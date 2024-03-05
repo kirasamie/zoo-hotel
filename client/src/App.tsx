@@ -4,12 +4,13 @@ import HomePage from "./pages/HomePage/HomePage";
 import AuthPage from "./pages/AuthPage/AuthPage";
 import RoomsPage from "./pages/RoomsPage/RoomsPage";
 import { useEffect } from "react";
-import axios from "axios";
 import Navbar from "./components/NavbarComponents/Navbar/Navbar";
 import PetForm from "./components/AccountComponents/PetsComponent/PetForm";
 import PetMenu from "./components/AccountComponents/PetsComponent/PetMenu";
 import PetPage from "./pages/PetPage/PetPage";
 import AccountPage from "./pages/AccountPage/AccountPage";
+import { useAppDispatch, useAppSelector } from "./redux/hooks";
+import { fetchCheckAllPets, fetchCheckUser } from "./redux/thunkActions";
 
 function App(): JSX.Element {
 
@@ -18,6 +19,7 @@ const user = useAppSelector((store) => store.userSlice.info);
 console.log(user);
   useEffect(() => {
    void dispatch(fetchCheckUser());
+   void dispatch(fetchCheckAllPets());
   }, [dispatch]);
 
   return (

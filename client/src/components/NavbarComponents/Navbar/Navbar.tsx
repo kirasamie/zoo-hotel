@@ -28,7 +28,7 @@ export default function Navbar(): JSX.Element {
         <div className={style.authContainer}>
             {user && user.id > 0 ? (
             <>
-            <Link to='/profile'>
+            <Link to='/account'>
                 <Button>Личный кабинет</Button>
             </Link>    
                 <Button onClick={() => void handlerLogout()}>Выйти</Button>

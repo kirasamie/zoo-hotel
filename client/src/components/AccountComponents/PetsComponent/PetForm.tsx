@@ -1,6 +1,5 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
-import styles from "./PetsComponent.module.css";
+import styles from "./PetForm.module.css";
 import {
   Autocomplete,
   Button,
@@ -12,7 +11,7 @@ import {
   TextField,
 } from "@mui/material";
 
-export default function PetsComponents() {
+export default function PetForm() {
   return (
     <form className={styles.form}>
       <div>

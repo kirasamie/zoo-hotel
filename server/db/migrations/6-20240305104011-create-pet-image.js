@@ -1,15 +1,14 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Orders', {
+    await queryInterface.createTable('PetImages', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      orderPetId: {
-        allowNull: false,
+      petId: {
         type: Sequelize.INTEGER,
         references: {
           model: {
@@ -18,38 +17,22 @@ module.exports = {
           key: 'id',
         },
       },
-      orderRoomId: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: {
-          model: {
-            tableName: 'Rooms',
-          },
-          key: 'id',
-        },
-      },
-      orderDateIn: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
-      orderDateOut: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
-      addInfo: {
-        type: Sequelize.TEXT,
+      link: {
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW'),
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW'),
       },
     });
   },
-  async down(queryInterface) {
-    await queryInterface.dropTable('Orders');
+  async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable('PetImages');
   },
 };

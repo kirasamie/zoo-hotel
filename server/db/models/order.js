@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       orderRoomId: DataTypes.INTEGER,
       orderDateIn: DataTypes.DATE,
       orderDateOut: DataTypes.DATE,
+      addInfo: DataTypes.TEXT,
     },
     {
       sequelize,

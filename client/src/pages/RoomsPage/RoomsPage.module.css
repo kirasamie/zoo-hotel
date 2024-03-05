@@ -1,0 +1,45 @@
+.roomsPageWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.inputsWrapper {
+    border: 1px solid red;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.rooms {
+    border: 1px solid red;
+    width: 600px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.roomUpperRow {
+    display: flex;
+}
+
+.roomBottomRow {
+    display: flex;
+    justify-content: end;
+}
+
+.roomUpperRow button {
+    height: 40px;
+    width: 40px;
+    margin: 10px;
+}
+
+.roomBottomRow button {
+    height: 80px;
+    width: 80px;
+    margin: 10px;
+}

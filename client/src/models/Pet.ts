@@ -1,4 +1,5 @@
-export type PetType = {
+export type PetItemType = {
+  id: number
   petUserId: number
   petType: number
   petName: string
@@ -9,3 +10,4 @@ export type PetType = {
   petAbout: string
   petPhoto: string
 }
+export type PetResponseType = PetItemType[]

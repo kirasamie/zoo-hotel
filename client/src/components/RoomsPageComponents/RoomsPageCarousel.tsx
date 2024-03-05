@@ -10,36 +10,21 @@ import SwipeableViews from 'react-swipeable-views-react-18-fix';
 import { autoPlay } from 'react-swipeable-views-utils';
 import { useTheme } from '@mui/material/styles';
 import type { RoomType } from '../../types';
+import styles from './RoomsPageCarousel.module.css';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 type RoomProps = {
   room: RoomType;
   setChoosenRoomId: (id: number) => void;
+  handleOpen: () => void;
 };
 
-const images = [
-  {
-    label: 'San Francisco – Oakland Bay Bridge, United States',
-    imgPath: 'https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60',
-  },
-  {
-    label: 'Bird',
-    imgPath: 'https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60',
-  },
-  {
-    label: 'Bali, Indonesia',
-    imgPath: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250',
-  },
-  {
-    label: 'Goč, Serbia',
-    imgPath: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60',
-  },
-];
-
-function RoomsPageCarousel({ room, setChoosenRoomId, popupState }: RoomProps) {
+function RoomsPageCarousel({ room, setChoosenRoomId, handleOpen }: RoomProps) {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
+
+  const images = room.RoomImages;
   const maxSteps = images.length;
 
   const handleNext = () => {
@@ -55,88 +40,70 @@ function RoomsPageCarousel({ room, setChoosenRoomId, popupState }: RoomProps) {
   };
 
   return (
-    <Box sx={{ maxWidth: 400, flexGrow: 1 }}>
-      <Paper
-        square
-        elevation={0}
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          height: 50,
-          pl: 2,
-          bgcolor: 'background.default',
-        }}
-      >
-        <Typography>{images[activeStep].label}</Typography>
-      </Paper>
-      <AutoPlaySwipeableViews axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'} index={activeStep} onChangeIndex={handleStepChange} enableMouseEvents>
-        {images.map((step, index) => (
-          <div key={step.label}>
-            {Math.abs(activeStep - index) <= 2 ? (
-              <Box
-                component="img"
-                sx={{
-                  height: 255,
-                  display: 'block',
-                  maxWidth: 400,
-                  overflow: 'hidden',
-                  width: '100%',
-                }}
-                src={step.imgPath}
-                alt={step.label}
-              />
-            ) : null}
-          </div>
-        ))}
-      </AutoPlaySwipeableViews>
-      <MobileStepper
-        steps={maxSteps}
-        position="static"
-        activeStep={activeStep}
-        nextButton={
-          <Button size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
-            Next
-            {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
-          </Button>
-        }
-        backButton={
-          <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-            {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-            Back
-          </Button>
-        }
-      />
-      <Paper
-        square
-        elevation={0}
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          height: 50,
-          pl: 2,
-          bgcolor: 'background.default',
-        }}
-      >
-        <Typography>
-          {room.roomAbout} {room.id}
-        </Typography>
-      </Paper>
-      <Paper
-        square
-        elevation={0}
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          height: 50,
-          pl: 2,
-          bgcolor: 'background.default',
-        }}
-      >
-        <Typography>Для {String(room.roomPetType).includes('12') ? 'кошечек и собачек' : String(room.roomPetType).includes('1') ? 'кошечек' : 'собачек'}</Typography>
-        <Typography>Цена за сутки: {room.roomPrice} рубь</Typography>
-      </Paper>
-      <Button variant='contained' onClick={() => setChoosenRoomId(room.id)}>Нравится!</Button>
-    </Box>
+    <div className={styles.popupWrapper}>
+      <div className={styles.swipableViewsWrapper}>
+        <AutoPlaySwipeableViews axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'} index={activeStep} onChangeIndex={handleStepChange} enableMouseEvents>
+          {images.map((image, index) => (
+            <div key={`image_${image.id}`}>
+              {Math.abs(activeStep - index) <= 2 ? (
+                <Box
+                  component="img"
+                  sx={{
+                    height: 300,
+                    display: 'block',
+                    overflow: 'hidden',
+                    width: '100%',
+                  }}
+                  src={image.link}
+                  alt={image.link}
+                />
+              ) : null}
+            </div>
+          ))}
+        </AutoPlaySwipeableViews>
+        <MobileStepper
+          steps={maxSteps}
+          position="static"
+          activeStep={activeStep}
+          nextButton={
+            <Button size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
+              {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+            </Button>
+          }
+          backButton={
+            <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+              {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+            </Button>
+          }
+        />
+      </div>
+      <div className={styles.descriptionWrapper}>
+        <Typography sx={{ flex: 1 }}>{room.roomAbout}</Typography>
+        <Paper
+          square
+          elevation={0}
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            pl: 2,
+            bgcolor: 'background.default',
+          }}
+        >
+          <Typography>Для {String(room.roomPetType).includes('12') ? 'кошечек и собачек' : String(room.roomPetType).includes('1') ? 'кошечек' : 'собачек'}</Typography>
+          <Typography>Цена за сутки: {room.roomPrice} рубь</Typography>
+        </Paper>
+        <Button
+          sx={{ alignSelf: 'center' }}
+          variant="contained"
+          onClick={() => {
+            setChoosenRoomId(room.id);
+            handleOpen();
+          }}
+        >
+          Нравится!
+        </Button>
+      </div>
+    </div>
   );
 }
 

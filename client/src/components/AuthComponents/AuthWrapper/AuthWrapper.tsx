@@ -1,5 +1,15 @@
-export default function AuthWrapper() {
+import { useState } from "react"
+import RegisterForm from "../RegisterForm/RegisterForm";
+import LoginForm from "../LoginForm/LoginForm";
+
+export default function AuthWrapper(): JSX.Element {
+  const [isLogin, setIsLogin] = useState(false);
+
   return (
-    <div>AuthWrapper</div>
+    isLogin ? (
+      <LoginForm setIsLogin={setIsLogin} />
+      ) : (
+      <RegisterForm setIsLogin={setIsLogin} />
+    )
   )
 }

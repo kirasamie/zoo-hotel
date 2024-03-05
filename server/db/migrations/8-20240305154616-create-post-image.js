@@ -1,43 +1,24 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Orders', {
+    await queryInterface.createTable('PostImages', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      orderPetId: {
-        allowNull: false,
+      postId: {
         type: Sequelize.INTEGER,
         references: {
           model: {
-            tableName: 'Pets',
+            tableName: 'Posts',
           },
           key: 'id',
         },
       },
-      orderRoomId: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: {
-          model: {
-            tableName: 'Rooms',
-          },
-          key: 'id',
-        },
-      },
-      orderDateIn: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
-      orderDateOut: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
-      addInfo: {
-        type: Sequelize.TEXT,
+      link: {
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
@@ -50,6 +31,6 @@ module.exports = {
     });
   },
   async down(queryInterface) {
-    await queryInterface.dropTable('Orders');
+    await queryInterface.dropTable('PostImages');
   },
 };

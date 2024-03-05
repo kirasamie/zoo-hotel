@@ -44,9 +44,6 @@ module.exports = {
       petAbout: {
         type: Sequelize.TEXT,
       },
-      petPhoto: {
-        type: Sequelize.STRING,
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

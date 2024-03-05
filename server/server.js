@@ -7,6 +7,7 @@ const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 
 const usersRouter = require('./routes/usersRoutes');
+const roomsRouter = require('./routes/roomsRoutes');
 
 const app = express();
 const { PORT, SECRET_KEY_SESSION } = process.env;
@@ -24,7 +25,7 @@ const sessionConfig = {
 };
 const corsConfig = {
   credentials: true,
-  origin: ['http://localhost:5173'],
+  origin: true,
   optionsSuccesStatus: 200,
 };
 
@@ -37,5 +38,6 @@ app.use(session(sessionConfig));
 app.use(express.static(path.join(process.cwd(), 'public')));
 
 app.use('/api/user', usersRouter);
+app.use('/api/rooms', roomsRouter);
 
 app.listen(PORT, () => console.log(`Server has started on PORT ${PORT}`));

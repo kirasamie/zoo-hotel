@@ -4,6 +4,7 @@ import AuthPage from './pages/AuthPage/AuthPage';
 import RoomsPage from './pages/RoomsPage/RoomsPage';
 import { useEffect } from 'react';
 import axios from 'axios';
+import Navbar from './components/NavbarComponents/Navbar/Navbar';
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
   return (
     <>
       <div className="SOMEWRAPPER!!!!!!!!!!!!!">
+        <Navbar />
         <h1>header с навбаром</h1>
       </div>
       <div className="SOMEWRAPPER!!!!!!!!!!!!!">

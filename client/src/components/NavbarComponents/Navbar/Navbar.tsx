@@ -1,17 +1,15 @@
 import { Button } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import style from './Navbar.module.css';
-import { useState } from "react";
-import axios from "axios";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import { fetchLogoutUser } from "../../../redux/thunkActions";
 
 export default function Navbar(): JSX.Element {
-    const [stateAuth, setStateAuth] = useState(false);
+    const user = useAppSelector((store) => store.userSlice.info);
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
     const handlerLogout = async(): Promise<void> => {
-        axios.get(`${import.meta.env.VITE_URL}/user/logout`, {withCredentials: true})
-        .then(() => navigate('/'))
-        .catch((error) => console.log(error))
-        setStateAuth(false)
+       dispatch(fetchLogoutUser()).then(() => navigate('/')).catch((error) => console.log(error));
     }
 
   return (
@@ -28,7 +26,7 @@ export default function Navbar(): JSX.Element {
             </Link>
         </div>
         <div className={style.authContainer}>
-            {stateAuth ? (
+            {user && user.id > 0 ? (
             <>
             <Link to='/profile'>
                 <Button>Личный кабинет</Button>
@@ -39,7 +37,7 @@ export default function Navbar(): JSX.Element {
             :
             (
             <Link to='/auth'>
-                <Button onClick={() => void setStateAuth(true)}>Войти</Button>
+                <Button>Войти</Button>
             </Link>
             )}
         </div>

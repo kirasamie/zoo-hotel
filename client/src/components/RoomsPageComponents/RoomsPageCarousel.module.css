@@ -1,0 +1,16 @@
+.swipableViewsWrapper {
+  width: 250px;
+}
+
+.popupWrapper {
+  width: 550px;
+  display: flex;
+  flex-direction: row;
+}
+
+.descriptionWrapper {
+  width: 300px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}

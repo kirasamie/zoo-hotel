@@ -1,3 +1,4 @@
+
 import { Outlet, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
 import AuthPage from "./pages/AuthPage/AuthPage";
@@ -10,14 +11,15 @@ import PetMenu from "./components/AccountComponents/PetsComponent/PetMenu";
 import PetPage from "./pages/PetPage/PetPage";
 import AccountPage from "./pages/AccountPage/AccountPage";
 
-function App() {
+function App(): JSX.Element {
+
+const dispatch = useAppDispatch();
+const user = useAppSelector((store) => store.userSlice.info);
+console.log(user);
   useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_URL}/user/checkSession`, {
-        withCredentials: true,
-      })
-      .then((response) => console.log(response.data));
-  }, []);
+   void dispatch(fetchCheckUser());
+  }, [dispatch]);
+
   return (
     <>
       <div className="SOMEWRAPPER!!!!!!!!!!!!!">

@@ -2,13 +2,24 @@ import { Outlet, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
 import AuthPage from "./pages/AuthPage/AuthPage";
 import PetsComponents from "./components/AccountComponents/PetsComponent/PetsComponents";
-import { dividerClasses } from "@mui/material";
 import PetsMenuBurger from "./components/AccountComponents/PetsComponent/PetsMenuBurger";
+import RoomsPage from "./pages/RoomsPage/RoomsPage";
+import { useEffect } from "react";
+import axios from "axios";
+import Navbar from "./components/NavbarComponents/Navbar/Navbar";
 
 function App() {
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_URL}/user/checkSession`, {
+        withCredentials: true,
+      })
+      .then((response) => console.log(response.data));
+  }, []);
   return (
     <>
       <div className="SOMEWRAPPER!!!!!!!!!!!!!">
+        <Navbar />
         <h1>header с навбаром</h1>
       </div>
       <div className="SOMEWRAPPER!!!!!!!!!!!!!">
@@ -30,10 +41,7 @@ function App() {
             </Route>
           </Route>
 
-          <Route
-            path="rooms"
-            element={<h2>huge story ROOMS WITH PAYMENT</h2>}
-          ></Route>
+          <Route path="rooms" element={<RoomsPage />}></Route>
 
           <Route path="another" element={<h2>another page</h2>}></Route>
         </Routes>

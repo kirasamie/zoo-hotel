@@ -4,30 +4,37 @@ const bcrypt = require('bcrypt');
 const { User } = require('../db/models');
 
 router.get('/checkSession', async (req, res) => {
-  const { userId, username, email } = req.session;
-  res.json({ id: userId, username, email });
+  const { userId, firstName, email } = req.session;
+  res.json({ id: userId, firstName, email });
 });
 
 router.post('/register', async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const { firstName, lastName, email, password, avatar, phone } = req.body;
     const user = await User.findOne({ where: { email } });
 
     if (user) {
       res.sendStatus(401);
     } else {
       const hash = await bcrypt.hash(password, 10);
-      const newUser = await User.create({ username, email, password: hash });
+      const newUser = await User.create({
+        firstName,
+        lastName,
+        email,
+        password: hash,
+        avatar,
+        phone,
+      });
       req.session.email = newUser.email;
-      req.session.username = newUser.username;
+      req.session.firstName = newUser.firstName;
       req.session.userId = newUser.id;
       req.session.save(() => {
         console.log(
-          `Welcome, ${newUser.username}. Your registration completed with email ${newUser.email}`
+          `Welcome, ${newUser.name}. Your registration completed with email ${newUser.email}`
         );
         res.status(201).json({
           id: newUser.id,
-          username: newUser.username,
+          firstName: newUser.firstName,
           email: newUser.email,
         });
       });
@@ -49,12 +56,16 @@ router.post('/login', async (req, res) => {
       const checkPass = await bcrypt.compare(password, user.password);
       if (checkPass) {
         req.session.email = user.email;
-        req.session.username = user.username;
+        req.session.firstName = user.firstName;
         req.session.userId = user.id;
         req.session.save(() => {
           res
-            .status(200)
-            .json({ id: user.id, username: user.username, email: user.email });
+            .status(201)
+            .json({
+              id: user.id,
+              firstName: user.firstName,
+              email: user.email,
+            });
         });
       } else {
         res.sendStatus(402);

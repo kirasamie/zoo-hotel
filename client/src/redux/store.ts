@@ -1,13 +1,14 @@
 import { ConfigureStoreOptions, configureStore } from '@reduxjs/toolkit';
-import todoSlice, { SliceStateType } from './todoSlice';
+import userSlice from './userSlice';
+import type { SliceState } from './userSlice';
 
 type StoreType = {
-  todoSlice: SliceStateType; //!
-};
+  userSlice: SliceState;
+}
 
 const storeOptions: ConfigureStoreOptions<StoreType> = {
   reducer: {
-    todoSlice, //!
+    userSlice,
   },
 };
 

@@ -4,8 +4,10 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Button, TextField, Box } from '@mui/material';
+import { useAppDispatch } from '../../../redux/hooks';
+import { fetchRegisterUser } from '../../../redux/thunkActions';
 
-type InputsUserType = {
+export type InputsUserType = {
   firstName?: string;
   lastName?: string;
   email: string;
@@ -16,6 +18,7 @@ type InputsUserType = {
 
 export default function RegisterForm({ setIsLogin }): JSX.Element {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const initialStateRegisterForm = { firstName: '', lastName: '', email: '', password: '', avatar: '', phone: 0 };
 
@@ -26,15 +29,12 @@ export default function RegisterForm({ setIsLogin }): JSX.Element {
   };
 
   const handlerRegister = async (): Promise<void> => {
-    try {
-      const response = await axios.post(`${import.meta.env.VITE_URL}/user/register`, inputs, { withCredentials: true });
-      if (response.status === 201) {
-        navigate('/');
-      }
-    } catch (error) {
-      console.log(error);
+   dispatch(fetchRegisterUser(inputs)).then((res) => {
+    if (res.meta.requestStatus === 'fulfilled') {
+      navigate('/');
     }
-  };
+   }).catch((error) => console.log(error))
+  }
 
   return (
     <div className="authContainer">

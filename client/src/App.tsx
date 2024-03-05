@@ -3,15 +3,19 @@ import HomePage from './pages/HomePage/HomePage';
 import AuthPage from './pages/AuthPage/AuthPage';
 import RoomsPage from './pages/RoomsPage/RoomsPage';
 import { useEffect } from 'react';
-import axios from 'axios';
 import Navbar from './components/NavbarComponents/Navbar/Navbar';
+import { useAppDispatch, useAppSelector } from './redux/hooks';
+import { fetchCheckUser } from './redux/thunkActions';
 
-function App() {
+function App(): JSX.Element {
 
+const dispatch = useAppDispatch();
+const user = useAppSelector((store) => store.userSlice.info);
+console.log(user);
   useEffect(() => {
-    axios.get(`${import.meta.env.VITE_URL}/user/checkSession`, {withCredentials: true})
-    .then((response) => console.log(response.data))
-  }, [])
+   void dispatch(fetchCheckUser());
+  }, [dispatch]);
+
   return (
     <>
       <div className="SOMEWRAPPER!!!!!!!!!!!!!">

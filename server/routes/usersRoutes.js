@@ -8,6 +8,7 @@ router.get('/checkSession', async (req, res) => {
   res.json({ id: userId, firstName, email });
 });
 
+
 router.post('/register', async (req, res) => {
   try {
     const { firstName, lastName, email, password, avatar, phone } = req.body;

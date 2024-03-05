@@ -20,10 +20,8 @@ console.log(user);
     <>
       <div className="SOMEWRAPPER!!!!!!!!!!!!!">
         <Navbar />
-        <h1>header с навбаром</h1>
       </div>
       <div className="SOMEWRAPPER!!!!!!!!!!!!!">
-        <h1>роуты</h1>
         <Routes>
           <Route index element={<HomePage />}></Route>
 

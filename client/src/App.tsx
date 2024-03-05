@@ -2,8 +2,15 @@ import { Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage/HomePage';
 import AuthPage from './pages/AuthPage/AuthPage';
 import RoomsPage from './pages/RoomsPage/RoomsPage';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 function App() {
+
+  useEffect(() => {
+    axios.get(`${import.meta.env.VITE_URL}/user/checkSession`, {withCredentials: true})
+    .then((response) => console.log(response.data))
+  }, [])
   return (
     <>
       <div className="SOMEWRAPPER!!!!!!!!!!!!!">

@@ -3,6 +3,7 @@ import HomePage from './pages/HomePage/HomePage';
 import AuthPage from './pages/AuthPage/AuthPage';
 import { useEffect } from 'react';
 import axios from 'axios';
+import Navbar from './components/NavbarComponents/Navbar/Navbar';
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
   return (
     <>
       <div className="SOMEWRAPPER!!!!!!!!!!!!!">
+        <Navbar />
         <h1>header с навбаром</h1>
       </div>
       <div className="SOMEWRAPPER!!!!!!!!!!!!!">

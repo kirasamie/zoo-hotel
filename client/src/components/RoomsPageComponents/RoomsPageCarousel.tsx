@@ -9,8 +9,14 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views-react-18-fix';
 import { autoPlay } from 'react-swipeable-views-utils';
 import { useTheme } from '@mui/material/styles';
+import type { RoomType } from '../../types';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+
+type RoomProps = {
+  room: RoomType;
+  setChoosenRoomId: (id: number) => void;
+};
 
 const images = [
   {
@@ -31,7 +37,7 @@ const images = [
   },
 ];
 
-function RoomsPageCarousel() {
+function RoomsPageCarousel({ room, setChoosenRoomId, popupState }: RoomProps) {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   const maxSteps = images.length;
@@ -100,6 +106,36 @@ function RoomsPageCarousel() {
           </Button>
         }
       />
+      <Paper
+        square
+        elevation={0}
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          height: 50,
+          pl: 2,
+          bgcolor: 'background.default',
+        }}
+      >
+        <Typography>
+          {room.roomAbout} {room.id}
+        </Typography>
+      </Paper>
+      <Paper
+        square
+        elevation={0}
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          height: 50,
+          pl: 2,
+          bgcolor: 'background.default',
+        }}
+      >
+        <Typography>Для {String(room.roomPetType).includes('12') ? 'кошечек и собачек' : String(room.roomPetType).includes('1') ? 'кошечек' : 'собачек'}</Typography>
+        <Typography>Цена за сутки: {room.roomPrice} рубь</Typography>
+      </Paper>
+      <Button variant='contained' onClick={() => setChoosenRoomId(room.id)}>Нравится!</Button>
     </Box>
   );
 }

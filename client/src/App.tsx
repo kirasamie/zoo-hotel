@@ -1,6 +1,9 @@
-import { Route, Routes } from 'react-router-dom';
-import HomePage from './pages/HomePage/HomePage';
-import AuthPage from './pages/AuthPage/AuthPage';
+import { Outlet, Route, Routes } from "react-router-dom";
+import HomePage from "./pages/HomePage/HomePage";
+import AuthPage from "./pages/AuthPage/AuthPage";
+import PetsComponents from "./components/AccountComponents/PetsComponent/PetsComponents";
+import { dividerClasses } from "@mui/material";
+import PetsMenuBurger from "./components/AccountComponents/PetsComponent/PetsMenuBurger";
 
 function App() {
   return (
@@ -15,19 +18,22 @@ function App() {
 
           <Route path="auth" element={<AuthPage />}></Route>
 
-          <Route path="account" element={<h2>account page</h2>}>
+          <Route path="account" element={<PetsMenuBurger />}>
             {/* тут должно быть условие - клиент или работник (админ) */}
             <Route path="chat" element={<h2>chat page</h2>}>
               {/* NESTED с комнатами */}
             </Route>
             <Route path="orders" element={<h2>orders page</h2>} />
             <Route path="profile" element={<h2>profile page</h2>} />
-            <Route path="pets" element={<h2>pets page</h2>}>
-              <Route path=":petId" element={<h2>profile page</h2>} />
+            <Route path="pets" element={<PetsComponents />}>
+              <Route path=":petId" element={<h2>p</h2>} />
             </Route>
           </Route>
 
-          <Route path="rooms" element={<h2>huge story ROOMS WITH PAYMENT</h2>}></Route>
+          <Route
+            path="rooms"
+            element={<h2>huge story ROOMS WITH PAYMENT</h2>}
+          ></Route>
 
           <Route path="another" element={<h2>another page</h2>}></Route>
         </Routes>

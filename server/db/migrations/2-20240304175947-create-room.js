@@ -12,9 +12,6 @@ module.exports = {
       roomAbout: {
         type: Sequelize.TEXT
       },
-      roomPhoto: {
-        type: Sequelize.STRING
-      },
       roomCapacity: {
         allowNull: false,
         type: Sequelize.INTEGER

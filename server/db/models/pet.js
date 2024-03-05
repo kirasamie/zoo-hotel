@@ -2,8 +2,9 @@ const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class Pet extends Model {
-    static associate({ User, Order }) {
+    static associate({ User, Order, PetImage }) {
       this.hasMany(Order, { foreignKey: 'orderPetId' });
+      this.hasMany(PetImage, { foreignKey: 'petId' });
       this.belongsTo(User, { foreignKey: 'petUserId' });
     }
   }
@@ -17,7 +18,6 @@ module.exports = (sequelize, DataTypes) => {
       petAge: DataTypes.INTEGER,
       petIsSprayed: DataTypes.BOOLEAN,
       petAbout: DataTypes.TEXT,
-      petPhoto: DataTypes.STRING,
     },
     {
       sequelize,

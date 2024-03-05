@@ -10,8 +10,44 @@ import {
   RadioGroup,
   TextField,
 } from "@mui/material";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import { fetchAddNewPet } from "../../../redux/thunkActions";
 
-export default function PetForm() {
+export type InputsPetType = {
+  petType: number;
+  petName: string;
+  petBreed?: string;
+  petGender: string;
+  petAge: number;
+  petIsSprayed: boolean;
+  petAbout?: string;
+}
+
+export default function PetForm(): JSX.Element {
+
+  const pets = useAppSelector((store) => store.petSlice.pets);
+  const dispatch = useAppDispatch();
+
+  const initialStatePet = {
+    petType: 0,
+    petName: '',
+    petGender: '',
+    petAge: 0,
+    petIsSprayed: false,
+  }
+
+  const [inputs, setInputs] = React.useState<InputsPetType>(initialStatePet);
+
+
+  const handlerChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handlerAddNewPet = async (): Promise<void> => {
+    void dispatch(fetchAddNewPet(inputs))
+    setInputs(initialStatePet);
+  }
+  console.log(pets);
   return (
     <form className={styles.form}>
       <div>
@@ -33,16 +69,18 @@ export default function PetForm() {
             </FormLabel>
             <RadioGroup
               aria-labelledby="demo-controlled-radio-buttons-group"
-              name="controlled-radio-buttons-group"
+              name="petType"
+              onChange={(e) => handlerChange(e)}
               // value={value}
               // onChange={handleChange}
             >
               <FormControlLabel
-                value="dog"
+                value={2}
                 control={<Radio />}
                 label="Собака"
+    
               />
-              <FormControlLabel value="cat" control={<Radio />} label="Кошка" />
+              <FormControlLabel  value={1} control={<Radio />} label="Кошка" />
             </RadioGroup>
           </FormControl>
         </div>
@@ -51,42 +89,51 @@ export default function PetForm() {
           <TextField
             id="outlined-multiline-flexible"
             label="Кличка"
+            name="petName"
+            onChange={(e) => handlerChange(e)}
             multiline
             maxRows={4}
           />
         </div>
         <br />
         <div>
-          <Autocomplete
+          {/* <Autocomplete
             disablePortal
             id="combo-box-demo"
-            options={[
-              { label: "Pitbul", id: 1 },
-              { label: "Ovcharka", id: 2 },
+            options={['Pitbull', 'Ovcharka'
             ]}
             sx={{ width: 300 }}
-            renderInput={(params) => <TextField {...params} label="Порода" />}
+            renderInput={(params) => <TextField {...params} onChange={(e) => handlerChange(e)} name="petBreed" label="Порода" />}
           />
-        </div>
+        </div> */}
+          <TextField
+            id="outlined-multiline-flexible"
+            name='petBreed'
+            onChange={(e) => handlerChange(e)}
+            label="Порода"
+            multiline
+            maxRows={4}
+            />
         <br />
+        </div>
         <div>
           <FormControl>
             <FormLabel id="demo-controlled-radio-buttons-group">Пол</FormLabel>
             <RadioGroup
               aria-labelledby="demo-controlled-radio-buttons-group"
-              name="controlled-radio-buttons-group"
+              name="petGender"
               // value={value}
-              // onChange={handleChange}
+              onChange={(e) => handlerChange(e)}
             >
               <FormControlLabel
                 value="female"
                 control={<Radio />}
-                label="Мужской"
+                label="Женский"
               />
               <FormControlLabel
                 value="male"
                 control={<Radio />}
-                label="Женский"
+                label="Мужской"
               />
             </RadioGroup>
           </FormControl>
@@ -95,7 +142,9 @@ export default function PetForm() {
         <div>
           <TextField
             id="outlined-multiline-flexible"
-            label="Возраст"
+            name='petAge'
+            onChange={(e) => handlerChange(e)}
+            label="Возраст в годах"
             multiline
             maxRows={4}
           />
@@ -108,12 +157,12 @@ export default function PetForm() {
             </FormLabel>
             <RadioGroup
               aria-labelledby="demo-controlled-radio-buttons-group"
-              name="controlled-radio-buttons-group"
+              name="petIsSprayed"
               // value={value}
-              // onChange={handleChange}
+              onChange={(e) => handlerChange(e)}
             >
-              <FormControlLabel value="yes" control={<Radio />} label="Да" />
-              <FormControlLabel value="no" control={<Radio />} label="Нет" />
+              <FormControlLabel value={true} control={<Radio />} label="Да" />
+              <FormControlLabel value={false} control={<Radio />} label="Нет" />
             </RadioGroup>
           </FormControl>
         </div>
@@ -124,12 +173,14 @@ export default function PetForm() {
             id="outlined-basic"
             label="Расскажите о питомце"
             variant="outlined"
+            onChange={(e) => handlerChange(e)}
+            name='petAbout'
             rows={4}
           />
         </div>
       </div>
       <br />
-      <Button variant="contained">Создать карточку питомца</Button>
+      <Button onClick={() => void handlerAddNewPet()} variant="contained">Создать карточку питомца</Button>
     </form>
   );
 }

@@ -5,10 +5,10 @@
   height: 80vh;
 }
 .menu {
-  width: 15%;
+  width: 35%;
   height: 100%;
 }
 .content {
-  width: 50%;
+  width: 500px;
   overflow: auto;
 }

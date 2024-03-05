@@ -8,6 +8,5 @@ export type PetItemType = {
   petAge: number
   petIsSprayed: boolean
   petAbout: string
-  petPhoto: string
 }
 export type PetResponseType = PetItemType[]

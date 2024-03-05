@@ -1,5 +1,7 @@
-export default function AuthPage() {
+import AuthWrapper from "../../components/AuthComponents/AuthWrapper/AuthWrapper";
+
+export default function AuthPage(): JSX.Element {
   return (
-    <div>AuthPage</div>
+    <div><AuthWrapper /></div>
   )
 }

@@ -1,72 +1,54 @@
-import { Button } from '@mui/material';
-import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
-import styles from './PetCard.module.css';
+import { useAppSelector } from '../../../redux/hooks';
 import { useNavigate, useParams } from 'react-router-dom';
+import './OrderCard.css';
 
 export default function OrderCard(): JSX.Element {
-  const pets = useAppSelector((store) => store.petSlice.pets);
+  const { orderId } = useParams();
+  const orders = useAppSelector((store) => store.orderSlice.ordersUser);
   const navigate = useNavigate();
-  const params = useParams();
-  const pet = useAppSelector((store) =>
-    store.petSlice.pets.find((pet) => params.petId && pet.id === +params.petId)
-  );
-  const dispatch = useAppDispatch();
+  const order = orders.find((ord) => orderId && ord.id === Number(orderId));
 
-  const deleteHandler = async (): Promise<void> => {
-    if (pet?.id) {
-      dispatch(fetchDelPet(pet.id))
-      const filtered =  pets.filter((el) => el.id !== pet.id);
-      navigate(`/account/pets/${filtered.length ? filtered[0].id : ``}`)
-    }
-  };
-  
   return (
-    <div className={styles.container}>
-      <>
-        <h2>Карточка {pet?.petName}</h2>
-        <div className={styles.photos}>
-          <div
-            className={styles.photo}
-            style={{
-              backgroundImage: `url(https://lapkins.ru/upload/resize_cache/uf/8a2/293_293_2/8a236308bc2b290669dda88b3ab09f55.jpg)`,
-            }}
-          />
-          <div
-            className={styles.photo}
-            style={{
-              backgroundImage: `url(https://lapkins.ru/upload/resize_cache/uf/ea0/293_293_2/ea01f805be25abc46416a8b948a628d3.jpg)`,
-            }}
-          />
-          <div
-            className={styles.photo}
-            style={{
-              backgroundImage: `url(https://lapkins.ru/upload/resize_cache/uf/0fa/293_293_2/0fac6580aeb86f1960557fab7ab168de.jpg)`,
-            }}
-          />
+    <div className='wrapperSummary'>
+      <div className='headerOrder'>
+        <div className='containerOrder'>
+          <div className='cardOrder'>
+            <div className='face face1'>
+              <div className='contentOrder'>
+                <div className='icon'>
+                  <i className='fa fa-twitter-square' aria-hidden='true'>
+                    <img
+                      className='imageCard'
+                      src='https://lapkins.ru/upload/resize_cache/uf/8a2/293_293_2/8a236308bc2b290669dda88b3ab09f55.jpg'
+                      alt='img'
+                    />
+                  </i>
+                </div>
+              </div>
+            </div>
+            <div className='face face2'>
+              <div className='content'>
+                <h3>@{order?.Pet.petName}</h3>
+                <p>{order?.Pet.petAbout}</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className={styles.info}>
-          <span>Кличка животного: {pet?.petName}</span>
-          <span>Порода животного: {pet?.petBreed}</span>
-          <span>Пол животного: {pet?.petGender}</span>
-          <span>Возраст животного в годах: {pet?.petAge}</span>
-          <span>
-            Стерилизация животного: {pet?.petIsSprayed ? 'Да' : 'Нет'}
+      </div>
+      <div className='bodyPosts' />
+      <div className='card'>
+        <img
+          src='https://images.unsplash.com/photo-1615147342761-9238e15d8b96?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1001&q=80'
+          className='card__image'
+          alt='brown couch'
+        />
+        <div className='card__content'>
+          <div className='time'>27.08.2023, 14:10:00</div>
+          <span className='card__title'>
+            Duis autem vel eum iriure dolor in hend in vulputate
           </span>
-          <span>Дополнительная информация о животном: {pet?.petAbout}</span>
         </div>
-        <div>
-          <Button
-            onClick={() => navigate(`/account/pets/edit/${pet?.id}`)}
-            className={styles.editButton}
-            variant='contained'
-          >
-            Редактировать
-          </Button>
-          <Button onClick={() => void deleteHandler()} variant='contained'>
-            Удалить
-          </Button>
-        </div>
-      </>
+      </div>
     </div>
   );
 }

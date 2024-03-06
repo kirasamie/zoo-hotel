@@ -1,10 +1,14 @@
-import { Button } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import styles from "./PetCard.module.css";
-import { useNavigate, useParams } from "react-router-dom";
-import { fetchDelPet } from "../../../redux/pet/async-action";
+import { Button } from '@mui/material';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import styles from './PetCard.module.css';
+import { useNavigate, useParams } from 'react-router-dom';
+import {
+  fetchCheckAllPets,
+  fetchDelPet,
+} from '../../../redux/pet/async-action';
 
 export default function PetCard() {
+  const pets = useAppSelector((store) => store.petSlice.pets);
   const navigate = useNavigate();
   const params = useParams();
   const pet = useAppSelector((store) =>
@@ -14,10 +18,12 @@ export default function PetCard() {
 
   const deleteHandler = async (): Promise<void> => {
     if (pet?.id) {
-      dispatch(fetchDelPet(pet.id));
+      dispatch(fetchDelPet(pet.id))
+      const filtered =  pets.filter((el) => el.id !== pet.id);
+      navigate(`/account/pets/${filtered.length ? filtered[0].id : ``}`)
     }
   };
-
+  
   return (
     <div className={styles.container}>
       <>
@@ -48,7 +54,7 @@ export default function PetCard() {
           <span>Пол животного: {pet?.petGender}</span>
           <span>Возраст животного в годах: {pet?.petAge}</span>
           <span>
-            Стерилизация животного: {pet?.petIsSprayed ? "Да" : "Нет"}
+            Стерилизация животного: {pet?.petIsSprayed ? 'Да' : 'Нет'}
           </span>
           <span>Дополнительная информация о животном: {pet?.petAbout}</span>
         </div>
@@ -56,11 +62,11 @@ export default function PetCard() {
           <Button
             onClick={() => navigate(`/account/pets/edit/${pet?.id}`)}
             className={styles.editButton}
-            variant="contained"
+            variant='contained'
           >
             Редактировать
           </Button>
-          <Button onClick={() => void deleteHandler()} variant="contained">
+          <Button onClick={() => void deleteHandler()} variant='contained'>
             Удалить
           </Button>
         </div>

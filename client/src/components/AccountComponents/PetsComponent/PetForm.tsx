@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { fetchAddNewPet, fetchEditPet } from "../../../redux/pet/async-action";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 
 export type InputsPetType = {
@@ -26,6 +26,7 @@ export type InputsPetType = {
 };
 
 export default function PetForm(): JSX.Element {
+  const navigate = useNavigate();
   const params = useParams();
   const pet = useAppSelector((store) =>
     store.petSlice.pets.find((pet) => params.petId && pet.id === +params.petId)
@@ -62,6 +63,7 @@ export default function PetForm(): JSX.Element {
     if (pet) {
       void dispatch(fetchEditPet({ id: pet?.id, inputs }));
       setInputs(initialStatePet);
+      navigate(`/account/pets/${pet.id}`)
     }
   };
 

@@ -30,14 +30,17 @@ module.exports = {
       },
       orderDateIn: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: Sequelize.STRING,
       },
       orderDateOut: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: Sequelize.STRING,
       },
       addInfo: {
         type: Sequelize.TEXT,
+      },
+      paymentStatus: {
+        type: Sequelize.BOOLEAN,
       },
       createdAt: {
         allowNull: false,

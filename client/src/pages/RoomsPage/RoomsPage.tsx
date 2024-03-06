@@ -29,24 +29,26 @@ export default function RoomsPage() {
 
   return (
     <div className={styles.roomsPageWrapper}>
-      <RoomsPageModal open={open} handleClose={handleClose} />
+      <RoomsPageModal room={currentRoom} open={open} handleClose={handleClose} />
       <div className={styles.rooms}>
         <PopupState variant="popover" popupId="demo-popup-popover">
           {(popupState) => (
-            <div>
+            <>
               <div className={styles.roomUpperRow}>
                 {rooms.length &&
                   rooms.slice(0, 6).map((room) => (
-                    <button onMouseEnter={() => void chooseRoomHandler(room.id)} {...bindTrigger(popupState)}>
-                      {room.id}
+                    <button key={room.id} onMouseEnter={() => void chooseRoomHandler(room.id)} {...bindTrigger(popupState)}>
+                      {String(room.roomPetType).includes('1') && <img style={{ height: '40px', width: '40px' }} src='/img/cat.png' />}
+                      {String(room.roomPetType).includes('2') && <img style={{ height: '40px', width: '40px' }} src='/img/dog.png' />}
                     </button>
                   ))}
               </div>
               <div className={styles.roomBottomRow}>
                 {rooms.length &&
                   rooms.slice(6, 9).map((room) => (
-                    <button onMouseEnter={() => void chooseRoomHandler(room.id)} {...bindTrigger(popupState)}>
-                      {room.id}
+                    <button key={room.id} onMouseEnter={() => void chooseRoomHandler(room.id)} {...bindTrigger(popupState)}>
+                      {String(room.roomPetType).includes('1') && <img style={{ height: '40px', width: '40px' }} src='/img/cat.png' />}
+                      {String(room.roomPetType).includes('2') && <img style={{ height: '40px', width: '40px' }} src='/img/dog.png' />}
                     </button>
                   ))}
               </div>
@@ -63,7 +65,7 @@ export default function RoomsPage() {
               >
                 <RoomsPageCarousel room={currentRoom} setChoosenRoomId={setChoosenRoomId} handleOpen={handleOpen} />
               </Popover>
-            </div>
+            </>
           )}
         </PopupState>
       </div>

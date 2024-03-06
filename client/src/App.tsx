@@ -17,8 +17,10 @@ function App(): JSX.Element {
   const user = useAppSelector((store) => store.userSlice.info);
   console.log(user);
   useEffect(() => {
-    void dispatch(fetchCheckUser());
-    void dispatch(fetchCheckAllPets());
+   void dispatch(fetchCheckUser());
+   if (user && user.id > 0) {
+     void dispatch(fetchCheckAllPets());
+   }
   }, [dispatch]);
 
   return (

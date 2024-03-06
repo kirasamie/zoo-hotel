@@ -16,13 +16,15 @@ function App(): JSX.Element {
 
 const dispatch = useAppDispatch();
 const user = useAppSelector((store) => store.userSlice.info);
+const pets = useAppSelector((store) => store.petSlice);
+console.log('THIS IS PETS', pets);
 console.log(user);
   useEffect(() => {
    void dispatch(fetchCheckUser());
    if (user && user.id > 0) {
      void dispatch(fetchCheckAllPets());
    }
-  }, [dispatch]);
+  }, [dispatch, user]);
 
   return (
     <>

@@ -7,16 +7,15 @@ import Navbar from './components/NavbarComponents/Navbar/Navbar';
 import PetForm from './components/AccountComponents/PetsComponent/PetForm';
 import PetPage from './pages/PetPage/PetPage';
 import AccountPage from './pages/AccountPage/AccountPage';
-import { useAppDispatch, useAppSelector } from './redux/hooks';
-import { fetchCheckOrdersByUser, fetchCheckUser } from './redux/thunkActions';
+import { useAppDispatch } from './redux/hooks';
+import { fetchCheckUser } from './redux/thunkActions';
 import PetCard from './components/AccountComponents/PetsComponent/PetCard';
 import { fetchCheckAllPets } from './redux/pet/async-action';
 import OrderPage from './pages/OrderPage/OrderPage';
+import OrderCard from './components/AccountComponents/OrdersComponent/OrderCard';
 
 function App(): JSX.Element {
-  const orders = useAppSelector((store) => store.orderSlice.ordersUser);
   const dispatch = useAppDispatch();
-  const user = useAppSelector((store) => store.userSlice.info);
   useEffect(() => {
     void dispatch(fetchCheckUser());
   }, [dispatch]);
@@ -24,11 +23,6 @@ function App(): JSX.Element {
   useEffect(() => {
     void dispatch(fetchCheckAllPets());
   }, [dispatch]);
-
-  useEffect(() => {
-    void dispatch(fetchCheckOrdersByUser(user.id));
-  }, [dispatch, user.id]);
-console.log('HERE ORDERS', orders);
 
   return (
     <>
@@ -52,7 +46,7 @@ console.log('HERE ORDERS', orders);
             {/* NESTED с комнатами */}
             {/* </Route> */}
             <Route path='orders' element={<OrderPage />}>
-              {/* <Route path='orders/:orderId' element={'orderId'} /> */}
+              <Route path=':orderId' element={<OrderCard />} />
             </Route>
             {/* <Route path="profile" element={<h2>profile page</h2>} /> */}
             <Route path='pets' element={<PetPage />}>

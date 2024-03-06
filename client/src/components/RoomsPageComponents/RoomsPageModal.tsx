@@ -28,34 +28,65 @@ type ModalPropsType = {
   handleClose: () => void;
 };
 
+type OrderType = {
+  userId: number;
+  petId: number;
+  dateFrom: string;
+  dateTo: string;
+  amount: number;
+  quantity: number;
+  description: string;
+};
+
 export default function RoomsPageModal({ room, open, handleClose }: ModalPropsType) {
-  const [days, setDays] = useState(0);
   const pets = useAppSelector((store) => store.petSlice.pets);
-  const [inputs, setInputs] = useState({ petId: '', allowedRange: '', orderDescription: '' });
+  const user = useAppSelector((store) => store.userSlice.info);
+  const [orders, setOrders] = useState<Array<OrderType>>([]);
+  const [mainOrder, setMainOrder] = useState<OrderType>({ userId: 0, petId: 0, dateFrom: '', dateTo: '', amount: 0, quantity: 0, description: '' });
+  const [allowPayment, setAllowPayment] = useState(false);
+  const [days, setDays] = useState(0);
+  const [inputs, setInputs] = useState({ petId: '', allowedRange: '', description: '' });
+
+  useEffect(() => {
+    const checkUserId = mainOrder.userId !== 0;
+    const checkPetId = mainOrder.petId !== 0;
+    const checkDateFrom = mainOrder.dateFrom !== '';
+    const checkDateTo = mainOrder.dateTo !== '';
+    const checkAmount = mainOrder.amount !== 0;
+    const checkQuantity = mainOrder.quantity !== 0;
+
+    console.log(mainOrder);
+    if (checkUserId && checkPetId && checkDateFrom && checkDateTo && checkAmount && checkQuantity) {
+      setAllowPayment(true);
+    }
+  }, [mainOrder]);
 
   const changeHandler = (event: SelectChangeEvent) => {
     setInputs((prev) => ({ ...prev, [event.target.name]: event.target.value as string }));
+    if (event.target.name === 'petId') setMainOrder((prev) => ({ ...prev, petId: Number(event.target.value) }));
+    if (event.target.name === 'description') setMainOrder((prev) => ({ ...prev, description: event.target.value }));
   };
 
   const changeDateRangeHandler = (value: DateRange<unknown>) => {
     const datesString = value.map((date) => date?.$d && new Date(date.$d).toLocaleDateString());
-    console.log(datesString);
     if (datesString.every((el) => el !== undefined)) {
       const date1: Date = new Date(value[0]?.$d);
       const date2: Date = new Date(value[1]?.$d);
       const diffDays: number = Math.ceil(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24)) + 1;
       setDays(diffDays);
+      setMainOrder((prev) => ({ ...prev, userId: user.id, quantity: diffDays, dateFrom: datesString[0], dateTo: datesString[1], amount: room?.roomPrice }));
     }
   };
 
   const paymentHandler = async () => {
-    const order = ['123'];
     const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
-    const session = await axios.post(`${import.meta.env.VITE_URL}/stripe`, order, { withCredentials: true });
-    console.log(session);
+    const session = await axios.post(`${import.meta.env.VITE_URL}/stripe`, { mainOrder: mainOrder }, { withCredentials: true });
+    console.log('SESSION ', session);
+    console.log('user ', user);
     const result = await stripe!.redirectToCheckout({
       sessionId: session.data.id,
     });
+    console.log('result =>>', result);
     if (result?.error) {
       console.log(result?.error);
     }
@@ -74,11 +105,15 @@ export default function RoomsPageModal({ room, open, handleClose }: ModalPropsTy
           <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="ru">
             <DateRangePicker slots={{ field: SingleInputDateRangeField }} name="allowedRange" onChange={changeDateRangeHandler} />
           </LocalizationProvider>
-          <TextField name="orderDescription" value={inputs.orderDescription} label="Ваш комментарий к заказу" maxRows={15} multiline fullWidth onChange={changeHandler} />
+          <TextField name="description" value={inputs.description} label="Ваш комментарий к заказу" maxRows={15} multiline fullWidth onChange={changeHandler} />
 
-          { !!days && <Typography>К оплате: {room?.roomPrice} руб за {days} дней = {room?.roomPrice * days} руб</Typography>}
+          {!!days && (
+            <Typography>
+              К оплате: {room?.roomPrice} руб за {days} дней = {room?.roomPrice * days} руб
+            </Typography>
+          )}
 
-          <Button variant="contained" onClick={() => void paymentHandler()}>
+          <Button disabled={!allowPayment} variant="contained" onClick={() => void paymentHandler()}>
             Оплатить
           </Button>
         </Box>

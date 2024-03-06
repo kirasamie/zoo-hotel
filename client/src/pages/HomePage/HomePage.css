@@ -1,3 +1,8 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 :root{
     --red: #F26419;
@@ -6,6 +11,36 @@
     --light-blue: #86BBD8;
     --dark: #2F4858;
 }
+
+/* 
+.container__center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+} */
+
+/* .center__row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+} */
+
+.align__left{
+	position: absolute;
+    display: flex;
+    flex-direction: column;
+    border-radius: 30px;
+    backdrop-filter: blur(8px);
+	top: 40px;
+	left: 40px;
+    width: 550px;
+    height: 260px;
+	z-index: 2;
+    padding: 20px 40px;
+}
+
+
 
 .body {
     position: relative;
@@ -26,7 +61,7 @@ p{
     color: var(--dark);
 }
 
-/* a{text-decoration: none;} */
+a{text-decoration: none;}
 
 
 .landing__content {
@@ -69,13 +104,15 @@ p{
 
 .image__pet {
     background: black;
+    border-radius: 20px;
 }
 .image__pet img{
+    object-fit: cover;
     opacity: 0.8;
     width: 100%;
     height: 660px;
     border-radius: 11px;
-    
+
 }
 
 .mySwiper {

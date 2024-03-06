@@ -3,12 +3,13 @@
   flex-direction: row;
   justify-content:center;
   height: 80vh;
+  
 }
 .menu {
-  width: 35%;
+  width: 15%;
   height: 100%;
 }
 .content {
-  width: 500px;
+  width: 60%;
   overflow: auto;
 }

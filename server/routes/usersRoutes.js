@@ -8,10 +8,11 @@ router.get('/checkSession', async (req, res) => {
   res.json({ id: userId, firstName, email });
 });
 
-
 router.post('/register', async (req, res) => {
   try {
-    const { firstName, lastName, email, password, avatar, phone } = req.body;
+    const {
+      firstName, lastName, email, password, avatar, phone,
+    } = req.body;
     const user = await User.findOne({ where: { email } });
 
     if (user) {
@@ -31,7 +32,7 @@ router.post('/register', async (req, res) => {
       req.session.userId = newUser.id;
       req.session.save(() => {
         console.log(
-          `Welcome, ${newUser.name}. Your registration completed with email ${newUser.email}`
+          `Welcome, ${newUser.name}. Your registration completed with email ${newUser.email}`,
         );
         res.status(201).json({
           id: newUser.id,
@@ -41,6 +42,7 @@ router.post('/register', async (req, res) => {
       });
     }
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       error,
     });

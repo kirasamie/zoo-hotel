@@ -1,46 +1,30 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import axios from "axios"
+import axios, { AxiosResponse } from "axios"
 import { API } from "../../constants/api"
-import { PetResponseType } from "../../models/Pet"
+import { PetItemType, PetResponseType } from "../../models/Pet"
+import { InputsPetType } from "../../components/AccountComponents/PetsComponent/PetForm"
 
-export const getPets = createAsyncThunk('pets/all', async () => {
-  const response = await axios.get<PetResponseType>(API+'/todos', {withCredentials: true})
-  return [
-    {
-      id: 1,
-      petUserId: 1,
-      petType: 1,
-      petName: "Rocky",
-      petBreed: "Pitbul",
-      petGender: "Man",
-      petAge: 4,
-      petIsSprayed: true,
-      petAbout: "Следить, чтобы не чесал ухо, есть аллергия на говядину, дома не гадит",
-      petPhoto: "Photo",
-    },
-    {
-      id: 1,
-      petUserId: 1,
-      petType: 1,
-      petName: "Rocky",
-      petBreed: "Pitbul",
-      petGender: "Man",
-      petAge: 4,
-      petIsSprayed: true,
-      petAbout: "Следить, чтобы не чесал ухо, есть аллергия на говядину, дома не гади",
-      petPhoto: "Photo",
-    },
-    {
-      id: 1,
-      petUserId: 1,
-      petType: 1,
-      petName: "Rocky",
-      petBreed: "Pitbul",
-      petGender: "Man",
-      petAge: 4,
-      petIsSprayed: true,
-      petAbout: "Следить, чтобы не чесал ухо, есть аллергия на говядину, дома не гади",
-      petPhoto: "Photo",
-    },
-  ];
+
+export const fetchCheckAllPets = createAsyncThunk('/pets/all', async () => {
+  const response = await axios.get<PetResponseType, AxiosResponse<PetResponseType>>(API+'/pets/all', {withCredentials: true});
+  return response.data
+})
+
+export const fetchAddNewPet = createAsyncThunk(`pets/new`, async (inputs: InputsPetType) => {
+  const response = await axios.post<PetResponseType, AxiosResponse<PetItemType>>(API+'/pets/new', inputs, {withCredentials: true});
+  return response.data
+})
+
+export const fetchEditPet = createAsyncThunk(`pets/edit`, async ({id, inputs}: {id: number, inputs:InputsPetType }) => {
+  const response = await axios.patch(`${API}/pets/edit/${id}`, inputs,  {withCredentials: true});
+  console.log(response);
+  
+  return response.data
+})
+
+export const fetchDelPet = createAsyncThunk(`pets/del`, async (id: number) => {
+  const response = await axios.delete(`${API}/pets/${id}`,  {withCredentials: true});
+  if (response.status === 200) {
+    return id;
+  }
 })

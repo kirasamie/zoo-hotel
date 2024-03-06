@@ -14,8 +14,9 @@ router.get('/all', async (req, res) => {
 
 router.post('/new', async (req, res) => {
   const { userId } = req.session;
-  const { petName, petBreed, petType, petGender, petAge, petIsSprayed, petAbout } =
-    req.body;
+  const {
+    petName, petBreed, petType, petGender, petAge, petIsSprayed, petAbout,
+  } = req.body;
   try {
     const newPet = await Pet.create({
       petName,
@@ -36,8 +37,9 @@ router.post('/new', async (req, res) => {
 router.patch('/edit/:id', async (req, res) => {
   const { userId } = req.session;
   const { id } = req.params;
-  const { petName, petBreed, petType, petGender, petAge, petIsSprayed, petAbout } =
-    req.body;
+  const {
+    petName, petBreed, petType, petGender, petAge, petIsSprayed, petAbout,
+  } = req.body;
   try {
     const editedPet = await Pet.update(
       {
@@ -49,9 +51,21 @@ router.patch('/edit/:id', async (req, res) => {
         petIsSprayed,
         petAbout,
       },
-      { where: { petUserId: userId, id } }
+      { where: { petUserId: userId, id }, returning: true, plain: true },
     );
-    res.json(editedPet);
+    console.log(editedPet);
+    res.json(editedPet[1]);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.delete('/:id', async (req, res) => {
+  const { userId } = req.session;
+  const { id } = req.params;
+  try {
+    await Pet.destroy({ where: { petUserId: userId, id } });
+    res.sendStatus(200);
   } catch (error) {
     console.log(error);
   }

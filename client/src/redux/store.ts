@@ -6,7 +6,6 @@ import userSlice from './userSlice';
 import type { SliceState } from './userSlice';
 
 export type StoreType = {
-  // todoSlice: SliceStateType; //!
   petSlice:  PetSliceState;
   userSlice: SliceState;
 };

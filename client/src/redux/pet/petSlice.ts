@@ -1,24 +1,10 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { getPets } from "./async-action";
+import { createSlice } from "@reduxjs/toolkit";
 import { PetResponseType } from "../../models/Pet";
 import { StoreType } from "../store"
-import { fetchAddNewPet, fetchCheckAllPets } from "../thunkActions";
-
-
-export type PetType = {
-  id: number;
-  petName: string;
-  petBreed?: string;
-  petGender: string;
-  petAge: number;
-  petIsPrayed: boolean;
-  petAbout?: string;
-}
-
-export type PetsType = PetType[];
+import { fetchAddNewPet, fetchCheckAllPets, fetchDelPet, fetchEditPet } from "./async-action";
 
 export type PetSliceState = {
-  pets: PetsType;
+  pets: PetResponseType;
 }
 
 const initialState: PetSliceState = {
@@ -37,6 +23,20 @@ const petSlice = createSlice({
       builder.addCase(fetchAddNewPet.fulfilled, (state, {payload}) => {
         state.pets.push(payload);
       })
+      builder.addCase(fetchEditPet.fulfilled, (state, { payload }) => {
+        console.log(payload);
+        
+       state.pets = state.pets.map((el) => {
+        if (el.id === payload.id) {
+          return payload
+        }
+          return el
+        
+       })
+      });
+      builder.addCase(fetchDelPet.fulfilled, (state, { payload }) => {
+        state.pets = state.pets.filter((el) => el.id !== payload);
+      });
   }
   })
   export default petSlice.reducer;

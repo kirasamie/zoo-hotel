@@ -17,8 +17,6 @@ export const fetchAddNewPet = createAsyncThunk(`pets/new`, async (inputs: Inputs
 
 export const fetchEditPet = createAsyncThunk(`pets/edit`, async ({id, inputs}: {id: number, inputs:InputsPetType }) => {
   const response = await axios.patch(`${API}/pets/edit/${id}`, inputs,  {withCredentials: true});
-  console.log(response);
-  
   return response.data
 })
 

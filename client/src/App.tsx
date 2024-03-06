@@ -20,11 +20,13 @@ console.log('THIS IS PETS', pets);
 console.log(user);
   useEffect(() => {
    void dispatch(fetchCheckUser());
-   if (user && user.id > 0) {
-     void dispatch(fetchCheckAllPets());
-   }
-  }, [dispatch, user]);
+  }, [dispatch]);
 
+  useEffect(() => {
+    void dispatch(fetchCheckAllPets());
+  }, [dispatch]);
+
+  
   return (
     <>
       <div className="SOMEWRAPPER!!!!!!!!!!!!!">

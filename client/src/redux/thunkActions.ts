@@ -29,12 +29,10 @@ export const fetchLogoutUser = createAsyncThunk(`/logout`, async () => {
     }
 })
     
-
-
-export const fetchAddNewPet = createAsyncThunk(`pets/new`, async (inputs: InputsPetType) => {
-    const response = await axios.post<PetType, AxiosResponse<PetType>>(`${import.meta.env.VITE_URL}/pets/new`, inputs, {withCredentials: true});
-    return response.data
-})
+// export const fetchAddNewPet = createAsyncThunk(`pets/new`, async (inputs: InputsPetType) => {
+//     const response = await axios.post<PetType, AxiosResponse<PetType>>(`${import.meta.env.VITE_URL}/pets/new`, inputs, {withCredentials: true});
+//     return response.data
+// })
 
 export const fetchCheckOrdersByUser = createAsyncThunk(`orders/user`, async (userId: number) => {
  const response = await axios.get<OrdersType, AxiosResponse<OrdersType>>(`${import.meta.env.VITE_URL}/orders/user/${userId}`, {withCredentials: true});

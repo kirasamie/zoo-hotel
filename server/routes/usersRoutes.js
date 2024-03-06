@@ -12,9 +12,7 @@ router.get('/checkSession', async (req, res) => {
 
 router.post('/register', async (req, res) => {
   try {
-    const {
-      firstName, lastName, email, password, avatar, phone,
-    } = req.body;
+    const { firstName, lastName, email, password, avatar, phone } = req.body;
 
     const user = await User.findOne({ where: { email } });
     if (user) {
@@ -34,22 +32,28 @@ router.post('/register', async (req, res) => {
       req.session.userId = newUser.id;
       req.session.save(() => {
         console.log(
-          `Welcome, ${newUser.name}. Your registration completed with email ${newUser.email}`,
+          `Welcome, ${newUser.name}. Your registration completed with email ${newUser.email}`
         );
         res.status(201).json({
           id: newUser.id,
           firstName: newUser.firstName,
           email: newUser.email,
         });
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
 
-  router.post('/message', async (req, res) => {
+router.post('/message', async (req, res) => {
   try {
     const { firstName, lastName, email } = req.body;
-      const secretWord = randomizer();
-      const message = {
-        to: req.body.email,
-        subject: 'Отель для животных ZooHotel!',
-        html: `
+    const secretWord = randomizer();
+    const message = {
+      to: req.body.email,
+      subject: 'Отель для животных ZooHotel!',
+      html: `
         <h2>Добро пожаловать на отель для ваших любимых питомцев, ZooHotel!</h2>
         <br/>
         <p> ${lastName} ${firstName}</p>
@@ -64,12 +68,11 @@ router.post('/register', async (req, res) => {
         <p>С Уважением,</p>
         <p>Администрация ZooHotel KiraJuckieKate</p>
         `,
-      };
-      mailer(message);
-      res.json({
-        secretWord,
-      });
-    }
+    };
+    mailer(message);
+    res.json({
+      secretWord,
+    });
   } catch (error) {
     console.log(error);
     res.json({ err: error });

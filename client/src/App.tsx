@@ -19,7 +19,9 @@ const user = useAppSelector((store) => store.userSlice.info);
 console.log(user);
   useEffect(() => {
    void dispatch(fetchCheckUser());
-  //  void dispatch(fetchCheckAllPets());
+   if (user && user.id > 0) {
+     void dispatch(fetchCheckAllPets());
+   }
   }, [dispatch]);
 
   return (

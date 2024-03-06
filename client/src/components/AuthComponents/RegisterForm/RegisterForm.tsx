@@ -4,6 +4,11 @@ import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Button, TextField, Box, styled } from '@mui/material';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 import { useAppDispatch } from '../../../redux/hooks';
 import { fetchRegisterUser } from '../../../redux/thunkActions';
 
@@ -28,6 +33,11 @@ export type InputsUserType = {
   phone?: number;
 };
 
+
+export type SecretWordType = {
+  secretWord: string;
+}
+
 export default function RegisterForm({ setIsLogin }): JSX.Element {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -35,22 +45,20 @@ export default function RegisterForm({ setIsLogin }): JSX.Element {
   const initialStateRegisterForm = { firstName: '', lastName: '', email: '', password: '', avatar: '', phone: 0 };
 
   const [inputs, setInputs] = useState<InputsUserType>(initialStateRegisterForm);
+  const [inputSecretWord, setInputSecretWord] = useState<SecretWordType>({secretWord: ''});
+  const [formRegistration, setFormRegistration] = useState<boolean>(false);
+  const [message, setMessage] = useState<SecretWordType>({secretWord: ''});
+
+  const handlerClose = () => {
+    setFormRegistration(false);
+  };
 
   const handlerChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const [avatarFile, setAvatarFile] = useState();
-  const handlerRegister = async (): Promise<void> => {
-    dispatch(fetchRegisterUser(inputs))
-      .then((res) => {
-        if (res.meta.requestStatus === 'fulfilled') {
-          navigate('/');
-        }
-      })
-      .catch((error) => console.log(error));
-  };
-
+        
   const changeAvatarHandler = (e) => {
     console.log(e.target.files[0]);
   };
@@ -70,6 +78,34 @@ export default function RegisterForm({ setIsLogin }): JSX.Element {
   useEffect(() => {
     sendFile();
   }, [avatarFile]);
+
+  const handlerChangeSecretWord = (e: ChangeEvent<HTMLInputElement>): void => {
+    setInputSecretWord((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handlerSendMessage = async(): Promise<void> => {
+    axios.post(`${import.meta.env.VITE_URL}/user/message`, inputs, {withCredentials: true})
+    .then((res) => setMessage(res.data.secretWord))
+    .catch((error) => console.log(error))
+    setFormRegistration(true)
+  }
+  console.log(message);
+  
+  const handlerRegister = async (): Promise<void> => {
+    if (String(message) === inputSecretWord.secretWord) {
+        console.log('success!');
+      dispatch(fetchRegisterUser(inputs)).then((res) => {
+       if (res.meta.requestStatus === 'fulfilled') {
+         navigate('/');
+    } 
+  }).catch((error) => console.log(error))
+  setFormRegistration(false);
+  } else {
+    console.log('missed!');
+    navigate('/');
+    setFormRegistration(false);
+  }
+}
 
   return (
     <div className="authContainer">
@@ -159,13 +195,50 @@ export default function RegisterForm({ setIsLogin }): JSX.Element {
             maxWidth: '100%',
           }}
         />
-        <Button variant="contained" color="success" onClick={() => void handlerRegister()}>
+        <Button variant="contained" color="success" onClick={() => void handlerSendMessage()}>
           Регистрация
         </Button>
         <Button variant="contained" onClick={() => setIsLogin(true)}>
           Уже зарегистрированы? Войти
         </Button>
+        {formRegistration ? (
+          <>
+          <Dialog
+            open={formRegistration}
+            onClose={() => void handlerClose()}
+            PaperProps={{
+              component: 'form',
+              onChange: (e:ChangeEvent<HTMLInputElement>) => void handlerChangeSecretWord(e)
+            }}
+            >
+            <DialogTitle>Subscribe</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                Для завершения регистрации, необходимо подтвердить код-подтверждения, отправленный на электронную почту "{inputs.email}".
+              </DialogContentText>
+              <TextField
+                autoFocus
+                required
+                margin="dense"
+                id="name"
+                name="secretWord"
+                label="Введите код-подтверждения"
+                type="text"
+                fullWidth
+                variant="standard"
+                />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={() => void handlerClose()}>Cancel</Button>
+              <Button onClick={() => void handlerRegister()}>Subscribe</Button>
+            </DialogActions>
+          </Dialog>
+              </>
+          )
+          :  
+          null
+        }
       </Box>
     </div>
-  );
-}
+    );
+  }

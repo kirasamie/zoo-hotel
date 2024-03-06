@@ -70,7 +70,7 @@ export default function RoomsPageModal({ room, open, handleClose }: ModalPropsTy
   };
 
   const changeDateRangeHandler = (value: DateRange<unknown>) => {
-    const datesString = value.map((date) => date?.$d && new Date(date.$d).toLocaleDateString());
+    const datesString = value.map((date) => date?.$d && new Date(date.$d).toDateString());
     if (datesString.every((el) => el !== undefined)) {
       const date1: Date = new Date(value[0]?.$d);
       const date2: Date = new Date(value[1]?.$d);
@@ -91,6 +91,20 @@ export default function RoomsPageModal({ room, open, handleClose }: ModalPropsTy
     }
   };
 
+  const banDates = [['Mon Mar 11 2024', 'Fri Mar 15 2024']];
+
+  const banDatesRanges = banDates.map((range) => {
+    const dateFrom = new Date(range[0]);
+    const dateTo = new Date(range[1]);
+    const result = [];
+    const pad = (s) => ('00' + s).slice(-2);
+    while (dateFrom.getTime() <= dateTo.getTime()) {
+      result.push(pad(dateFrom.getDate()) + '.' + pad(dateFrom.getMonth() + 1) + '.' + dateFrom.getFullYear());
+      dateFrom.setDate(dateFrom.getDate() + 1);
+    }
+    return result;
+  });
+
   return (
     <div>
       <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
@@ -102,7 +116,15 @@ export default function RoomsPageModal({ room, open, handleClose }: ModalPropsTy
             </Select>
           </FormControl>
           <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="ru">
-            <DateRangePicker slots={{ field: SingleInputDateRangeField }} name="allowedRange" onChange={changeDateRangeHandler} />
+            <DateRangePicker
+              disablePast
+              shouldDisableDate={(date) => {
+                return banDatesRanges.flat().includes(new Date(date.$d).toLocaleDateString());
+              }}
+              slots={{ field: SingleInputDateRangeField }}
+              name="allowedRange"
+              onChange={changeDateRangeHandler}
+            />
           </LocalizationProvider>
           <TextField name="description" value={inputs.description} label="Ваш комментарий к заказу" maxRows={15} multiline fullWidth onChange={changeHandler} />
 

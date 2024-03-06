@@ -1,45 +1,44 @@
 .roomsPageWrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-}
-
-.inputsWrapper {
-    border: 1px solid red;
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
 
 .rooms {
-    border: 1px solid red;
-    width: 600px;
-    height: 400px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  border: 2px solid gray;
+  border-radius: 10px;
+  width: 600px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .roomUpperRow {
-    display: flex;
+  display: flex;
 }
 
 .roomBottomRow {
-    display: flex;
-    justify-content: end;
+  display: flex;
+  justify-content: end;
+}
+
+.roomUpperRow button,
+.roomBottomRow button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
 }
 
 .roomUpperRow button {
-    height: 40px;
-    width: 40px;
-    margin: 10px;
+  width: 100px;
+  height: 80px;
 }
 
 .roomBottomRow button {
-    height: 80px;
-    width: 80px;
-    margin: 10px;
+  width: 120px;
+  height: 120px;
 }

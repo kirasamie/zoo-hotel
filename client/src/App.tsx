@@ -1,19 +1,18 @@
-
-import { Outlet, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
 import AuthPage from "./pages/AuthPage/AuthPage";
 import RoomsPage from "./pages/RoomsPage/RoomsPage";
 import { useEffect } from "react";
 import Navbar from "./components/NavbarComponents/Navbar/Navbar";
 import PetForm from "./components/AccountComponents/PetsComponent/PetForm";
-import PetMenu from "./components/AccountComponents/PetsComponent/PetMenu";
 import PetPage from "./pages/PetPage/PetPage";
 import AccountPage from "./pages/AccountPage/AccountPage";
 import { useAppDispatch, useAppSelector } from "./redux/hooks";
-import { fetchCheckAllPets, fetchCheckUser } from "./redux/thunkActions";
+import { fetchCheckUser } from "./redux/thunkActions";
+import PetCard from "./components/AccountComponents/PetsComponent/PetCard";
+import { fetchCheckAllPets } from "./redux/pet/async-action";
 
 function App(): JSX.Element {
-
 const dispatch = useAppDispatch();
 const user = useAppSelector((store) => store.userSlice.info);
 const pets = useAppSelector((store) => store.petSlice);
@@ -51,7 +50,8 @@ console.log(user);
             <Route path="profile" element={<h2>profile page</h2>} /> */}
             <Route path="pets" element={<PetPage />}>
               <Route path="new" element={<PetForm />} />
-              <Route path=":petId" element={<h2>p</h2>} />
+              <Route path="edit/:petId" element={<PetForm />} />
+              <Route path=":petId" element={<PetCard />} />
             </Route>
           </Route>
 

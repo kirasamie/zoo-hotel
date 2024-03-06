@@ -29,10 +29,7 @@ export const fetchLogoutUser = createAsyncThunk(`/logout`, async () => {
     }
 })
     
-export const fetchCheckAllPets = createAsyncThunk('/pets/all', async () => {
-    const response = await axios.get<PetsType, AxiosResponse<PetsType>>(`${import.meta.env.VITE_URL}/pets/all`, {withCredentials: true});
-    return response.data
-})
+
 
 export const fetchAddNewPet = createAsyncThunk(`pets/new`, async (inputs: InputsPetType) => {
     const response = await axios.post<PetType, AxiosResponse<PetType>>(`${import.meta.env.VITE_URL}/pets/new`, inputs, {withCredentials: true});
@@ -48,3 +45,4 @@ export const fetchCheckOrdersByRoom = createAsyncThunk(`orders/room`, async (roo
     const response = await axios.get<OrdersType, AxiosResponse<OrdersType>>(`${import.meta.env.VITE_URL}/orders/room/${roomId}`, {withCredentials: true});
     return response.data
    })
+

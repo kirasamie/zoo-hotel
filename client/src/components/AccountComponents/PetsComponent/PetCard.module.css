@@ -1,0 +1,38 @@
+.container {
+  width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.photos {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.photo {
+  width: 200px;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+}
+
+img {
+  width: 200px;
+  height: 200px;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+}
+.editButton {
+  margin-right: 5px !important;
+}

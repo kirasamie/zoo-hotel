@@ -8,7 +8,6 @@ import { OrderSliceState } from './orderSlice';
 import orderSlice from './orderSlice';
 
 export type StoreType = {
-  // todoSlice: SliceStateType; //!
   petSlice:  PetSliceState;
   userSlice: SliceState;
   orderSlice: OrderSliceState;

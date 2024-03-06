@@ -10,13 +10,41 @@ router.get('/checkSession', async (req, res) => {
   res.json({ id: userId, firstName, email });
 });
 
-router.post('/message', async (req, res) => {
+router.post('/register', async (req, res) => {
   try {
-    const { firstName, lastName, email } = req.body;
+    const {
+      firstName, lastName, email, password, avatar, phone,
+    } = req.body;
+
     const user = await User.findOne({ where: { email } });
     if (user) {
       res.sendStatus(401);
     } else {
+      const hash = await bcrypt.hash(password, 10);
+      const newUser = await User.create({
+        firstName,
+        lastName,
+        email,
+        password: hash,
+        avatar,
+        phone,
+      });
+      req.session.email = newUser.email;
+      req.session.firstName = newUser.firstName;
+      req.session.userId = newUser.id;
+      req.session.save(() => {
+        console.log(
+          `Welcome, ${newUser.name}. Your registration completed with email ${newUser.email}`,
+        );
+        res.status(201).json({
+          id: newUser.id,
+          firstName: newUser.firstName,
+          email: newUser.email,
+        });
+
+  router.post('/message', async (req, res) => {
+  try {
+    const { firstName, lastName, email } = req.body;
       const secretWord = randomizer();
       const message = {
         to: req.body.email,

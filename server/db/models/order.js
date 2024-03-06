@@ -2,13 +2,15 @@ const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class Order extends Model {
-    static associate({ Room, Pet }) {
+    static associate({ Room, Pet, User }) {
       this.belongsTo(Room, { foreignKey: 'orderRoomId' });
       this.belongsTo(Pet, { foreignKey: 'orderPetId' });
+      this.belongsTo(User, { foreignKey: 'orderUserId' });
     }
   }
   Order.init(
     {
+      orderUserId: DataTypes.INTEGER,
       orderPetId: DataTypes.INTEGER,
       orderRoomId: DataTypes.INTEGER,
       orderDateIn: DataTypes.STRING,

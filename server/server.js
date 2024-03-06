@@ -12,6 +12,7 @@ const roomsRouter = require('./routes/roomsRoutes');
 const petsRouter = require('./routes/petsRoutes');
 const stripeRouter = require('./routes/stripeRoutes');
 const imageRouter = require('./routes/imageRoutes');
+const orderRouter = require('./routes/orderRoutes');
 
 const app = express();
 const { PORT, SECRET_KEY_SESSION } = process.env;
@@ -46,5 +47,6 @@ app.use('/api/rooms', roomsRouter);
 app.use('/api/pets', petsRouter);
 app.use('/api/stripe', stripeRouter);
 app.use('/api/image', imageRouter);
+app.use('/api/orders', orderRouter);
 
 app.listen(PORT, () => console.log(`Server has started on PORT ${PORT}`));

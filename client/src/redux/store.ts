@@ -4,10 +4,13 @@ import { ConfigureStoreOptions, configureStore } from '@reduxjs/toolkit';
 import petSlice, { PetSliceState } from './pet/petSlice';
 import userSlice from './userSlice';
 import type { SliceState } from './userSlice';
+import { OrderSliceState } from './orderSlice';
+import orderSlice from './orderSlice';
 
 export type StoreType = {
   petSlice:  PetSliceState;
   userSlice: SliceState;
+  orderSlice: OrderSliceState;
 };
 
 
@@ -15,6 +18,7 @@ const storeOptions: ConfigureStoreOptions<StoreType> = {
   reducer: {
     petSlice,
     userSlice,
+    orderSlice,
   },
 };
 

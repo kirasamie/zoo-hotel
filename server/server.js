@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 require('dotenv').config();
 const express = require('express');
 const path = require('path');
@@ -9,6 +10,7 @@ const FileStore = require('session-file-store')(session);
 const usersRouter = require('./routes/usersRoutes');
 const roomsRouter = require('./routes/roomsRoutes');
 const petsRouter = require('./routes/petsRoutes');
+const stripeRouter = require('./routes/stripeRoutes');
 
 const app = express();
 const { PORT, SECRET_KEY_SESSION } = process.env;
@@ -41,5 +43,6 @@ app.use(express.static(path.join(process.cwd(), 'public')));
 app.use('/api/user', usersRouter);
 app.use('/api/rooms', roomsRouter);
 app.use('/api/pets', petsRouter);
+app.use('/api/stripe', stripeRouter);
 
 app.listen(PORT, () => console.log(`Server has started on PORT ${PORT}`));

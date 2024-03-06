@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const router = require('express').Router();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const { Order } = require('../db/models');
 
 router.post('/', async (req, res) => {
   const { mainOrder } = req.body;
@@ -25,8 +26,15 @@ router.post('/', async (req, res) => {
         success_url: 'http://localhost:5175/rooms',
         cancel_url: 'http://localhost:5175/rooms',
       });
-      console.log(session.payment_status)
-      res.json({ id: session.id, session });
+      const order = await Order.create({
+        orderPetId: mainOrder.petId,
+        orderRoomId: mainOrder.roomId,
+        orderDateIn: mainOrder.dateFrom,
+        orderDateOut: mainOrder.dateTo,
+        addInfo: mainOrder?.description,
+        paymentStatus: false,
+      });
+      res.json({ id: session.id, order });
     } catch (error) {
       res.json({ err: 'Ошибка при выполнении транзакции' });
       console.log(error);

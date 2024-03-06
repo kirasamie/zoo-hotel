@@ -14,7 +14,7 @@ export default function HomePage(): JSX.Element {
   return (
     <>
     <div className='textContainerLeft'>
-
+    </div>
       <div className='landing__info align__left'>
         <h1 className='textContent'>ZOoтель</h1>
         <p className='textContent'>
@@ -26,7 +26,7 @@ export default function HomePage(): JSX.Element {
           <a href='#/'>Забронировать комнату</a>
         </button>
       </div>
-    </div>
+
       <div className='body'>
         <section className='container__center' id='landing__area'>
           <div className='landing__content center__row'>

@@ -29,7 +29,7 @@ export default function RoomsPage() {
 
   return (
     <div className={styles.roomsPageWrapper}>
-      <RoomsPageModal open={open} handleClose={handleClose} />
+      <RoomsPageModal room={currentRoom} open={open} handleClose={handleClose} />
       <div className={styles.rooms}>
         <PopupState variant="popover" popupId="demo-popup-popover">
           {(popupState) => (
@@ -45,7 +45,7 @@ export default function RoomsPage() {
               <div className={styles.roomBottomRow}>
                 {rooms.length &&
                   rooms.slice(6, 9).map((room) => (
-                    <button onMouseEnter={() => void chooseRoomHandler(room.id)} {...bindTrigger(popupState)}>
+                    <button key={room.id} onMouseEnter={() => void chooseRoomHandler(room.id)} {...bindTrigger(popupState)}>
                       {room.id}
                     </button>
                   ))}

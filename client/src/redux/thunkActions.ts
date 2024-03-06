@@ -1,9 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios, { AxiosResponse } from 'axios';
+import axios, { Axios, AxiosResponse } from 'axios';
 import { UserType } from './userSlice';
 import { InputsUserType } from '../components/AuthComponents/RegisterForm/RegisterForm';
 import { PetType, PetsType } from './pet/petSlice';
 import { InputsPetType } from '../components/AccountComponents/PetsComponent/PetForm';
+import { OrdersType } from './orderSlice';
 // import type { TodoInputType, TodoType } from '../types'; //!
 
 export const fetchCheckUser = createAsyncThunk('/', async () => {
@@ -37,3 +38,13 @@ export const fetchAddNewPet = createAsyncThunk(`pets/new`, async (inputs: Inputs
     const response = await axios.post<PetType, AxiosResponse<PetType>>(`${import.meta.env.VITE_URL}/pets/new`, inputs, {withCredentials: true});
     return response.data
 })
+
+export const fetchCheckOrdersByUser = createAsyncThunk(`orders/user`, async (userId: number) => {
+ const response = await axios.get<OrdersType, AxiosResponse<OrdersType>>(`${import.meta.env.VITE_URL}/orders/user/${userId}`, {withCredentials: true});
+ return response.data
+})
+
+export const fetchCheckOrdersByRoom = createAsyncThunk(`orders/room`, async (roomId: number) => {
+    const response = await axios.get<OrdersType, AxiosResponse<OrdersType>>(`${import.meta.env.VITE_URL}/orders/room/${roomId}`, {withCredentials: true});
+    return response.data
+   })

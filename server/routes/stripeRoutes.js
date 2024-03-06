@@ -3,6 +3,8 @@ const router = require('express').Router();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const { Order } = require('../db/models');
 
+const { FRONT_URL } = process.env;
+
 router.post('/', async (req, res) => {
   const { mainOrder } = req.body;
   const { userId } = req.session;
@@ -23,10 +25,11 @@ router.post('/', async (req, res) => {
         payment_method_types: ['card'],
         line_items: lineItems,
         mode: 'payment',
-        success_url: 'http://localhost:5175/rooms',
-        cancel_url: 'http://localhost:5175/rooms',
+        success_url: FRONT_URL,
+        cancel_url: FRONT_URL,
       });
       const order = await Order.create({
+        orderUserId: mainOrder.userId,
         orderPetId: mainOrder.petId,
         orderRoomId: mainOrder.roomId,
         orderDateIn: mainOrder.dateFrom,

@@ -29,7 +29,7 @@ export default function RoomsPage() {
 
   return (
     <div className={styles.roomsPageWrapper}>
-      <RoomsPageModal open={open} handleClose={handleClose} />
+      <RoomsPageModal room={currentRoom} open={open} handleClose={handleClose} />
       <div className={styles.rooms}>
         <PopupState variant="popover" popupId="demo-popup-popover">
           {(popupState) => (

@@ -7,11 +7,10 @@ export default function PetMenu(): JSX.Element {
   return (
     <div className={styles.menu}>
       <Link to="/account/pets/new">Добавить друга</Link>
-      {pets.map((pet) => {
-        return (
+      {pets.map((pet) => (
           <Link key={pet.id} to={`/account/pets/${pet.id}`}>Карточка {pet.petName}</Link>
-        );
-      })}
+      )
+      )}
     </div>
   );
 }

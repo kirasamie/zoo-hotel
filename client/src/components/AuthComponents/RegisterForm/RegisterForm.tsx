@@ -1,11 +1,23 @@
 /* eslint-disable no-nested-ternary */
-import type { ChangeEvent } from 'react';
-import { useState } from 'react';
+import type { ChangeEvent, FormEvent } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Button, TextField, Box } from '@mui/material';
+import { Button, TextField, Box, styled } from '@mui/material';
 import { useAppDispatch } from '../../../redux/hooks';
 import { fetchRegisterUser } from '../../../redux/thunkActions';
+
+const VisuallyHiddenInput = styled('input')({
+  clip: 'rect(0 0 0 0)',
+  clipPath: 'inset(50%)',
+  height: 1,
+  overflow: 'hidden',
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  whiteSpace: 'nowrap',
+  width: 1,
+});
 
 export type InputsUserType = {
   firstName?: string;
@@ -28,13 +40,36 @@ export default function RegisterForm({ setIsLogin }): JSX.Element {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  const [avatarFile, setAvatarFile] = useState();
   const handlerRegister = async (): Promise<void> => {
-   dispatch(fetchRegisterUser(inputs)).then((res) => {
-    if (res.meta.requestStatus === 'fulfilled') {
-      navigate('/');
+    dispatch(fetchRegisterUser(inputs))
+      .then((res) => {
+        if (res.meta.requestStatus === 'fulfilled') {
+          navigate('/');
+        }
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const changeAvatarHandler = (e) => {
+    console.log(e.target.files[0]);
+  };
+
+  const sendFile = async () => {
+    const data = new FormData();
+    if (avatarFile) {
+      data.append('avatar', avatarFile);
+      const response = await axios.post(`${import.meta.env.VITE_URL}/image`, data, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+        withCredentials: true,
+      });
+      console.log(response);
     }
-   }).catch((error) => console.log(error))
-  }
+  };
+
+  useEffect(() => {
+    sendFile();
+  }, [avatarFile]);
 
   return (
     <div className="authContainer">
@@ -46,6 +81,10 @@ export default function RegisterForm({ setIsLogin }): JSX.Element {
           '& > :not(style)': { m: 1 },
         }}
       >
+        <Button component="label" role={undefined} variant="contained" tabIndex={-1}>
+          Загрузить аватар
+          <VisuallyHiddenInput type="file" name="avatar" accept="image/png, image/jpeg, image/jpg" onChange={(e: ChangeEvent<HTMLInputElement>) => void setAvatarFile(e.target.files[0])} />
+        </Button>
         <TextField
           label="Ваше имя"
           type="text"
@@ -98,6 +137,7 @@ export default function RegisterForm({ setIsLogin }): JSX.Element {
             maxWidth: '100%',
           }}
         />
+
         <TextField
           label="Загрузить фото"
           helperText="Вы можете загрузить аватар"

@@ -19,7 +19,7 @@ const user = useAppSelector((store) => store.userSlice.info);
 console.log(user);
   useEffect(() => {
    void dispatch(fetchCheckUser());
-   void dispatch(fetchCheckAllPets());
+  //  void dispatch(fetchCheckAllPets());
   }, [dispatch]);
 
   return (

@@ -31,6 +31,7 @@ type ModalPropsType = {
 type OrderType = {
   userId: number;
   petId: number;
+  roomId: number;
   dateFrom: string;
   dateTo: string;
   amount: number;
@@ -42,7 +43,7 @@ export default function RoomsPageModal({ room, open, handleClose }: ModalPropsTy
   const pets = useAppSelector((store) => store.petSlice.pets);
   const user = useAppSelector((store) => store.userSlice.info);
   const [orders, setOrders] = useState<Array<OrderType>>([]);
-  const [mainOrder, setMainOrder] = useState<OrderType>({ userId: 0, petId: 0, dateFrom: '', dateTo: '', amount: 0, quantity: 0, description: '' });
+  const [mainOrder, setMainOrder] = useState<OrderType>({ userId: 0, petId: 0, roomId: 0, dateFrom: '', dateTo: '', amount: 0, quantity: 0, description: '' });
   const [allowPayment, setAllowPayment] = useState(false);
   const [days, setDays] = useState(0);
   const [inputs, setInputs] = useState({ petId: '', allowedRange: '', description: '' });
@@ -50,13 +51,14 @@ export default function RoomsPageModal({ room, open, handleClose }: ModalPropsTy
   useEffect(() => {
     const checkUserId = mainOrder.userId !== 0;
     const checkPetId = mainOrder.petId !== 0;
+    const checkRoomId = mainOrder.roomId !== 0;
     const checkDateFrom = mainOrder.dateFrom !== '';
     const checkDateTo = mainOrder.dateTo !== '';
     const checkAmount = mainOrder.amount !== 0;
     const checkQuantity = mainOrder.quantity !== 0;
 
     console.log(mainOrder);
-    if (checkUserId && checkPetId && checkDateFrom && checkDateTo && checkAmount && checkQuantity) {
+    if (checkUserId && checkPetId && checkRoomId && checkDateFrom && checkDateTo && checkAmount && checkQuantity) {
       setAllowPayment(true);
     }
   }, [mainOrder]);
@@ -74,19 +76,16 @@ export default function RoomsPageModal({ room, open, handleClose }: ModalPropsTy
       const date2: Date = new Date(value[1]?.$d);
       const diffDays: number = Math.ceil(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24)) + 1;
       setDays(diffDays);
-      setMainOrder((prev) => ({ ...prev, userId: user.id, quantity: diffDays, dateFrom: datesString[0], dateTo: datesString[1], amount: room?.roomPrice }));
+      setMainOrder((prev) => ({ ...prev, userId: user.id, quantity: diffDays, dateFrom: datesString[0], dateTo: datesString[1], amount: room?.roomPrice, roomId: room.id }));
     }
   };
 
   const paymentHandler = async () => {
     const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
     const session = await axios.post(`${import.meta.env.VITE_URL}/stripe`, { mainOrder: mainOrder }, { withCredentials: true });
-    console.log('SESSION ', session);
-    console.log('user ', user);
     const result = await stripe!.redirectToCheckout({
       sessionId: session.data.id,
     });
-    console.log('result =>>', result);
     if (result?.error) {
       console.log(result?.error);
     }

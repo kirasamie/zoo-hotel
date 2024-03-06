@@ -11,9 +11,10 @@ module.exports = (sequelize, DataTypes) => {
     {
       orderPetId: DataTypes.INTEGER,
       orderRoomId: DataTypes.INTEGER,
-      orderDateIn: DataTypes.DATE,
-      orderDateOut: DataTypes.DATE,
+      orderDateIn: DataTypes.STRING,
+      orderDateOut: DataTypes.STRING,
       addInfo: DataTypes.TEXT,
+      paymentStatus: DataTypes.BOOLEAN,
     },
     {
       sequelize,

@@ -34,11 +34,21 @@ router.post('/image/:postId', upload.fileFilter, upload.single('postImage'), asy
   res.json({ msg: 'Фото успешно загружено!', filename: req.file.filename });
 });
 
+router.get('/:id', async (req, res) => {
+  const { userId } = req.session;
+  const { id } = req.params;
+  try {
+    const posts = await Post.findAll({ where: { orderId: id }, order: [['createdAt', 'DESC']] });
+    console.log(posts.length);
+    res.json(posts);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 router.post('/', async (req, res) => {
   const { userId } = req.session;
-  const {
-    title, body, orderId, workerId,
-  } = req.body;
+  const { title, body, orderId, workerId } = req.body;
   console.log(userId, workerId);
   if (userId === workerId) {
     try {

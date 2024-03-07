@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       body: DataTypes.STRING,
       workerId: DataTypes.INTEGER,
       postPhotoLink: DataTypes.STRING,
+      orderId: DataTypes.INTEGER,
     },
     {
       sequelize,

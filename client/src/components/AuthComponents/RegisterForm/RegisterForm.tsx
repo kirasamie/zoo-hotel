@@ -11,6 +11,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useAppDispatch } from '../../../redux/hooks';
 import { fetchRegisterUser } from '../../../redux/thunkActions';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -38,6 +39,7 @@ export type SecretWordType = {
 };
 
 export default function RegisterForm({ setIsLogin }): JSX.Element {
+  const key = '6LdZkJApAAAAAGu1pAW565A-PtYW1Hze2wV2hq8p';
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -144,22 +146,6 @@ export default function RegisterForm({ setIsLogin }): JSX.Element {
           '& > :not(style)': { m: 1 },
         }}
       >
-        <Button
-          component='label'
-          role={undefined}
-          variant='contained'
-          tabIndex={-1}
-        >
-          Загрузить аватар
-          <VisuallyHiddenInput
-            type='file'
-            name='avatar'
-            accept='image/png, image/jpeg, image/jpg'
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              void setAvatarFile(e.target.files[0])
-            }
-          />
-        </Button>
         <TextField
           label='Ваше имя'
           type='text'
@@ -212,28 +198,45 @@ export default function RegisterForm({ setIsLogin }): JSX.Element {
             maxWidth: '100%',
           }}
         />
-
-        <TextField
-          label='Загрузить фото'
-          helperText='Вы можете загрузить аватар'
-          type='text'
-          name='avatar'
-          onChange={(e) => void handlerChange(e)}
-          sx={{
-            width: '500px',
-            maxWidth: '100%',
-          }}
-        />
-        <TextField
-          helperText='Место забронировано под капчу'
-          type='text'
-          name='lastName'
-          onChange={(e) => void handlerChange(e)}
-          sx={{
-            width: '500px',
-            maxWidth: '100%',
-          }}
-        />
+        <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1 }}>
+          <TextField
+            disabled
+            helperText='Вы можете загрузить аватар'
+            type='text'
+            name='avatar'
+            value={avatarFile?.name}
+            onChange={(e) => void handlerChange(e)}
+            sx={{
+              width: '340px',
+              maxWidth: '100%',
+            }}
+          />
+          <Button
+            sx={{
+              width: '160px',
+              height: '55px',
+              maxWidth: '100%',
+              textAlign: 'center',
+            }}
+            component='label'
+            role={undefined}
+            variant='contained'
+            tabIndex={-1}
+          >
+            Загрузить аватар
+            <VisuallyHiddenInput
+              type='file'
+              name='avatar'
+              accept='image/png, image/jpeg, image/jpg'
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                void setAvatarFile(e.target.files[0])
+              }
+            />
+          </Button>
+        </Box>
+        <div>
+          <ReCAPTCHA sitekey='6LfClZApAAAAAHWVRUGDt1nEt451W4Le8kHU_7lN' />
+        </div>
         <Button
           variant='contained'
           color='success'

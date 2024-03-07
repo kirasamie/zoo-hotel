@@ -79,10 +79,11 @@ export default function PetForm(): JSX.Element {
     setSelectedImages((previousImages) => previousImages.concat(imagesArray));
     e.target.value = '';
   };
-  if (avatarPet.length >= 4) {
+  if (avatarPet.length >= 4 && selectedImages.length >= 4) {
     setAvatarPet((prev) => prev.slice(0, 3));
+    setSelectedImages((prev) => prev.slice(0, 3));
   }
-  
+
   const sendFiles = async (petId: number) => {
     const data = new FormData();
     console.log(avatarPet);
@@ -103,7 +104,6 @@ export default function PetForm(): JSX.Element {
           withCredentials: true,
         }
       );
-      console.log(response);
     }
   };
 
@@ -138,7 +138,7 @@ export default function PetForm(): JSX.Element {
   const handlerAddNewPet = async (): Promise<void> => {
     void dispatch(fetchAddNewPet(inputs)).then((res) => {
       if (res.meta.requestStatus === 'fulfilled') {
-        sendFiles(res.payload.id)
+        sendFiles(res.payload.id);
       }
     });
     setInputs(initialStatePet);

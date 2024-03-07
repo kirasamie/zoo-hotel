@@ -1,9 +1,22 @@
 import './HomePage.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
+import { YMaps, Map, FullscreenControl, Placemark, TypeSelector, TrafficControl } from '@pbe/react-yandex-maps';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
+
+// const placemark = new Placemark([55.75, 37.61], {
+//   balloonContent: '<img src="http://img-fotki.yandex.ru/get/6114/82599242.2d6/0_88b97_ec425cf5_M" />',
+//   iconContent: "Azerbaijan"
+// }, {
+//   preset: "islands#yellowStretchyIcon",
+//   // Disabling the close balloon button.
+//   balloonCloseButton: false,
+//   // The balloon will open and close when the placemark icon is clicked.
+//   hideIconOnBalloonOpen: false
+// });
+// geoMap.geoObjects.add(placemark);
 
 export default function HomePage(): JSX.Element {
   const arrImages = ['first', 'second', 'third', 'fourd'];
@@ -70,6 +83,19 @@ export default function HomePage(): JSX.Element {
           </div>
         </div>
       </div>
+      <YMaps>
+        <div className="ya-map-wrapper">
+          <Map className="ya-map" defaultState={{ center: [46.287837853706414, 47.94919350240244], zoom: 13 }}>
+            <FullscreenControl />
+            <Placemark
+              geometry={[46.287837853706414, 47.94919350240244]}
+              // options={ balloonContentBody: 'yandex zaebis' }
+            />
+            <TypeSelector options={{ float: 'right' }} />
+            <TrafficControl options={{ float: 'right' }} />
+          </Map>
+        </div>
+      </YMaps>
     </>
   );
 }

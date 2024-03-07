@@ -1,19 +1,19 @@
-import { Route, Routes } from "react-router-dom";
-import HomePage from "./pages/HomePage/HomePage";
-import AuthPage from "./pages/AuthPage/AuthPage";
-import RoomsPage from "./pages/RoomsPage/RoomsPage";
-import { useEffect } from "react";
-import Navbar from "./components/NavbarComponents/Navbar/Navbar";
-import PetForm from "./components/AccountComponents/PetsComponent/PetForm";
-import PetPage from "./pages/PetPage/PetPage";
-import AccountPage from "./pages/AccountPage/AccountPage";
-import { useAppDispatch } from "./redux/hooks";
-import { fetchCheckUser } from "./redux/thunkActions";
-import PetCard from "./components/AccountComponents/PetsComponent/PetCard";
-import { fetchCheckAllPets } from "./redux/pet/async-action";
-import OrderPage from "./pages/OrderPage/OrderPage";
-import OrderCard from "./components/AccountComponents/OrdersComponent/OrderCard";
 import ProfileComponent from "./components/AccountComponents/ProfileComponent/ProfileComponent";
+import { Route, Routes } from 'react-router-dom';
+import HomePage from './pages/HomePage/HomePage';
+import AuthPage from './pages/AuthPage/AuthPage';
+import RoomsPage from './pages/RoomsPage/RoomsPage';
+import { useEffect } from 'react';
+import Navbar from './components/NavbarComponents/Navbar/Navbar';
+import PetForm from './components/AccountComponents/PetsComponent/PetForm';
+import PetPage from './pages/PetPage/PetPage';
+import AccountPage from './pages/AccountPage/AccountPage';
+import { useAppDispatch } from './redux/hooks';
+import { fetchCheckUser } from './redux/thunkActions';
+import PetCard from './components/AccountComponents/PetsComponent/PetCard';
+import { fetchCheckAllPets } from './redux/pet/async-action';
+import OrderPage from './pages/OrderPage/OrderPage';
+import OrderCard from './components/AccountComponents/OrdersComponent/OrderCardList';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();

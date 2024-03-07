@@ -10,11 +10,12 @@ import {
   RadioGroup,
   TextField,
   styled,
-} from "@mui/material";
-import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import { fetchAddNewPet, fetchEditPet } from "../../../redux/pet/async-action";
-import { useNavigate, useParams } from "react-router-dom";
-import { ChangeEvent, useEffect, useState } from "react";
+} from '@mui/material';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import { fetchAddNewPet, fetchEditPet } from '../../../redux/pet/async-action';
+import { useNavigate, useParams } from 'react-router-dom';
+import { ChangeEvent, useEffect, useState } from 'react';
+import axios from 'axios';
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -68,7 +69,7 @@ export default function PetForm(): JSX.Element {
     const selectedFilesArray = Array.from(selectedFiles);
 
     const imagesArray = selectedFilesArray.map((file) => {
-      const obj = { file: {}, blob: "" };
+      const obj = { file: {}, blob: '' };
       obj.file = file;
       obj.blob = URL.createObjectURL(file);
       setAvatarPet((prev) => [...prev, obj]);
@@ -76,8 +77,34 @@ export default function PetForm(): JSX.Element {
     });
 
     setSelectedImages((previousImages) => previousImages.concat(imagesArray));
+    e.target.value = '';
+  };
+  if (avatarPet.length >= 4 && selectedImages.length >= 4) {
+    setAvatarPet((prev) => prev.slice(0, 3));
+    setSelectedImages((prev) => prev.slice(0, 3));
+  }
 
-    e.target.value = "";
+  const sendFiles = async (petId: number) => {
+    const data = new FormData();
+    console.log(avatarPet);
+
+    if (avatarPet) {
+      const arrPetsImages = avatarPet.map((avatar) => {
+        return avatar.file;
+      });
+      arrPetsImages.forEach((arr) => {
+        data.append('pets', arr);
+      });
+
+      const response = await axios.post(
+        `${import.meta.env.VITE_URL}/image/pet/${petId}`,
+        data,
+        {
+          headers: { 'Content-Type': 'multipart/form-data' },
+          withCredentials: true,
+        }
+      );
+    }
   };
 
   function deleteHandler(image) {
@@ -109,7 +136,11 @@ export default function PetForm(): JSX.Element {
   };
 
   const handlerAddNewPet = async (): Promise<void> => {
-    void dispatch(fetchAddNewPet(inputs));
+    void dispatch(fetchAddNewPet(inputs)).then((res) => {
+      if (res.meta.requestStatus === 'fulfilled') {
+        sendFiles(res.payload.id);
+      }
+    });
     setInputs(initialStatePet);
   };
   return (
@@ -227,8 +258,8 @@ export default function PetForm(): JSX.Element {
         >
           Загрузить фото питомца (до 3х фото)
           <VisuallyHiddenInput
-            type="file"
-            name="avatar"
+            type='file'
+            name='pets'
             multiple
             accept="image/png, image/jpeg, image/jpg"
             onChange={(e: ChangeEvent<HTMLInputElement>) => onSelectFile(e)}
@@ -251,15 +282,6 @@ export default function PetForm(): JSX.Element {
                   ДО 3х КАРТИНОК,БОЛЬШЕ НИЗЯ!
                 </p>
               );
-              // return (
-              //   <div key={image} className='image'>
-              //     <img src={image} height='200' alt='upload' />
-              //     <button onClick={() => deleteHandler(image)}>
-              //       delete image
-              //     </button>
-              //     <p>{index + 1}</p>
-              //   </div>
-              // );
             })}
         </div>
       </div>

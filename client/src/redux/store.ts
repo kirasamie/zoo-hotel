@@ -1,28 +1,26 @@
 import { ConfigureStoreOptions, configureStore } from '@reduxjs/toolkit';
-
-// import todoSlice, { SliceStateType } from './todoSlice';
 import petSlice, { PetSliceState } from './pet/petSlice';
-import userSlice from './userSlice';
-import type { SliceState } from './userSlice';
-import { OrderSliceState } from './orderSlice';
-import orderSlice from './orderSlice';
+import userSlice, { SliceState } from './userSlice';
+import orderSlice, { OrderSliceState } from './orderSlice';
+import postsSlice, { PostsSliceState } from './posts/postsSlice';
 
 export type StoreType = {
-  petSlice:  PetSliceState;
+  petSlice: PetSliceState;
   userSlice: SliceState;
   orderSlice: OrderSliceState;
+  postsSlice: PostsSliceState;
 };
-
 
 const storeOptions: ConfigureStoreOptions<StoreType> = {
   reducer: {
     petSlice,
     userSlice,
     orderSlice,
+    postsSlice,
   },
 };
 
-export const store = configureStore(storeOptions)
+export const store = configureStore(storeOptions);
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

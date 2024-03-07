@@ -89,7 +89,13 @@ export default function HomePage(): JSX.Element {
             <FullscreenControl />
             <Placemark
               geometry={[46.287837853706414, 47.94919350240244]}
-              // options={ balloonContentBody: 'yandex zaebis' }
+              modules={['geoObject.addon.balloon']}
+              properties={{
+                balloonContentHeader: 'Zoотель',
+                balloonContentBody: '<h1 class="ya-map-placemark">ZH</h1><p style="width: 200px">Описание нашего прекрасного отеля которое я не придумал</p>',
+                balloonContentFooter: 'with love by KirKateJuckie',
+                autoPan: true,
+              }}
             />
             <TypeSelector options={{ float: 'right' }} />
             <TrafficControl options={{ float: 'right' }} />

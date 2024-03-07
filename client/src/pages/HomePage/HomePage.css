@@ -201,3 +201,15 @@ a {
   height: 500px;
   border-radius: 20px;
 }
+
+.ya-map-placemark {
+  border-radius: 50%;
+  border: 2px solid black;
+  width: 60px;
+  height: 60px;
+  line-height: 58px;
+  text-align: center;
+  color: white;
+  background-color: brown;
+  margin: 10px auto;
+}

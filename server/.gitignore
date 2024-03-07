@@ -130,3 +130,5 @@ dist
 .pnp.*
 
 sessions
+public/img/avatars/
+public/img/posts/

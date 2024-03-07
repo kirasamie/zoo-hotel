@@ -5,7 +5,10 @@ const { Pet, PetImage, User } = require('../db/models');
 router.get('/all', async (req, res) => {
   const { userId } = req.session;
   try {
-    const allPets = await Pet.findAll({ where: { petUserId: userId } });
+    const allPets = await Pet.findAll({
+      where: { petUserId: userId },
+      include: { model: PetImage },
+    });
     res.json(allPets);
   } catch (error) {
     console.log(error);
@@ -15,7 +18,13 @@ router.get('/all', async (req, res) => {
 router.post('/new', async (req, res) => {
   const { userId } = req.session;
   const {
-    petName, petBreed, petType, petGender, petAge, petIsSprayed, petAbout,
+    petName,
+    petBreed,
+    petType,
+    petGender,
+    petAge,
+    petIsSprayed,
+    petAbout,
   } = req.body;
   try {
     const newPet = await Pet.create({
@@ -38,7 +47,13 @@ router.patch('/edit/:id', async (req, res) => {
   const { userId } = req.session;
   const { id } = req.params;
   const {
-    petName, petBreed, petType, petGender, petAge, petIsSprayed, petAbout,
+    petName,
+    petBreed,
+    petType,
+    petGender,
+    petAge,
+    petIsSprayed,
+    petAbout,
   } = req.body;
   try {
     const editedPet = await Pet.update(
@@ -51,7 +66,7 @@ router.patch('/edit/:id', async (req, res) => {
         petIsSprayed,
         petAbout,
       },
-      { where: { petUserId: userId, id }, returning: true, plain: true },
+      { where: { petUserId: userId, id }, returning: true, plain: true }
     );
     console.log(editedPet);
     res.json(editedPet[1]);

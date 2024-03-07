@@ -14,6 +14,7 @@ export default function OrderCardList(): JSX.Element {
   const dispatch = useAppDispatch();
   const posts = useAppSelector((store) => store.postsSlice.posts);
   const order = orders.find((ord) => orderId && ord.id === Number(orderId));
+  const pet = useAppSelector((store) => (store.petSlice.pets).find((pet) => pet.id === order?.orderPetId));
 
   useEffect(() => {
     console.log('before dispatching posts', orderId);
@@ -34,7 +35,7 @@ export default function OrderCardList(): JSX.Element {
               <div className="contentOrder">
                 <div className="icon">
                   <i className="fa fa-twitter-square" aria-hidden="true">
-                    <img className="imageCard" src="https://lapkins.ru/upload/resize_cache/uf/8a2/293_293_2/8a236308bc2b290669dda88b3ab09f55.jpg" alt="img" />
+                    <img className="imageCard" src={`${import.meta.env.VITE_URL.slice(0, -3)}/img/pets/${pet?.PetImages[0]?.link}`} alt="img" />
                   </i>
                 </div>
               </div>

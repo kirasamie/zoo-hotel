@@ -12,7 +12,7 @@ import { fetchCheckUser } from './redux/thunkActions';
 import PetCard from './components/AccountComponents/PetsComponent/PetCard';
 import { fetchCheckAllPets } from './redux/pet/async-action';
 import OrderPage from './pages/OrderPage/OrderPage';
-import OrderCard from './components/AccountComponents/OrdersComponent/OrderCard';
+import OrderCard from './components/AccountComponents/OrdersComponent/OrderCardList';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();

@@ -9,6 +9,7 @@ import {
 
 export default function PetCard() {
   const pets = useAppSelector((store) => store.petSlice.pets);
+  console.log('THIS IS PETS', pets);
   const navigate = useNavigate();
   const params = useParams();
   const pet = useAppSelector((store) =>
@@ -18,35 +19,27 @@ export default function PetCard() {
 
   const deleteHandler = async (): Promise<void> => {
     if (pet?.id) {
-      dispatch(fetchDelPet(pet.id))
-      const filtered =  pets.filter((el) => el.id !== pet.id);
-      navigate(`/account/pets/${filtered.length ? filtered[0].id : ``}`)
+      dispatch(fetchDelPet(pet.id));
+      const filtered = pets.filter((el) => el.id !== pet.id);
+      navigate(`/account/pets/${filtered.length ? filtered[0].id : ``}`);
     }
   };
-  
+
   return (
     <div className={styles.container}>
       <>
         <h2>Карточка {pet?.petName}</h2>
         <div className={styles.photos}>
-          <div
-            className={styles.photo}
-            style={{
-              backgroundImage: `url(https://lapkins.ru/upload/resize_cache/uf/8a2/293_293_2/8a236308bc2b290669dda88b3ab09f55.jpg)`,
-            }}
-          />
-          <div
-            className={styles.photo}
-            style={{
-              backgroundImage: `url(https://lapkins.ru/upload/resize_cache/uf/ea0/293_293_2/ea01f805be25abc46416a8b948a628d3.jpg)`,
-            }}
-          />
-          <div
-            className={styles.photo}
-            style={{
-              backgroundImage: `url(https://lapkins.ru/upload/resize_cache/uf/0fa/293_293_2/0fac6580aeb86f1960557fab7ab168de.jpg)`,
-            }}
-          />
+          {pet?.PetImages?.map((petImage) => (
+            <div className={styles.photo}>
+              <img
+                src={`${import.meta.env.VITE_URL.slice(0, -3)}/img/pets/${
+                  petImage.link
+                }`}
+                alt='imagePet'
+              />
+            </div>
+          ))}
         </div>
         <div className={styles.info}>
           <span>Кличка животного: {pet?.petName}</span>

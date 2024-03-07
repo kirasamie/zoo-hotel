@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchCheckOrdersByRoom, fetchCheckOrdersByUser, fetchCheckOrdersByWorker } from "./thunkActions";
+import { PetItemType } from "../models/Pet";
 
 export type OrderType = {
     id: number;
@@ -9,6 +10,7 @@ export type OrderType = {
     orderDateOut: string;
     addInfo?: string;
     paymentStatus: boolean;
+    Pet: PetItemType
 }
 
 export type OrdersType = OrderType[];

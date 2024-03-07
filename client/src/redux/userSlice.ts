@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCheckUser, fetchRegisterUser, fetchLoginUser, fetchLogoutUser } from "./thunkActions";
+import { fetchCheckUser, fetchRegisterUser, fetchLoginUser, fetchLogoutUser, fetchEditUser } from "./thunkActions";
 
 export type UserType = {
     id: number;
@@ -8,7 +8,7 @@ export type UserType = {
     email: string;
     password: string;
     avatar?: string;
-    phone?: number;
+    phone?: string;
     isWorker?: boolean | null;
   };
 
@@ -24,7 +24,7 @@ const initialStateUser: UserType = {
     email: '', 
     password: '', 
     avatar: '', 
-    phone: 0,
+    phone: '',
     isWorker: null,
 }
 
@@ -51,6 +51,9 @@ const userSlice = createSlice({
         builder.addCase(fetchLogoutUser.fulfilled, (state) => {
             state.info = initialStateUser;
         })
+        builder.addCase(fetchEditUser.fulfilled, (state, { payload }) => {
+            state.info = payload
+          });
     }
 })
 

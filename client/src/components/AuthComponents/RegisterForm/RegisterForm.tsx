@@ -3,7 +3,6 @@ import type { ChangeEvent, FormEvent } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Button, TextField, Box, styled } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -12,6 +11,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { useAppDispatch } from '../../../redux/hooks';
 import { fetchRegisterUser } from '../../../redux/thunkActions';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { Button, TextField, Box, styled } from '@mui/material';
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',

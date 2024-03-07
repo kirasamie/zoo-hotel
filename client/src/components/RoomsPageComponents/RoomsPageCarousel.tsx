@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import MobileStepper from '@mui/material/MobileStepper';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
@@ -11,6 +10,7 @@ import { autoPlay } from 'react-swipeable-views-utils';
 import { useTheme } from '@mui/material/styles';
 import type { RoomType } from '../../types';
 import styles from './RoomsPageCarousel.module.css';
+import Box from '@mui/material/Box';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 

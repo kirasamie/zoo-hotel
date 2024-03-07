@@ -10,12 +10,6 @@ module.exports = {
       },
       postId: {
         type: Sequelize.INTEGER,
-        references: {
-          model: {
-            tableName: 'Posts',
-          },
-          key: 'id',
-        },
       },
       link: {
         type: Sequelize.STRING,

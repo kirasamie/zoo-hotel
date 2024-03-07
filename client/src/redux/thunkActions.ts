@@ -3,6 +3,8 @@ import axios, { AxiosResponse } from 'axios';
 import { UserType } from './userSlice';
 import { InputsUserType } from '../components/AuthComponents/RegisterForm/RegisterForm';
 import { OrdersType } from './orderSlice';
+import { API } from '../constants/api';
+import { UserEditType } from '../models/User';
 // import type { TodoInputType, TodoType } from '../types'; //!
 
 export const fetchCheckUser = createAsyncThunk('/', async () => {
@@ -46,3 +48,8 @@ export const fetchCheckOrdersByRoom = createAsyncThunk(`orders/room`, async (roo
   const response = await axios.get<OrdersType, AxiosResponse<OrdersType>>(`${import.meta.env.VITE_URL}/orders/room/${roomId}`, { withCredentials: true });
   return response.data;
 });
+
+export const fetchEditUser = createAsyncThunk(`user/edit`, async (inputs: UserEditType ) => {
+    const response = await axios.patch(`${API}/user/edit`, inputs,  {withCredentials: true});
+    return response.data
+  })

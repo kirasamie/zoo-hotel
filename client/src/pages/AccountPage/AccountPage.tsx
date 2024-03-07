@@ -1,32 +1,61 @@
-import { Button } from '@mui/material';
-import { Link, Outlet } from 'react-router-dom';
-import style from './AccountPage.module.css';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { useEffect } from 'react';
-import { fetchCheckOrdersByUser, fetchCheckOrdersByWorker } from '../../redux/thunkActions';
+import { Link, Outlet, useLocation } from "react-router-dom";
+import styles from "./AccountPage.module.css";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useEffect } from "react";
+import {
+  fetchCheckOrdersByUser,
+  fetchCheckOrdersByWorker,
+} from "../../redux/thunkActions";
+import cn from "classnames";
 
 export default function AccountPage(): JSX.Element {
   const pets = useAppSelector((store) => store.petSlice.pets);
   const user = useAppSelector((store) => store.userSlice.info);
   const dispatch = useAppDispatch();
+  const location = useLocation();
 
   useEffect(() => {
     void dispatch(fetchCheckOrdersByUser());
     void dispatch(fetchCheckOrdersByWorker());
   }, [dispatch]);
 
+  const buttons = [
+    {
+      title: "ЗАКАЗЫ",
+      url: "orders",
+      isActive: location.pathname.includes("/orders"),
+    },
+    {
+      title: "ПРОФИЛЬ",
+      url: "profile",
+      isActive: location.pathname.includes("/profile"),
+    },
+  ];
+  if (!user.isWorker) {
+    buttons.push({
+      title: "КАБИНЕТ ПИТОМЦА",
+      url: pets.length ? `pets/${pets[0].id}` : `pets`,
+      isActive: location.pathname.includes("/pets"),
+    });
+  }
+
   return (
-    <div className={style.container}>
-      <div>
-        <Link to="orders">
-          <Button>Заказы</Button>
-        </Link>
-        <Link to="info">
-          <Button>Профиль</Button>
-        </Link>
-        { user.isWorker ? null :  <Link to={pets.length ? `pets/${pets[0].id}` : `pets`}>
-          <Button>Кабинет питомца</Button>
-        </Link>}
+    <div className={styles.container}>
+      <div className={styles.groupBtn}>
+        {buttons.map((el) => {
+          return (
+            <Link key={el.title} to={el.url}>
+              <button
+                className={cn(
+                  styles.accountNavBtn,
+                  el.isActive ? styles.activeNavBtn : ""
+                )}
+              >
+                {el.title}
+              </button>
+            </Link>
+          );
+        })}
       </div>
       <Outlet />
     </div>

@@ -7,17 +7,10 @@ const { User } = require('../db/models');
 
 router.get('/checkSession', async (req, res) => {
   const {
-    userId, firstName, lastName, phone, avatar, email, isWorker,
+    userId,
   } = req.session;
-  res.json({
-    id: userId,
-    firstName,
-    email,
-    isWorker,
-    lastName,
-    phone,
-    avatar
-  });
+  const user = await User.findOne({ where: { id: userId }, attributes: { exclude: ['password'] } });
+  res.json(user);
 });
 
 router.post('/register', async (req, res) => {
@@ -160,6 +153,22 @@ router.get('/logout', (req, res) => {
     res.clearCookie('cookiesFinalOchka');
     res.status(200).json({ msg: 'Goodbye!' });
   });
+});
+
+router.patch('/edit', async (req, res) => {
+  try {
+    const { userId } = req.session;
+    const user = await User.update({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      password: req.body.password,
+      phone: req.body.phone,
+    }, { where: { id: userId }, returning: true, plain: true });
+    res.json(user[1]);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 module.exports = router;

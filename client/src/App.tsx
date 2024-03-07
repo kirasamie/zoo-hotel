@@ -1,3 +1,4 @@
+import ProfileComponent from "./components/AccountComponents/ProfileComponent/ProfileComponent";
 import { Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage/HomePage';
 import AuthPage from './pages/AuthPage/AuthPage';
@@ -26,40 +27,40 @@ function App(): JSX.Element {
 
   return (
     <>
-      <div className='SOMEWRAPPER!!!!!!!!!!!!!'>
+      <div className="SOMEWRAPPER!!!!!!!!!!!!!">
         <Navbar />
       </div>
       <div
-        style={{ position: 'relative' }}
-        className='SOMEWRAPPER!!!!!!!!!!!!!'
+        style={{ position: "relative" }}
+        className="SOMEWRAPPER!!!!!!!!!!!!!"
       >
         <Routes>
           <Route index element={<HomePage />}></Route>
 
-          <Route path='auth' element={<AuthPage />}></Route>
+          <Route path="auth" element={<AuthPage />}></Route>
 
-          <Route path='account' element={<AccountPage />}>
+          <Route path="account" element={<AccountPage />}>
             {/* тут должно быть условие - клиент или работник (админ) */}
             {/* <Route path="chat" element={<h2>chat page</h2>}> */}
             {/* NESTED с комнатами */}
             {/* </Route> */}
-            <Route path='orders' element={<OrderPage />}>
-              <Route path=':orderId' element={<OrderCard />} />
+            <Route path="orders" element={<OrderPage />}>
+              <Route path=":orderId" element={<OrderCard />} />
             </Route>
-            {/* <Route path="profile" element={<h2>profile page</h2>} /> */}
-            <Route path='pets' element={<PetPage />}>
-              <Route path='new' element={<PetForm />} />
-              <Route path='edit/:petId' element={<PetForm />} />
-              <Route path=':petId' element={<PetCard />} />
+            <Route path="profile" element={<ProfileComponent />} />
+            <Route path="pets" element={<PetPage />}>
+              <Route path="new" element={<PetForm />} />
+              <Route path="edit/:petId" element={<PetForm />} />
+              <Route path=":petId" element={<PetCard />} />
             </Route>
           </Route>
 
-          <Route path='rooms' element={<RoomsPage />}></Route>
+          <Route path="rooms" element={<RoomsPage />}></Route>
 
-          <Route path='another' element={<h2>another page</h2>}></Route>
+          <Route path="another" element={<h2>another page</h2>}></Route>
         </Routes>
       </div>
-      <div className='SOMEWRAPPER!!!!!!!!!!!!!'>{/* <h1>Футер</h1> */}</div>
+      <div className="SOMEWRAPPER!!!!!!!!!!!!!">{/* <h1>Футер</h1> */}</div>
     </>
   );
 }

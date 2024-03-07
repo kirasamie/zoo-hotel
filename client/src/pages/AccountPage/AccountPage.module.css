@@ -1,5 +1,25 @@
 .container {
     display: flex;
     flex-direction: column;
-   
+}
+.groupBtn {
+    border: 2px solid #15bbde;
+    width: fit-content;
+    margin: 10px;
+}
+.accountNavBtn {
+    border: none;
+    background-color: white;
+    padding: 10px;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    size: 14px;
+    font-weight: 700;
+    color: #15bbde;
+}
+.accountNavBtn:hover{
+    text-decoration: underline;
+}
+.activeNavBtn {
+    color: white;
+    background-color: #15bbde;
 }

@@ -1,0 +1,26 @@
+.photo {
+  background-size: cover;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-position: center;
+}
+.info {
+  margin: 40px;
+  font-size: 20px;
+}
+.profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 5px solid #15bbde;
+  border-radius: 15px;
+  width: fit-content;
+  padding: 10px 20px;
+}
+.profileContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

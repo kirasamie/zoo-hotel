@@ -17,26 +17,30 @@ export default function Navbar(): JSX.Element {
   return (
     <div className={style.container}>
       <div>
-        <Link to="/">
+        <Link to='/'>
           <Button>TEEPLEED LOGO</Button>
         </Link>
-        { user.isWorker ? null : <Link to="/rooms">
-          <Button>Комнатки</Button>
-        </Link>}
-        { user.isWorker ? null :  <Link to="/another">
-          <Button>Услуги</Button>
-        </Link>}
+        {user.isWorker ? null : (
+          <Link to='/rooms '>
+            <Button>Комнатки</Button>
+          </Link>
+        )}
+        {user.isWorker ? null : (
+          <Link to='/another'>
+            <Button>Услуги</Button>
+          </Link>
+        )}
       </div>
       <div className={style.authContainer}>
         {user && user.id > 0 ? (
           <>
-            <Link to="/account">
+            <Link to='/account'>
               <Button>Личный кабинет</Button>
             </Link>
             <Button onClick={() => void handlerLogout()}>Выйти</Button>
           </>
         ) : (
-          <Link to="/auth">
+          <Link to='/auth'>
             <Button>Войти</Button>
           </Link>
         )}

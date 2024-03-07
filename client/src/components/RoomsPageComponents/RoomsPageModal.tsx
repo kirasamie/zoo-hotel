@@ -1,14 +1,17 @@
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { DateRange, DateRangePicker, SingleInputDateRangeField } from '@mui/x-date-pickers-pro';
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import 'dayjs/locale/ru';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { TextField, Typography, Box, Button, Modal, MenuItem, Select, SelectChangeEvent, InputLabel, FormControl } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import axios from 'axios';
-import { useAppSelector } from '../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { RoomType } from '../../types';
+import { fetchCheckOrdersByRoom } from '../../redux/thunkActions';
+import { styled } from '@mui/material/styles';
+import { DateRangePickerDay as MuiDateRangePickerDay, DateRangePickerDayProps } from '@mui/x-date-pickers-pro/DateRangePickerDay';
 
 const style = {
   position: 'absolute' as const,
@@ -39,14 +42,43 @@ type OrderType = {
   description: string;
 };
 
+const DateRangePickerDay = styled(MuiDateRangePickerDay)(({ theme, isHighlighting, isStartOfHighlighting, isEndOfHighlighting, outsideCurrentMonth }) => ({
+  ...(!outsideCurrentMonth &&
+    isHighlighting && {
+      borderRadius: 0,
+      backgroundColor: theme.palette.primary.main,
+      color: theme.palette.common.white,
+      '&:hover, &:focus': {
+        backgroundColor: theme.palette.primary.dark,
+      },
+    }),
+  ...(isStartOfHighlighting && {
+    borderTopLeftRadius: '50%',
+    borderBottomLeftRadius: '50%',
+  }),
+  ...(isEndOfHighlighting && {
+    borderTopRightRadius: '50%',
+    borderBottomRightRadius: '50%',
+  }),
+})) as React.ComponentType<DateRangePickerDayProps<Dayjs>>;
+
 export default function RoomsPageModal({ room, open, handleClose }: ModalPropsType) {
   const pets = useAppSelector((store) => store.petSlice.pets);
   const user = useAppSelector((store) => store.userSlice.info);
+  const dates = useAppSelector((store) => store.orderSlice.ordersRoom);
+  const dispatch = useAppDispatch();
   const [orders, setOrders] = useState<Array<OrderType>>([]);
   const [mainOrder, setMainOrder] = useState<OrderType>({ userId: 0, petId: 0, roomId: 0, dateFrom: '', dateTo: '', amount: 0, quantity: 0, description: '' });
   const [allowPayment, setAllowPayment] = useState(false);
   const [days, setDays] = useState(0);
   const [inputs, setInputs] = useState({ petId: '', allowedRange: '', description: '' });
+  const [calendarError, setCalendarError] = useState('');
+
+  useEffect(() => {
+    if (typeof room?.id === 'number' && room.id !== 0) {
+      dispatch(fetchCheckOrdersByRoom(room.id));
+    }
+  }, [room]);
 
   useEffect(() => {
     const checkUserId = mainOrder.userId !== 0;
@@ -57,11 +89,20 @@ export default function RoomsPageModal({ room, open, handleClose }: ModalPropsTy
     const checkAmount = mainOrder.amount !== 0;
     const checkQuantity = mainOrder.quantity !== 0;
 
-    console.log(mainOrder);
-    if (checkUserId && checkPetId && checkRoomId && checkDateFrom && checkDateTo && checkAmount && checkQuantity) {
-      setAllowPayment(true);
+    const userDates = getBannedDates([[mainOrder.dateFrom, mainOrder.dateTo]]);
+    const serverDates = getBannedDates(dates);
+    if (userDates.flat().some((date) => serverDates.flat().includes(date))) {
+      setCalendarError('Выбранная дата уже забронирована');
+    } else {
+      setCalendarError('');
     }
-  }, [mainOrder]);
+    console.log(checkUserId, checkPetId, checkRoomId, checkDateFrom, checkDateTo, checkAmount, checkQuantity, !calendarError);
+    if (checkUserId && checkPetId && checkRoomId && checkDateFrom && checkDateTo && checkAmount && checkQuantity && !calendarError) {
+      setAllowPayment(true);
+    } else {
+      setAllowPayment(false);
+    }
+  }, [mainOrder, calendarError]);
 
   const changeHandler = (event: SelectChangeEvent) => {
     setInputs((prev) => ({ ...prev, [event.target.name]: event.target.value as string }));
@@ -91,19 +132,19 @@ export default function RoomsPageModal({ room, open, handleClose }: ModalPropsTy
     }
   };
 
-  const banDates = [['Mon Mar 11 2024', 'Fri Mar 15 2024']];
-
-  const banDatesRanges = banDates.map((range) => {
-    const dateFrom = new Date(range[0]);
-    const dateTo = new Date(range[1]);
-    const result = [];
-    const pad = (s) => ('00' + s).slice(-2);
-    while (dateFrom.getTime() <= dateTo.getTime()) {
-      result.push(pad(dateFrom.getDate()) + '.' + pad(dateFrom.getMonth() + 1) + '.' + dateFrom.getFullYear());
-      dateFrom.setDate(dateFrom.getDate() + 1);
-    }
-    return result;
-  });
+  const getBannedDates = (dates) => {
+    return dates.map((range) => {
+      const dateFrom = new Date(range[0]);
+      const dateTo = new Date(range[1]);
+      const result = [];
+      const pad = (s) => ('00' + s).slice(-2);
+      while (dateFrom.getTime() <= dateTo.getTime()) {
+        result.push(pad(dateFrom.getDate()) + '.' + pad(dateFrom.getMonth() + 1) + '.' + dateFrom.getFullYear());
+        dateFrom.setDate(dateFrom.getDate() + 1);
+      }
+      return result;
+    });
+  };
 
   return (
     <div>
@@ -119,11 +160,18 @@ export default function RoomsPageModal({ room, open, handleClose }: ModalPropsTy
             <DateRangePicker
               disablePast
               shouldDisableDate={(date) => {
-                return banDatesRanges.flat().includes(new Date(date.$d).toLocaleDateString());
+                return getBannedDates(dates).flat().includes(new Date(date.$d).toLocaleDateString());
               }}
               slots={{ field: SingleInputDateRangeField }}
               name="allowedRange"
               onChange={changeDateRangeHandler}
+              slotProps={{
+                textField: { helperText: calendarError, error: !!calendarError },
+                popper: { sx: { '.MuiDateRangePickerDay-day.Mui-disabled': { border: '1px solid orange' }, '.MuiDateRangeCalendar-root>div:first-child': { opacity: '0' } } },
+              }}
+              sx={{
+                '& .Mui-disabled': { color: '#FF0000' },
+              }}
             />
           </LocalizationProvider>
           <TextField name="description" value={inputs.description} label="Ваш комментарий к заказу" maxRows={15} multiline fullWidth onChange={changeHandler} />

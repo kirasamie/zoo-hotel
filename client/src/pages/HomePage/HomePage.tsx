@@ -42,7 +42,7 @@ export default function HomePage(): JSX.Element {
               className='mySwiper'
             >
               {arrImages.map((image) => (
-                <SwiperSlide>
+                <SwiperSlide key={image}>
                   <div className='image__pet'>
                     <img src={`./img/main/${image}.jpg`} alt='animal' />
                   </div>

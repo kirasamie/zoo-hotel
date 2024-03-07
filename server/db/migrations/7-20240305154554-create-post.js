@@ -15,6 +15,9 @@ module.exports = {
       body: {
         type: Sequelize.STRING
       },
+      postPhotoLink: {
+        type: Sequelize.STRING
+      },
       workerId: {
         type: Sequelize.INTEGER,
         references: {

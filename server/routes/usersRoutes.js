@@ -7,13 +7,16 @@ const { User } = require('../db/models');
 
 router.get('/checkSession', async (req, res) => {
   const {
-    userId, firstName, email, isWorker,
+    userId, firstName, lastName, phone, avatar, email, isWorker,
   } = req.session;
   res.json({
     id: userId,
     firstName,
     email,
     isWorker,
+    lastName,
+    phone,
+    avatar
   });
 });
 

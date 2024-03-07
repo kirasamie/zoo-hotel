@@ -2,6 +2,8 @@ import { useAppSelector } from '../../../redux/hooks';
 import { useNavigate, useParams } from 'react-router-dom';
 import './OrderCard.css';
 import { Button } from '@mui/material';
+import { useState } from 'react';
+import OrderPostModal from './OrderPostModal';
 
 export default function OrderCard(): JSX.Element {
   const { orderId } = useParams();
@@ -9,6 +11,8 @@ export default function OrderCard(): JSX.Element {
   const orders = useAppSelector((store) => store.orderSlice[`${isWorker ? 'ordersWorker' : 'ordersUser'}`]);
   const navigate = useNavigate();
   const order = orders.find((ord) => orderId && ord.id === Number(orderId));
+
+  const [modalOpen, setModalOpen] = useState(false);
 
   return (
     <div className="wrapperSummary">
@@ -36,7 +40,8 @@ export default function OrderCard(): JSX.Element {
       <div className="bodyPosts" />
       <br />
       <br />
-      <Button variant='outlined'>Добавить пост!</Button>
+      <OrderPostModal open={modalOpen} handleClose={() => setModalOpen(false)} orderId={orderId} />
+      <Button variant='outlined' onClick={() => setModalOpen(true)}>Добавить пост!</Button>
       <div className="card">
         <img
           src="https://images.unsplash.com/photo-1615147342761-9238e15d8b96?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1001&q=80"

@@ -1,4 +1,4 @@
-import ProfileComponent from "./components/AccountComponents/ProfileComponent/ProfileComponent";
+import ProfileComponent from './components/AccountComponents/ProfileComponent/ProfileComponent';
 import { Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage/HomePage';
 import AuthPage from './pages/AuthPage/AuthPage';
@@ -30,20 +30,11 @@ function App(): JSX.Element {
       <div className="SOMEWRAPPER!!!!!!!!!!!!!">
         <Navbar />
       </div>
-      <div
-        style={{ position: "relative" }}
-        className="SOMEWRAPPER!!!!!!!!!!!!!"
-      >
+      <div style={{ position: 'relative' }} className="SOMEWRAPPER!!!!!!!!!!!!!">
         <Routes>
           <Route index element={<HomePage />}></Route>
-
           <Route path="auth" element={<AuthPage />}></Route>
-
           <Route path="account" element={<AccountPage />}>
-            {/* тут должно быть условие - клиент или работник (админ) */}
-            {/* <Route path="chat" element={<h2>chat page</h2>}> */}
-            {/* NESTED с комнатами */}
-            {/* </Route> */}
             <Route path="orders" element={<OrderPage />}>
               <Route path=":orderId" element={<OrderCard />} />
             </Route>

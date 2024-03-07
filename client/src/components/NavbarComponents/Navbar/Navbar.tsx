@@ -1,8 +1,8 @@
-import { Button } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import style from './Navbar.module.css';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { fetchLogoutUser } from '../../../redux/thunkActions';
+import { Button } from '@mui/material';
 
 export default function Navbar(): JSX.Element {
   const user = useAppSelector((store) => store.userSlice.info);

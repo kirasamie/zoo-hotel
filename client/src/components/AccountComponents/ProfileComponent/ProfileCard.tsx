@@ -1,10 +1,10 @@
-import { Button, TextField } from "@mui/material";
-import styles from "./ProfileCard.module.css";
-import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import { useEffect, useState } from "react";
-import React from "react";
-import { fetchEditUser } from "../../../redux/thunkActions";
-import { UserEditType } from "../../../models/User";
+import React from 'react';
+import styles from './ProfileCard.module.css';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import { useEffect, useState } from 'react';
+import { fetchEditUser } from '../../../redux/thunkActions';
+import { UserEditType } from '../../../models/User';
+import { Button, TextField } from '@mui/material';
 
 export default function ProfileCard() {
   const dispatch = useAppDispatch();
@@ -12,10 +12,10 @@ export default function ProfileCard() {
 
   const [isEditMode, setIsEditMode] = useState(false);
   const initialStateUser = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
   };
 
   const [inputs, setInputs] = React.useState<UserEditType>(initialStateUser);
@@ -23,10 +23,10 @@ export default function ProfileCard() {
   useEffect(() => {
     if (user) {
       setInputs({
-        firstName: user.firstName || "",
-        lastName: user.lastName || "",
-        email: user.email || "",
-        phone: user.phone || "",
+        firstName: user.firstName || '',
+        lastName: user.lastName || '',
+        email: user.email || '',
+        phone: user.phone || '',
       });
     } else {
       setInputs(initialStateUser);
@@ -34,9 +34,7 @@ export default function ProfileCard() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
-  const handlerChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ): void => {
+  const handlerChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
@@ -63,46 +61,10 @@ export default function ProfileCard() {
           </div>
         ) : (
           <div className={styles.info}>
-            <TextField
-              fullWidth
-              id="outlined-multiline-flexible"
-              name="firstName"
-              value={inputs.firstName}
-              onChange={(e) => handlerChange(e)}
-              label="Имя"
-              multiline
-              maxRows={4}
-            />
-            <TextField
-              fullWidth
-              id="outlined-multiline-flexible"
-              name="lastName"
-              value={inputs.lastName}
-              onChange={(e) => handlerChange(e)}
-              label="Фамилия"
-              multiline
-              maxRows={4}
-            />
-            <TextField
-              fullWidth
-              id="outlined-multiline-flexible"
-              name="email"
-              value={inputs.email}
-              onChange={(e) => handlerChange(e)}
-              label="Email"
-              multiline
-              maxRows={4}
-            />
-            <TextField
-              fullWidth
-              id="outlined-multiline-flexible"
-              name="phone"
-              value={inputs.phone}
-              onChange={(e) => handlerChange(e)}
-              label="Контактный телефон"
-              multiline
-              maxRows={4}
-            />
+            <TextField fullWidth id="outlined-multiline-flexible" name="firstName" value={inputs.firstName} onChange={(e) => handlerChange(e)} label="Имя" multiline maxRows={4} />
+            <TextField fullWidth id="outlined-multiline-flexible" name="lastName" value={inputs.lastName} onChange={(e) => handlerChange(e)} label="Фамилия" multiline maxRows={4} />
+            <TextField fullWidth id="outlined-multiline-flexible" name="email" value={inputs.email} onChange={(e) => handlerChange(e)} label="Email" multiline maxRows={4} />
+            <TextField fullWidth id="outlined-multiline-flexible" name="phone" value={inputs.phone} onChange={(e) => handlerChange(e)} label="Контактный телефон" multiline maxRows={4} />
           </div>
         )}
       </div>

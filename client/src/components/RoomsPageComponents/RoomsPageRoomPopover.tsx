@@ -1,6 +1,6 @@
+import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
 import Button from '@mui/material/Button';
 import Popover from '@mui/material/Popover';
-import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
 
 export default function PopoverPopupState({ carousel, button }) {
   return (

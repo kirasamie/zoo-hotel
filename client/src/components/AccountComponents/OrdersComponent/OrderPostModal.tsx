@@ -1,8 +1,8 @@
-import { TextField, Box, Button, Modal, styled } from '@mui/material';
 import { ChangeEvent, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import axios from 'axios';
 import { fetchGetPostsByOrder } from '../../../redux/posts/postsThunkActions';
+import { TextField, Box, Button, Modal, styled } from '@mui/material';
 
 const style = {
   position: 'absolute' as const,
@@ -36,7 +36,7 @@ type ModalPropsType = {
 
 export default function OrderPostModal({ open, handleClose, orderId }: ModalPropsType) {
   const user = useAppSelector((store) => store.userSlice.info);
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const [inputs, setInputs] = useState({ title: '', body: '', orderId: 0, workerId: 0 });
   const [postImage, setPostImage] = useState();
 
@@ -49,7 +49,7 @@ export default function OrderPostModal({ open, handleClose, orderId }: ModalProp
         withCredentials: true,
       });
       if (response.status === 200) {
-        dispatch(fetchGetPostsByOrder(Number(orderId)))
+        dispatch(fetchGetPostsByOrder(Number(orderId)));
         handleClose();
       }
     }

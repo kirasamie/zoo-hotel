@@ -3,9 +3,9 @@ import type { ChangeEvent } from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Button, TextField, Box } from '@mui/material';
 import { useAppDispatch } from '../../../redux/hooks';
 import { fetchLoginUser } from '../../../redux/thunkActions';
+import { Box, Button, TextField } from '@mui/material';
 
 type InputsUserType = {
   firstName?: string;
@@ -29,12 +29,14 @@ export default function LoginForm({ setIsLogin }): JSX.Element {
   };
 
   const handlerLogin = async (): Promise<void> => {
-    dispatch(fetchLoginUser(inputs)).then((res) => {
-      if (res.meta.requestStatus === 'fulfilled') {
-        navigate('/');
-      }
-     }).catch((error) => console.log(error))
-    }
+    dispatch(fetchLoginUser(inputs))
+      .then((res) => {
+        if (res.meta.requestStatus === 'fulfilled') {
+          navigate('/');
+        }
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
     <div className="authContainer">

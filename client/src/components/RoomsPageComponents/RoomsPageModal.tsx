@@ -3,7 +3,6 @@ import { DateRange, DateRangePicker, SingleInputDateRangeField } from '@mui/x-da
 import dayjs, { Dayjs } from 'dayjs';
 import 'dayjs/locale/ru';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { TextField, Typography, Box, Button, Modal, MenuItem, Select, SelectChangeEvent, InputLabel, FormControl } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import axios from 'axios';
@@ -12,6 +11,7 @@ import { RoomType } from '../../types';
 import { fetchCheckOrdersByRoom } from '../../redux/thunkActions';
 import { styled } from '@mui/material/styles';
 import { DateRangePickerDay as MuiDateRangePickerDay, DateRangePickerDayProps } from '@mui/x-date-pickers-pro/DateRangePickerDay';
+import { TextField, Typography, Box, Button, Modal, MenuItem, Select, SelectChangeEvent, InputLabel, FormControl } from '@mui/material';
 
 const style = {
   position: 'absolute' as const,

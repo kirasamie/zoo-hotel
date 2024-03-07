@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCheckOrdersByRoom, fetchCheckOrdersByUser } from "./thunkActions";
+import { fetchCheckOrdersByRoom, fetchCheckOrdersByUser, fetchCheckOrdersByWorker } from "./thunkActions";
 
 export type OrderType = {
     id: number;
@@ -16,11 +16,13 @@ export type OrdersType = OrderType[];
 export type OrderSliceState = {
     ordersUser: OrdersType;
     ordersRoom: OrdersType;
+    ordersWorker: OrdersType;
 }
 
 const initialState: OrderSliceState = {
     ordersUser: [],
     ordersRoom: [],
+    ordersWorker: [],
 }
 
 const orderSlice = createSlice({
@@ -30,6 +32,9 @@ const orderSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(fetchCheckOrdersByUser.fulfilled, (state, { payload }) => {
             state.ordersUser = payload;
+        })
+        builder.addCase(fetchCheckOrdersByWorker.fulfilled, (state, { payload }) => {
+            state.ordersWorker = payload;
         })
         builder.addCase(fetchCheckOrdersByRoom.fulfilled, (state, {payload}) => {
             state.ordersRoom = payload;

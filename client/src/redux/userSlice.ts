@@ -9,6 +9,7 @@ export type UserType = {
     password: string;
     avatar?: string;
     phone?: number;
+    isWorker?: boolean | null;
   };
 
 export type SliceState = {
@@ -23,7 +24,8 @@ const initialStateUser: UserType = {
     email: '', 
     password: '', 
     avatar: '', 
-    phone: 0 
+    phone: 0,
+    isWorker: null,
 }
 
 const initialState: SliceState = {

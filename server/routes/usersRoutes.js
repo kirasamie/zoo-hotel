@@ -6,14 +6,22 @@ const mailer = require('../lib/nodemailer');
 const { User } = require('../db/models');
 
 router.get('/checkSession', async (req, res) => {
-  const { userId, firstName, email } = req.session;
-  res.json({ id: userId, firstName, email });
+  const {
+    userId, firstName, email, isWorker,
+  } = req.session;
+  res.json({
+    id: userId,
+    firstName,
+    email,
+    isWorker,
+  });
 });
 
 router.post('/register', async (req, res) => {
   try {
-    const { firstName, lastName, email, password, avatar, phone } = req.body;
-
+    const {
+      firstName, lastName, email, password, avatar, phone,
+    } = req.body;
     const user = await User.findOne({ where: { email } });
     if (user) {
       res.sendStatus(401);
@@ -26,18 +34,19 @@ router.post('/register', async (req, res) => {
         password: hash,
         avatar,
         phone,
+        isWorker: false,
       });
       req.session.email = newUser.email;
       req.session.firstName = newUser.firstName;
       req.session.userId = newUser.id;
+      req.session.isWorker = newUser.isWorker;
       req.session.save(() => {
-        console.log(
-          `Welcome, ${newUser.name}. Your registration completed with email ${newUser.email}`
-        );
+        console.log(`Welcome, ${newUser.name}. Your registration completed with email ${newUser.email}`);
         res.status(201).json({
           id: newUser.id,
           firstName: newUser.firstName,
           email: newUser.email,
+          isWorker: newUser.isWorker,
         });
       });
     }
@@ -81,7 +90,9 @@ router.post('/message', async (req, res) => {
 
 router.post('/register', async (req, res) => {
   try {
-    const { firstName, lastName, email, password, avatar, phone } = req.body;
+    const {
+      firstName, lastName, email, password, avatar, phone,
+    } = req.body;
     const hash = await bcrypt.hash(password, 10);
     const newUser = await User.create({
       firstName,
@@ -95,9 +106,7 @@ router.post('/register', async (req, res) => {
     req.session.firstName = newUser.firstName;
     req.session.userId = newUser.id;
     req.session.save(() => {
-      console.log(
-        `Welcome, ${newUser.firstName}. Your registration completed with email ${newUser.email}`
-      );
+      console.log(`Welcome, ${newUser.firstName}. Your registration completed with email ${newUser.email}`);
       res.status(201).json({
         id: newUser.id,
         firstName: newUser.firstName,
@@ -123,11 +132,13 @@ router.post('/login', async (req, res) => {
         req.session.email = user.email;
         req.session.firstName = user.firstName;
         req.session.userId = user.id;
+        req.session.isWorker = user.isWorker;
         req.session.save(() => {
           res.status(201).json({
             id: user.id,
             firstName: user.firstName,
             email: user.email,
+            isWorker: user.isWorker,
           });
         });
       } else {

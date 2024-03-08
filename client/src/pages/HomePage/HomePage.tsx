@@ -20,7 +20,7 @@ import styles from './HomePage.module.css';
 // geoMap.geoObjects.add(placemark);
 
 export default function HomePage(): JSX.Element {
-  const arrImages = ['first', 'second', 'third', 'fourd'];
+  const arrImages = ['one.png', 'two.png', 'three.png', 'fourd.jpg', 'five.png', 'six.png', 'seven.png', 'eight.png'];
   return (
     <>
       <div className="textContainerLeft"></div>
@@ -50,7 +50,7 @@ export default function HomePage(): JSX.Element {
               {arrImages.map((image) => (
                 <SwiperSlide key={image}>
                   <div className="image__pet">
-                    <img src={`./img/main/${image}.jpg`} alt="animal" />
+                    <img src={`./img/main/${image}`} alt="animal" />
                   </div>
                 </SwiperSlide>
               ))}
@@ -58,6 +58,7 @@ export default function HomePage(): JSX.Element {
           </div>
         </section>
       </div>
+
       <div className="home-steps-wrapper">
         <h2>Для того, чтобы начать пользоваться нашим сервисом нужно сделать три простых шага:</h2>
         <div className="home-steps-card-wrapper">
@@ -84,6 +85,7 @@ export default function HomePage(): JSX.Element {
           </div>
         </div>
       </div>
+
       <div className={styles.servicesContainer}>
         <h2 className={styles.servHeader2}>Наши услуги</h2>
         <h3 className={styles.servHeader3}>Преимущества ZooHotel</h3>

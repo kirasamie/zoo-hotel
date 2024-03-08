@@ -1,0 +1,101 @@
+.bodyBackground {
+  background-image: url('/bg-mirror.png');
+  background-size: no-repeat;
+  position: absolute;
+  overflow: hidden;
+  height: 645px;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+}
+
+.track {
+  bottom: 100px;
+  width: 100%;
+  height: 100px;
+  overflow: hidden;
+  position: absolute;
+}
+
+.dog {
+  position: absolute;
+  bottom: 0;
+  left: -1500px;
+  height: 72px;
+  width: 145px;
+  background-image: url(/dog.gif);
+  animation: pet-moving 15s linear infinite;
+}
+
+.cat {
+  position: absolute;
+  bottom: 40px;
+  left: -1000px;
+  height: 55px;
+  width: 79px;
+  background-image: url(/cat.gif);
+  background-size: cover;
+  animation: pet-moving 20s linear infinite;
+}
+
+.mouse {
+  position: absolute;
+  bottom: 36px;
+  left: -1000px;
+  height: 55px;
+  width: 79px;
+  background-image: url(/mouse.gif);
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: pet-moving 20s linear infinite;
+  transform: scale(0.6) translateX(200px);
+}
+
+@keyframes pet-moving {
+  to {
+    left: 100vw;
+  }
+}
+
+.clouds,
+.farClouds,
+.nearClouds {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 100%;
+}
+
+.clouds {
+  overflow: hidden;
+  z-index: -1;
+}
+
+.farClouds,
+.nearClouds {
+  background-repeat: repeat-x;
+}
+
+.farClouds {
+  background-image: url(/far-clouds.png);
+  background-position-y: 166px;
+  animation: far-clouds-animation 210s infinite linear;
+}
+
+.nearClouds {
+  background-image: url(/near-clouds.png);
+  background-position-y: 226px;
+  animation: near-clouds-animation 80s infinite linear;
+}
+
+@keyframes far-clouds-animation {
+  to {
+    background-position: -2048px 166px;
+  }
+}
+
+@keyframes near-clouds-animation {
+  to {
+    background-position: -1268px 226px;
+  }
+}

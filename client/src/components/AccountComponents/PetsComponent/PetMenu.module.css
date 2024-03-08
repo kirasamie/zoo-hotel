@@ -6,3 +6,17 @@
   border-right: 2px solid rgb(158, 155, 155);
   height: 100%;
 }
+.iconCat {
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+}
+.iconDog {
+  width: 35px;
+  height: 35px;
+  margin-right: 5px;
+}
+.iconText {
+  display: flex;
+  align-items: center;
+}

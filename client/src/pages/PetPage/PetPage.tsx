@@ -1,6 +1,7 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import PetMenu from "../../components/AccountComponents/PetsComponent/PetMenu";
 import styles from "./PetPage.module.css";
+import { useAppSelector } from "../../redux/hooks";
 
 export default function PetPage(): JSX.Element {
   return (

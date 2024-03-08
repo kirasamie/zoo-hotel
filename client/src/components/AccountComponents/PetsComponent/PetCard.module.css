@@ -36,3 +36,17 @@ img {
 .editButton {
   margin-right: 5px !important;
 }
+.iconCat {
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+}
+.iconDog {
+  width: 35px;
+  height: 35px;
+  margin-right: 5px;
+}
+.title {
+  display: flex;
+  align-items: center;
+}

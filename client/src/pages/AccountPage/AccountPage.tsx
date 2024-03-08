@@ -36,7 +36,7 @@ export default function AccountPage(): JSX.Element {
   if (!user.isWorker) {
     buttons.push({
       title: "КАБИНЕТ ПИТОМЦА",
-      url: pets.length ? `pets/${pets[0].id}` : `pets`,
+      url: pets.length ? `pets/${pets[0].id}` : `pets/empty`,
       isActive: location.pathname.includes("/pets"),
     });
   }

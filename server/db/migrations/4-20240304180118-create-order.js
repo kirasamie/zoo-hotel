@@ -49,6 +49,9 @@ module.exports = {
       addInfo: {
         type: Sequelize.TEXT,
       },
+      addServices: {
+        type: Sequelize.STRING,
+      },
       paymentStatus: {
         type: Sequelize.BOOLEAN,
       },

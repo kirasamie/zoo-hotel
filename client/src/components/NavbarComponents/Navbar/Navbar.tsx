@@ -20,12 +20,12 @@ export default function Navbar(): JSX.Element {
         <Link to='/'>
           <Button>TEEPLEED LOGO</Button>
         </Link>
-        {user.isWorker ? null : (
+        {user?.isWorker ? null : (
           <Link to='/rooms '>
             <Button>Комнатки</Button>
           </Link>
         )}
-        {user.isWorker ? null : (
+        {user?.isWorker ? null : (
           <Link to='/another'>
             <Button>Услуги</Button>
           </Link>

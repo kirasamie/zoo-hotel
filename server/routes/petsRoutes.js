@@ -9,6 +9,7 @@ router.get('/all', async (req, res) => {
       where: { petUserId: userId },
       include: { model: PetImage },
     });
+    console.log(allPets);
     res.json(allPets);
   } catch (error) {
     console.log(error);
@@ -68,7 +69,6 @@ router.patch('/edit/:id', async (req, res) => {
       },
       { where: { petUserId: userId, id }, returning: true, plain: true }
     );
-    console.log(editedPet);
     res.json(editedPet[1]);
   } catch (error) {
     console.log(error);

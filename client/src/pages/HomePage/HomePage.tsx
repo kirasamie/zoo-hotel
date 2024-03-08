@@ -71,7 +71,7 @@ export default function HomePage(): JSX.Element {
             <div className="step step-2" />
             <h3>Шаг 2:</h3>
             <div>
-              <p>Заполните карточку вашего четверомногоногнмогого друга</p>
+              <p>Заполните карточку вашего четверомногоногнмогого друга в личном кабинете</p>
             </div>
           </div>
           <div className="home-steps-card">

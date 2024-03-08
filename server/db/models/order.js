@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       orderDateIn: DataTypes.STRING,
       orderDateOut: DataTypes.STRING,
       addInfo: DataTypes.TEXT,
+      addServices: DataTypes.STRING,
       paymentStatus: DataTypes.BOOLEAN,
     },
     {

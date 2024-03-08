@@ -24,7 +24,7 @@ console.log(pet);
       <>
         <h2>Карточка {pet?.petName}</h2>
         <div className={styles.photos}>
-          {pet?.PetImages.map((petImage) => (
+          {pet?.PetImages?.map((petImage) => (
             <div className={styles.photo}>
               <img src={`${import.meta.env.VITE_URL.slice(0, -3)}/img/pets/${petImage.link}`} alt="imagePet" />
             </div>

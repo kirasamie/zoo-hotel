@@ -1,12 +1,12 @@
 const router = require('express').Router();
 
-const { Room, User, Order, Pet } = require('../db/models');
+const { Room, User, Order, Pet, PetImage } = require('../db/models');
 
 router.get('/user', async (req, res) => {
   const { userId } = req.session;
   try {
     const orders = await Order.findAll({
-      include: { model: Pet },
+      include: { model: Pet, include: { model: PetImage } },
       where: { orderUserId: userId },
     });
     res.json(orders);
@@ -19,7 +19,7 @@ router.get('/worker', async (req, res) => {
   const { userId } = req.session;
   try {
     const orders = await Order.findAll({
-      include: { model: Pet },
+      include: { model: Pet, include: { model: PetImage } },
     });
     res.json(orders);
   } catch (error) {
@@ -35,7 +35,13 @@ router.get('/room/:id', async (req, res) => {
       where: { orderRoomId: Number(id) },
     });
     const orders = [];
-    ordersWithAllDates.filter((order) => (currentDate > Date.parse(order.orderDateOut) ? '' : orders.push([order.orderDateIn, order.orderDateOut]))).map((el) => el.get({ plain: true }));
+    ordersWithAllDates
+      .filter((order) =>
+        currentDate > Date.parse(order.orderDateOut)
+          ? ''
+          : orders.push([order.orderDateIn, order.orderDateOut])
+      )
+      .map((el) => el.get({ plain: true }));
     res.json(orders);
   } catch (error) {
     console.log(error);

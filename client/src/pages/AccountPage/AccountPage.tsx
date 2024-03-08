@@ -7,6 +7,7 @@ import {
   fetchCheckOrdersByWorker,
 } from "../../redux/thunkActions";
 import cn from "classnames";
+import { fetchCheckAllComments } from "../../redux/comment/async-action";
 
 export default function AccountPage(): JSX.Element {
   const pets = useAppSelector((store) => store.petSlice.pets);
@@ -17,6 +18,7 @@ export default function AccountPage(): JSX.Element {
   useEffect(() => {
     void dispatch(fetchCheckOrdersByUser());
     void dispatch(fetchCheckOrdersByWorker());
+    void dispatch(fetchCheckAllComments());
   }, [dispatch]);
 
   const buttons = [

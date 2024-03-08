@@ -9,8 +9,11 @@ router.get('/checkSession', async (req, res) => {
   const {
     userId,
   } = req.session;
-  const user = await User.findOne({ where: { id: userId }, attributes: { exclude: ['password'] } });
-  res.json(user);
+  if (userId) {
+    const user = await User.findOne({ where: { id: userId }, attributes: { exclude: ['password'] } });
+    res.json(user);
+  }
+  res.status(404);
 });
 
 router.post('/register', async (req, res) => {
@@ -41,7 +44,9 @@ router.post('/register', async (req, res) => {
         res.status(201).json({
           id: newUser.id,
           firstName: newUser.firstName,
+          lastName: newUser.lastName,
           email: newUser.email,
+          phone: newUser.phone,
           isWorker: newUser.isWorker,
         });
       });

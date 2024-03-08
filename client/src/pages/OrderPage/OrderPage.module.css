@@ -1,15 +1,24 @@
 .container {
-    display: flex;
-    flex-direction: row;
-    justify-content:center;
-    height: 80vh;
-    
-  }
-  .menu {
-    width: 15%;
-    height: 100%;
-  }
-  .content {
-    width: 60%;
-    overflow: auto;
-  }
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 80vh;
+
+}
+
+
+.menu {
+  width: 15%;
+  height: 100%;
+  background-color: #f1f0ed;
+  border-radius: 10px;
+  margin-right: 20px;
+  border: 1px solid gray;
+}
+
+.content {
+  width: 60%;
+  overflow: auto;
+  border-radius: 10px;
+  background-color: white;
+}

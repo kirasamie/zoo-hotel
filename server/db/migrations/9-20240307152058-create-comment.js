@@ -13,6 +13,15 @@ module.exports = {
       body: {
         type: Sequelize.STRING,
       },
+      userId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'Users',
+          },
+          key: 'id',
+        },
+      },
       postId: {
         type: Sequelize.INTEGER,
         references: {

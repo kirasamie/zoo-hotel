@@ -25,11 +25,11 @@ export default function Navbar(): JSX.Element {
             <Button>Комнатки</Button>
           </Link>
         )}
-        {user?.isWorker ? null : (
+        {/* {user?.isWorker ? null : (
           <Link to='/another'>
             <Button>Услуги</Button>
           </Link>
-        )}
+        )} */}
       </div>
       <div className={style.authContainer}>
         {user && user.id > 0 ? (

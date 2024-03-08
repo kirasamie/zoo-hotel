@@ -53,7 +53,7 @@ function App(): JSX.Element {
 
           <Route path="rooms" element={<RoomsPage />}></Route>
 
-          <Route path="another" element={<h2>another page</h2>}></Route>
+          {/* <Route path="another" element={<h2>another page</h2>}></Route> */}
         </Routes>
       </div>
       <div className="SOMEWRAPPER!!!!!!!!!!!!!">{/* <h1>Футер</h1> */}</div>

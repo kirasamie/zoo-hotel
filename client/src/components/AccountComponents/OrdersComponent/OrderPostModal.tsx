@@ -63,6 +63,7 @@ export default function OrderPostModal({ open, handleClose, orderId }: ModalProp
     const response = await axios.post(`${import.meta.env.VITE_URL}/posts/`, inputs, { withCredentials: true });
     if (response.status === 200) {
       sendFile(response.data.id);
+      setInputs({ title: '', body: '', orderId: 0, workerId: 0 });
     }
   };
 

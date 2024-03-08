@@ -6,10 +6,20 @@ const { Order } = require('../db/models');
 const { FRONT_URL } = process.env;
 
 router.post('/', async (req, res) => {
-  const { mainOrder } = req.body;
+  const { mainOrder, additionalOrders } = req.body;
   const { userId } = req.session;
   if (userId) {
-    const lineItems = ['ORDER MUST BE HERE'].map((item) => ({
+    const addOrderNames = [
+      'Груминг',
+      'Занятия с кинологом',
+      'Консультация зоопсихолога',
+      'Зоотакси',
+      'Приготовление пищи для питомца',
+      'Фотоотчет более 1 раза в день',
+      'Подготовка собаки к выставке',
+    ];
+    const namedAddOrders = additionalOrders.map((el) => ({ name: addOrderNames[Number(el[0]) - 1], price: el[1] }));
+    const mainItem = {
       price_data: {
         currency: 'rub',
         product_data: {
@@ -19,7 +29,19 @@ router.post('/', async (req, res) => {
         unit_amount: mainOrder.amount * 100,
       },
       quantity: mainOrder.quantity,
+    };
+    const additionalItems = namedAddOrders.map((item) => ({
+      price_data: {
+        currency: 'rub',
+        product_data: {
+          name: item.name,
+          images: ['none'],
+        },
+        unit_amount: item.price * 100,
+      },
+      quantity: 1,
     }));
+    const lineItems = [mainItem, ...additionalItems]
     try {
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],

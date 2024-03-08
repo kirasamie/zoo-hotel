@@ -3,12 +3,15 @@ import petSlice, { PetSliceState } from './pet/petSlice';
 import userSlice, { SliceState } from './userSlice';
 import orderSlice, { OrderSliceState } from './orderSlice';
 import postsSlice, { PostsSliceState } from './posts/postsSlice';
+import commentSlice from './comment/commentSlice';
+import { CommentSliceState } from './comment/types';
 
 export type StoreType = {
   petSlice: PetSliceState;
   userSlice: SliceState;
   orderSlice: OrderSliceState;
   postsSlice: PostsSliceState;
+  commentSlice: CommentSliceState;
 };
 
 const storeOptions: ConfigureStoreOptions<StoreType> = {
@@ -17,6 +20,7 @@ const storeOptions: ConfigureStoreOptions<StoreType> = {
     userSlice,
     orderSlice,
     postsSlice,
+    commentSlice
   },
 };
 

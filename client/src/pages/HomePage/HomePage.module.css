@@ -2,22 +2,62 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  padding: 0 20px;
   margin-bottom: 60px;
 }
 .services {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  width: 70%;
+  gap: 20px;
 }
+
+.imgWrapper {
+  height: 140px;
+  width: 140px;
+  border-radius: 50%;
+  background-color: white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+}
+
+.imgWrapper:hover {
+  transform: scale(1.2);
+}
+
 .img {
   width: 100px;
   height: 100px;
 }
 .iconText {
   display: flex;
+  width: 18vw;
   flex-direction: column;
   align-items: center;
+  gap: 20px;
+}
+
+.servHeader {
   font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.servContent {
+  font-size: 16px;
+  color: gray;
+  text-align: center;
+}
+
+.servHeader2 {
+  font-size: 48px;
+  margin: 20px;
+  text-align: center;
+}
+
+.servHeader3 {
+  font-size: 22px;
+  margin-bottom: 40px;
 }

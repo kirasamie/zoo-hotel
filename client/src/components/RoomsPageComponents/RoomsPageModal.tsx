@@ -118,7 +118,9 @@ export default function RoomsPageModal({ room, open, handleClose }: ModalPropsTy
 
   const paymentHandler = async () => {
     const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
-    const additionalOrders = Object.entries(optionsInputs).filter((el) => el[1]).map((el) => [el[0], optionsPrices[el[0]]])
+    const additionalOrders = Object.entries(optionsInputs)
+      .filter((el) => el[1])
+      .map((el) => [el[0], optionsPrices[el[0]]]);
     const session = await axios.post(`${import.meta.env.VITE_URL}/stripe`, { mainOrder: mainOrder, additionalOrders: additionalOrders }, { withCredentials: true });
     const result = await stripe!.redirectToCheckout({
       sessionId: session.data.id,
@@ -169,6 +171,11 @@ export default function RoomsPageModal({ room, open, handleClose }: ModalPropsTy
           handleClose();
           setInputs({ petId: '', allowedRange: '', description: '' });
           setPetSelectError('');
+          setCalendarError('');
+          setMainOrder((prev) => ({ ...prev, petId: 0 }));
+          setOptionInputs({ '1': false, '2': false, '3': false, '4': false, '5': false, '6': false, '7': false });
+          setMainOrder({ userId: 0, petId: 0, roomId: 0, dateFrom: '', dateTo: '', amount: 0, quantity: 0, description: '', addServices: '' });
+          setDays(0)
         }}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"

@@ -3,7 +3,8 @@ const router = require('express').Router();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const { Order } = require('../db/models');
 
-const { FRONT_URL } = process.env;
+const { FRONT_SUCCESS_URL, FRONT_CANCEL_URL } = process.env;
+console.log(FRONT_SUCCESS_URL, FRONT_CANCEL_URL)
 
 router.post('/', async (req, res) => {
   const { mainOrder, additionalOrders } = req.body;
@@ -47,8 +48,8 @@ router.post('/', async (req, res) => {
         payment_method_types: ['card'],
         line_items: lineItems,
         mode: 'payment',
-        success_url: FRONT_URL,
-        cancel_url: FRONT_URL,
+        success_url: FRONT_SUCCESS_URL,
+        cancel_url: FRONT_CANCEL_URL,
       });
       const order = await Order.create({
         orderUserId: mainOrder.userId,
@@ -57,6 +58,7 @@ router.post('/', async (req, res) => {
         orderDateIn: mainOrder.dateFrom,
         orderDateOut: mainOrder.dateTo,
         addInfo: mainOrder?.description,
+        addServices: additionalOrders.map((el) => el[0]).join(''),
         paymentStatus: false,
       });
       res.json({ id: session.id, order });

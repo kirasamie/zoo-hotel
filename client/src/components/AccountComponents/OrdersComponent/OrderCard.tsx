@@ -80,33 +80,33 @@ const OrderCard = React.memo(({ post }: PostPropsType) => {
               )}
             </div>
           )}
+          <div>
+            {showComment ? (
+              <form className={styles.addComment}>
+                <TextField
+                  id='standard-basic'
+                  label='Напишите комментарий'
+                  variant='standard'
+                  onChange={(e: HTMLInputElement) => void handlerChange(e)}
+                  name='body'
+                  value={input.body}
+                />
+                <Button
+                  variant='outlined'
+                  color='success'
+                  onClick={() => void handlerAddComment()}
+                >
+                  Опубликовать
+                </Button>
+              </form>
+            ) : null}
+          </div>
         </div>
       </div>
       <div className='comments'>
         {comments?.map((comment, i) => (
           <h2>{comment.body}</h2>
         ))}
-      </div>
-      <div>
-        {showComment ? (
-          <form className={styles.addComment}>
-            <TextField
-              id='standard-basic'
-              label='Напишите комментарий'
-              variant='standard'
-              onChange={(e: HTMLInputElement) => void handlerChange(e)}
-              name='body'
-              value={input.body}
-            />
-            <Button
-              variant='outlined'
-              color='success'
-              onClick={() => void handlerAddComment()}
-            >
-              Опубликовать
-            </Button>
-          </form>
-        ) : null}
       </div>
     </>
   );

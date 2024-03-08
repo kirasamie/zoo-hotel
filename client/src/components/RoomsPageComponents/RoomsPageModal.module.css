@@ -1,0 +1,29 @@
+.dividedForm {
+    width: 700px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.paymentButtonWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.prices {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.optionsPriceList {
+    flex: 1;
+    list-style-position: inside;
+}
+
+.finalCost {
+  width: 100%;
+  text-align: center;
+}

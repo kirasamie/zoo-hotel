@@ -32,7 +32,7 @@ function App(): JSX.Element {
     <>
       <Background />
       <Navbar />
-      <div style={{ position: 'relative' }}>
+     <div style={{ position: 'relative' }}>
         <div style={{ minHeight: 'calc(100vh - 130px)' }}>
           <Routes>
             <Route index element={<HomePage />}></Route>

@@ -90,7 +90,6 @@ export default function PetForm(): JSX.Element {
 
   const sendFiles = async (petId: number) => {
     const data = new FormData();
-    console.log(avatarPet);
 
     if (avatarPet) {
       const arrPetsImages = avatarPet.map((avatar) => {
@@ -150,6 +149,7 @@ export default function PetForm(): JSX.Element {
     });
     setInputs(initialStatePet);
     setSelectedImages([]);
+    setAvatarPet([]);
   };
   return (
     <form className={styles.form}>

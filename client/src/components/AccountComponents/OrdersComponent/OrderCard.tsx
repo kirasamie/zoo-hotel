@@ -1,9 +1,13 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { PostType } from '../../../redux/posts/postsSlice';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { Button, TextField } from '@mui/material';
 import styles from './OrderCard.module.css';
-import { fetchAddNewComment } from '../../../redux/comment/async-action';
+import {
+  fetchAddNewComment,
+  fetchCheckAllComments,
+} from '../../../redux/comment/async-action';
+import './OrderCard.css';
 
 type PostPropsType = {
   post: PostType;
@@ -16,7 +20,7 @@ export type InputType = {
 const OrderCard = React.memo(({ post }: PostPropsType) => {
   const dispatch = useAppDispatch();
   const comments = useAppSelector((store) => store.commentSlice.comments);
-
+  const [filteredComments, setFilteredComments] = useState([]);
   const [showComment, setShowComment] = useState(false);
   const [input, setInput] = useState<InputType>({ body: '' });
   const handlerChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -40,6 +44,13 @@ const OrderCard = React.memo(({ post }: PostPropsType) => {
     } в ${date.toLocaleTimeString().slice(0, -3)}`;
   };
 
+  useEffect(() => {
+    // void dispatch(fetchCheckAllComments());
+    setFilteredComments(
+      comments.filter((comment) => comment.postId === post.id)
+    );
+  }, [comments, post.id]);
+
   return (
     <>
       <div className='card'>
@@ -57,29 +68,27 @@ const OrderCard = React.memo(({ post }: PostPropsType) => {
           <p>{post.body}</p>
           <br />
           <div className='time'>{getFancyDate(post.createdAt)}</div>
-          {user.isWorker ? null : (
-            <div className={styles.commentaryDiv}>
-              {showComment ? (
-                <Button
-                  variant='outlined'
-                  color='error'
-                  className='commentaryButton'
-                  onClick={() => void setShowComment((prev) => !prev)}
-                >
-                  Закрыть
-                </Button>
-              ) : (
-                <Button
-                  variant='outlined'
-                  color='success'
-                  className='commentaryButton'
-                  onClick={() => void setShowComment((prev) => !prev)}
-                >
-                  Комментировать
-                </Button>
-              )}
-            </div>
-          )}
+          <div className={styles.commentaryDiv}>
+            {showComment ? (
+              <Button
+                variant='outlined'
+                color='error'
+                className='commentaryButton'
+                onClick={() => void setShowComment((prev) => !prev)}
+              >
+                Закрыть
+              </Button>
+            ) : (
+              <Button
+                variant='outlined'
+                color='success'
+                className='commentaryButton'
+                onClick={() => void setShowComment((prev) => !prev)}
+              >
+                Комментировать
+              </Button>
+            )}
+          </div>
           <div>
             {showComment ? (
               <form className={styles.addComment}>
@@ -104,10 +113,36 @@ const OrderCard = React.memo(({ post }: PostPropsType) => {
         </div>
       </div>
       <div className='comments'>
-        {comments?.map((comment, i) => (
-          <h2>{comment.body}</h2>
-        ))}
+        <div className='chat-container'>
+          <ul className='chat'>
+            {filteredComments?.map((comment) => {
+              console.log(comment);
+
+              // post.id === comment.postId ? (
+              return (
+                <>
+                  <li
+                    className={`message ${
+                      user.id === comment.userId ? 'right' : 'left'
+                    }`}
+                  >
+                    <img
+                      className='logo'
+                      src={`${import.meta.env.VITE_URL.slice(
+                        0,
+                        -3
+                      )}img/avatars/${comment.User?.avatar}`}
+                      alt='logotype'
+                    />
+                    {comment.body}
+                  </li>
+                </>
+              );
+            })}
+          </ul>
+        </div>
       </div>
+      {/* )} */}
     </>
   );
 });

@@ -130,7 +130,6 @@ a {
 
 .mySwiper {
   width: 100%;
-  /* height: 660px; */
   height: calc(100vh - 37px);
 }
 

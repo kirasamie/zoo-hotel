@@ -34,7 +34,6 @@ export default function PetCard() {
       setIsDeleted(true);
     }
   };
-  console.log(pet);
   return (
     <div className={styles.container}>
       <>

@@ -2,6 +2,8 @@
 export type CommentType = {
     postId: number;
     body: string;
+    userId: number;
+    avatar: string;
 }
 
 export type CommentsType = CommentType[]

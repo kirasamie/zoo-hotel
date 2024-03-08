@@ -1,0 +1,8 @@
+.commentaryDiv{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.commentaryDiv button {
+    border: 1px solid black;
+}

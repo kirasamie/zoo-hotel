@@ -17,9 +17,7 @@ export default function OrderCardList(): JSX.Element {
   const pet = useAppSelector((store) => (store.petSlice.pets).find((pet) => pet.id === order?.orderPetId));
 
   useEffect(() => {
-    console.log('before dispatching posts', orderId);
     if (orderId && Number(orderId) !== 0) {
-      console.log('dispatching posts', orderId);
       dispatch(fetchGetPostsByOrder(Number(orderId)));
     }
   }, [dispatch, orderId]);

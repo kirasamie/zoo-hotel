@@ -6,7 +6,6 @@ import { Button } from '@mui/material';
 
 export default function PetCard() {
   const pets = useAppSelector((store) => store.petSlice.pets);
-  console.log('THIS IS PETS', pets);
   const navigate = useNavigate();
   const params = useParams();
   const pet = useAppSelector((store) => store.petSlice.pets.find((pet) => params.petId && pet.id === +params.petId));
@@ -19,13 +18,13 @@ export default function PetCard() {
       navigate(`/account/pets/${filtered.length ? filtered[0].id : ``}`);
     }
   };
-
+console.log(pet);
   return (
     <div className={styles.container}>
       <>
         <h2>Карточка {pet?.petName}</h2>
         <div className={styles.photos}>
-          {pet?.PetImages?.map((petImage) => (
+          {pet?.PetImages.map((petImage) => (
             <div className={styles.photo}>
               <img src={`${import.meta.env.VITE_URL.slice(0, -3)}/img/pets/${petImage.link}`} alt="imagePet" />
             </div>

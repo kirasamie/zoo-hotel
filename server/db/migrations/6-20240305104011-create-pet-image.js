@@ -9,6 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       petId: {
+        onDelete: 'cascade',
         type: Sequelize.INTEGER,
         references: {
           model: {

@@ -22,9 +22,13 @@ export default function LoginForm({ setIsLogin }): JSX.Element {
 
   const initialStateRegisterForm = { email: '', password: '' };
 
-  const [inputs, setInputs] = useState<InputsUserType>(initialStateRegisterForm);
+  const [inputs, setInputs] = useState<InputsUserType>(
+    initialStateRegisterForm
+  );
 
-  const handlerChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+  const handlerChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ): void => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
@@ -32,14 +36,15 @@ export default function LoginForm({ setIsLogin }): JSX.Element {
     dispatch(fetchLoginUser(inputs))
       .then((res) => {
         if (res.meta.requestStatus === 'fulfilled') {
-          navigate('/');
+          const { isWorker } = res.payload;
+          isWorker ? navigate('/account/orders') : navigate('/account/pets')
         }
       })
       .catch((error) => console.log(error));
   };
 
   return (
-    <div className="authContainer">
+    <div className='authContainer'>
       <Box
         sx={{
           display: 'flex',
@@ -50,9 +55,9 @@ export default function LoginForm({ setIsLogin }): JSX.Element {
       >
         <TextField
           // helperText="Your email must be unique"
-          label="Email"
-          type="text"
-          name="email"
+          label='Email'
+          type='text'
+          name='email'
           onChange={(e) => void handlerChange(e)}
           sx={{
             width: '500px',
@@ -61,20 +66,24 @@ export default function LoginForm({ setIsLogin }): JSX.Element {
         />
         <TextField
           // helperText="Please enter your password"
-          type="password"
-          name="password"
+          type='password'
+          name='password'
           // id="demo-helper-text-aligned"
-          label="Password"
+          label='Password'
           onChange={(e) => void handlerChange(e)}
           sx={{
             width: '500px',
             maxWidth: '100%',
           }}
         />
-        <Button variant="contained" color="success" onClick={() => void handlerLogin()}>
+        <Button
+          variant='contained'
+          color='success'
+          onClick={() => void handlerLogin()}
+        >
           Войти
         </Button>
-        <Button variant="contained" onClick={() => setIsLogin(false)}>
+        <Button variant='contained' onClick={() => setIsLogin(false)}>
           Ещё не зарегистрированы?
         </Button>
       </Box>

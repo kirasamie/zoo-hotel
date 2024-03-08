@@ -1,19 +1,20 @@
-import ProfileComponent from './components/AccountComponents/ProfileComponent/ProfileComponent';
-import { Route, Routes } from 'react-router-dom';
-import HomePage from './pages/HomePage/HomePage';
-import AuthPage from './pages/AuthPage/AuthPage';
-import RoomsPage from './pages/RoomsPage/RoomsPage';
-import { useEffect } from 'react';
-import Navbar from './components/NavbarComponents/Navbar/Navbar';
-import PetForm from './components/AccountComponents/PetsComponent/PetForm';
-import PetPage from './pages/PetPage/PetPage';
-import AccountPage from './pages/AccountPage/AccountPage';
-import { useAppDispatch } from './redux/hooks';
-import { fetchCheckUser } from './redux/thunkActions';
-import PetCard from './components/AccountComponents/PetsComponent/PetCard';
-import { fetchCheckAllPets } from './redux/pet/async-action';
-import OrderPage from './pages/OrderPage/OrderPage';
-import OrderCard from './components/AccountComponents/OrdersComponent/OrderCardList';
+import ProfileComponent from "./components/AccountComponents/ProfileComponent/ProfileComponent";
+import { Route, Routes } from "react-router-dom";
+import HomePage from "./pages/HomePage/HomePage";
+import AuthPage from "./pages/AuthPage/AuthPage";
+import RoomsPage from "./pages/RoomsPage/RoomsPage";
+import { useEffect } from "react";
+import Navbar from "./components/NavbarComponents/Navbar/Navbar";
+import PetForm from "./components/AccountComponents/PetsComponent/PetForm";
+import PetPage from "./pages/PetPage/PetPage";
+import AccountPage from "./pages/AccountPage/AccountPage";
+import { useAppDispatch } from "./redux/hooks";
+import { fetchCheckUser } from "./redux/thunkActions";
+import PetCard from "./components/AccountComponents/PetsComponent/PetCard";
+import { fetchCheckAllPets } from "./redux/pet/async-action";
+import OrderPage from "./pages/OrderPage/OrderPage";
+import OrderCard from "./components/AccountComponents/OrdersComponent/OrderCardList";
+import EmptyPet from "./components/AccountComponents/PetsComponent/EmptyPet";
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -30,7 +31,10 @@ function App(): JSX.Element {
       <div className="SOMEWRAPPER!!!!!!!!!!!!!">
         <Navbar />
       </div>
-      <div style={{ position: 'relative' }} className="SOMEWRAPPER!!!!!!!!!!!!!">
+      <div
+        style={{ position: "relative" }}
+        className="SOMEWRAPPER!!!!!!!!!!!!!"
+      >
         <Routes>
           <Route index element={<HomePage />}></Route>
           <Route path="auth" element={<AuthPage />}></Route>
@@ -43,6 +47,7 @@ function App(): JSX.Element {
               <Route path="new" element={<PetForm />} />
               <Route path="edit/:petId" element={<PetForm />} />
               <Route path=":petId" element={<PetCard />} />
+              <Route path="empty" element={<EmptyPet />} />
             </Route>
           </Route>
 

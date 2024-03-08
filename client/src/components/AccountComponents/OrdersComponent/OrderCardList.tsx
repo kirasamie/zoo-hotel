@@ -6,6 +6,11 @@ import { useEffect, useState } from 'react';
 import OrderPostModal from './OrderPostModal';
 import OrderCard from './OrderCard';
 import { fetchGetPostsByOrder } from '../../../redux/posts/postsThunkActions';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Keyboard, Navigation } from 'swiper/modules';
+
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 export default function OrderCardList(): JSX.Element {
   const { orderId } = useParams();
@@ -25,6 +30,7 @@ export default function OrderCardList(): JSX.Element {
     if (orderId && Number(orderId) !== 0) {
       dispatch(fetchGetPostsByOrder(Number(orderId)));
     }
+    
   }, [dispatch, orderId]);
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -71,9 +77,24 @@ export default function OrderCardList(): JSX.Element {
           Добавить пост!
         </Button>
       )}
-      {posts.length
-        ? posts.map((post) => <OrderCard key={post.id} post={post} />)
-        : null}
+      <Swiper
+        slidesPerView={1}
+        spaceBetween={30}
+        keyboard={{
+          enabled: true,
+        }}
+        navigation={true}
+        modules={[Keyboard, Navigation]}
+        className='swiperPosts'
+      >
+        {posts.length
+          ? posts.map((post) => (
+              <SwiperSlide key={post.id} className='swiperSlidePost'>
+                <OrderCard key={post.id} post={post} />
+              </SwiperSlide>
+            ))
+          : null}
+      </Swiper>
     </div>
   );
 }

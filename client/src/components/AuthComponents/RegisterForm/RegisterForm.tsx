@@ -12,6 +12,10 @@ import { useAppDispatch } from '../../../redux/hooks';
 import { fetchRegisterUser } from '../../../redux/thunkActions';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { Button, TextField, Box, styled } from '@mui/material';
+import GlassWrapper from '../../GlassWrapper/GlassWrapper';
+import StyledTextfield from '../../GlassWrapper/StyledTextfield';
+import StyledButton from '../../GlassWrapper/StyledButton';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -52,9 +56,7 @@ export default function RegisterForm({ setIsLogin }): JSX.Element {
     phone: 0,
   };
 
-  const [inputs, setInputs] = useState<InputsUserType>(
-    initialStateRegisterForm
-  );
+  const [inputs, setInputs] = useState<InputsUserType>(initialStateRegisterForm);
   const [inputSecretWord, setInputSecretWord] = useState<SecretWordType>({
     secretWord: '',
   });
@@ -65,9 +67,7 @@ export default function RegisterForm({ setIsLogin }): JSX.Element {
     setFormRegistration(false);
   };
 
-  const handlerChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ): void => {
+  const handlerChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
@@ -81,14 +81,10 @@ export default function RegisterForm({ setIsLogin }): JSX.Element {
     const data = new FormData();
     if (avatarFile) {
       data.append('avatar', avatarFile);
-      const response = await axios.post(
-        `${import.meta.env.VITE_URL}/image`,
-        data,
-        {
-          headers: { 'Content-Type': 'multipart/form-data' },
-          withCredentials: true,
-        }
-      );
+      const response = await axios.post(`${import.meta.env.VITE_URL}/image`, data, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+        withCredentials: true,
+      });
       console.log(response);
     }
   };
@@ -137,116 +133,36 @@ export default function RegisterForm({ setIsLogin }): JSX.Element {
   };
 
   return (
-    <div className='authContainer'>
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          flexDirection: 'column',
-          '& > :not(style)': { m: 1 },
-        }}
-      >
-        <TextField
-          label='Ваше имя'
-          type='text'
-          name='firstName'
-          onChange={(e) => void handlerChange(e)}
-          sx={{
-            width: '500px',
-            maxWidth: '100%',
-          }}
-        />
-        <TextField
-          label='Ваша фамилия'
-          type='text'
-          name='lastName'
-          onChange={(e) => void handlerChange(e)}
-          sx={{
-            width: '500px',
-            maxWidth: '100%',
-          }}
-        />
-        <TextField
-          label='Контактный номер телефона'
-          type='text'
-          name='phone'
-          onChange={(e) => void handlerChange(e)}
-          sx={{
-            width: '500px',
-            maxWidth: '100%',
-          }}
-        />
-        <TextField
-          label='Email'
-          helperText='Ваша почта должна быть уникальна'
-          type='text'
-          name='email'
-          onChange={(e) => void handlerChange(e)}
-          sx={{
-            width: '500px',
-            maxWidth: '100%',
-          }}
-        />
-        <TextField
-          type='password'
-          name='password'
-          // id="demo-helper-text-aligned"
-          label='Пароль'
-          onChange={(e) => void handlerChange(e)}
-          sx={{
-            width: '500px',
-            maxWidth: '100%',
-          }}
-        />
-        <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1 }}>
-          <TextField
-            disabled
-            helperText='Вы можете загрузить аватар'
-            type='text'
-            name='avatar'
-            value={avatarFile?.name}
-            onChange={(e) => void handlerChange(e)}
-            sx={{
-              width: '340px',
-              maxWidth: '100%',
-            }}
-          />
-          <Button
-            sx={{
-              width: '160px',
-              height: '55px',
-              maxWidth: '100%',
-              textAlign: 'center',
-            }}
-            component='label'
+    <div className="authContainer">
+      <GlassWrapper width="600px">
+        <StyledTextfield label="Ваше имя" type="text" name="firstName" onChange={(e) => void handlerChange(e)} />
+        <StyledTextfield label="Ваша фамилия" type="text" name="lastName" onChange={(e) => void handlerChange(e)} />
+        <StyledTextfield label="Контактный номер телефона" type="text" name="phone" onChange={(e) => void handlerChange(e)} />
+        <StyledTextfield label="Email" type="text" name="email" onChange={(e) => void handlerChange(e)} />
+        <StyledTextfield label="Пароль" type="password" name="password" onChange={(e) => void handlerChange(e)} />
+        <div style={{ display: 'flex', flexDirection: 'row', gap: '10px', width: '100%' }}>
+          <StyledTextfield disabled type="text" name="avatar" value={avatarFile?.name || 'Файл не выбран'} onChange={(e) => void handlerChange(e)} />
+          <StyledButton
+            sx={{ width: '300px' }}
+            component="label"
             role={undefined}
-            variant='contained'
             tabIndex={-1}
+            startIcon={<CloudUploadIcon />}
+            disableElevation
           >
             Загрузить аватар
-            <VisuallyHiddenInput
-              type='file'
-              name='avatar'
-              accept='image/png, image/jpeg, image/jpg'
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                void setAvatarFile(e.target.files[0])
-              }
-            />
-          </Button>
-        </Box>
-        <div>
-          <ReCAPTCHA sitekey='6LfClZApAAAAAHWVRUGDt1nEt451W4Le8kHU_7lN' />
+            <VisuallyHiddenInput type="file" name="avatar" accept="image/png, image/jpeg, image/jpg" onChange={(e: ChangeEvent<HTMLInputElement>) => void setAvatarFile(e.target.files[0])} />
+          </StyledButton>
         </div>
-        <Button
-          variant='contained'
-          color='success'
-          onClick={() => void handlerSendMessage()}
-        >
+        <div>
+          <ReCAPTCHA theme='dark' sitekey="6LfClZApAAAAAHWVRUGDt1nEt451W4Le8kHU_7lN" />
+        </div>
+        <StyledButton color="success" onClick={() => void handlerSendMessage()}>
           Регистрация
-        </Button>
-        <Button variant='contained' onClick={() => setIsLogin(true)}>
+        </StyledButton>
+        <StyledButton onClick={() => setIsLogin(true)}>
           Уже зарегистрированы? Войти
-        </Button>
+        </StyledButton>
         {formRegistration ? (
           <>
             <Dialog
@@ -254,39 +170,22 @@ export default function RegisterForm({ setIsLogin }): JSX.Element {
               onClose={() => void handlerClose()}
               PaperProps={{
                 component: 'form',
-                onChange: (e: ChangeEvent<HTMLInputElement>) =>
-                  void handlerChangeSecretWord(e),
+                onChange: (e: ChangeEvent<HTMLInputElement>) => void handlerChangeSecretWord(e),
               }}
             >
               <DialogTitle>Subscribe</DialogTitle>
               <DialogContent>
-                <DialogContentText>
-                  Для завершения регистрации, необходимо подтвердить
-                  код-подтверждения, отправленный на электронную почту "
-                  {inputs.email}".
-                </DialogContentText>
-                <TextField
-                  autoFocus
-                  required
-                  margin='dense'
-                  id='name'
-                  name='secretWord'
-                  label='Введите код-подтверждения'
-                  type='text'
-                  fullWidth
-                  variant='standard'
-                />
+                <DialogContentText>Для завершения регистрации, необходимо подтвердить код-подтверждения, отправленный на электронную почту "{inputs.email}".</DialogContentText>
+                <TextField autoFocus required margin="dense" id="name" name="secretWord" label="Введите код-подтверждения" type="text" fullWidth variant="standard" />
               </DialogContent>
               <DialogActions>
                 <Button onClick={() => void handlerClose()}>Cancel</Button>
-                <Button onClick={() => void handlerRegister()}>
-                  Subscribe
-                </Button>
+                <Button onClick={() => void handlerRegister()}>Subscribe</Button>
               </DialogActions>
             </Dialog>
           </>
         ) : null}
-      </Box>
+      </GlassWrapper>
     </div>
   );
 }

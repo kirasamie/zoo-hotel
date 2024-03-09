@@ -1,0 +1,25 @@
+.glassFlexWrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid red;
+}
+
+.glassBackdrop {
+    backdrop-filter: blur(8px);
+    margin: 20px;
+}
+
+.glassWrapper {
+    border: 3px solid orange;
+    background-color: rgba(0,0,0,.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    padding: 20px;
+    gap: 10px;
+}

@@ -5,7 +5,51 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAppDispatch } from '../../../redux/hooks';
 import { fetchLoginUser } from '../../../redux/thunkActions';
-import { Box, Button, TextField } from '@mui/material';
+import { Box, Button, TextField, alpha, styled } from '@mui/material';
+import GlassWrapper from '../../GlassWrapper/GlassWrapper';
+
+const OrangeButton = styled(Button)({
+  color: '#ffffff',
+  textShadow: '0 1px 2px #000000',
+  fontWeight: 'bold',
+  backgroundColor: '#f6ae2d',
+  '&:hover': {
+    backgroundColor: '#ffc862',
+    borderColor: '#0062cc',
+    boxShadow: 'none',
+  },
+  '&:active': {
+    boxShadow: 'none',
+    backgroundColor: '#ffa600',
+    borderColor: '#d38900',
+  },
+  '&:focus': {
+    boxShadow: '0 0 0 0.2rem rgba(255, 200, 98,.5)',
+  },
+});
+
+const OrangeTextfield = styled(TextField)({
+  '& .MuiInputBase-input': {
+    color: 'white',
+  },
+  '& label': {
+    color: 'orange',
+  },
+  '& label.Mui-focused': {
+    color: 'white',
+  },
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: 'orange',
+    },
+    '&:hover fieldset': {
+      borderColor: 'white',
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: 'orange',
+    },
+  },
+});
 
 type InputsUserType = {
   firstName?: string;
@@ -22,13 +66,9 @@ export default function LoginForm({ setIsLogin }): JSX.Element {
 
   const initialStateRegisterForm = { email: '', password: '' };
 
-  const [inputs, setInputs] = useState<InputsUserType>(
-    initialStateRegisterForm
-  );
+  const [inputs, setInputs] = useState<InputsUserType>(initialStateRegisterForm);
 
-  const handlerChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ): void => {
+  const handlerChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
@@ -37,56 +77,24 @@ export default function LoginForm({ setIsLogin }): JSX.Element {
       .then((res) => {
         if (res.meta.requestStatus === 'fulfilled') {
           const { isWorker } = res.payload;
-          isWorker ? navigate('/account/orders') : navigate('/account/pets')
+          isWorker ? navigate('/account/orders') : navigate('/account/pets');
         }
       })
       .catch((error) => console.log(error));
   };
 
   return (
-    <div className='authContainer'>
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          flexDirection: 'column',
-          '& > :not(style)': { m: 1 },
-        }}
-      >
-        <TextField
-          // helperText="Your email must be unique"
-          label='Email'
-          type='text'
-          name='email'
-          onChange={(e) => void handlerChange(e)}
-          sx={{
-            width: '500px',
-            maxWidth: '100%',
-          }}
-        />
-        <TextField
-          // helperText="Please enter your password"
-          type='password'
-          name='password'
-          // id="demo-helper-text-aligned"
-          label='Password'
-          onChange={(e) => void handlerChange(e)}
-          sx={{
-            width: '500px',
-            maxWidth: '100%',
-          }}
-        />
-        <Button
-          variant='contained'
-          color='success'
-          onClick={() => void handlerLogin()}
-        >
+    <div className="authContainer">
+      <GlassWrapper width='500px'>
+        <OrangeTextfield size='small' variant="outlined" label="Email" type="text" name="email" onChange={(e) => void handlerChange(e)} fullWidth />
+        <OrangeTextfield size='small' variant="outlined" label="Password" type="password" name="password" onChange={(e) => void handlerChange(e)} fullWidth />
+        <OrangeButton variant="outlined" onClick={() => void handlerLogin()}>
           Войти
-        </Button>
-        <Button variant='contained' onClick={() => setIsLogin(false)}>
+        </OrangeButton>
+        <OrangeButton variant="outlined" onClick={() => setIsLogin(false)}>
           Ещё не зарегистрированы?
-        </Button>
-      </Box>
+        </OrangeButton>
+      </GlassWrapper>
     </div>
   );
 }

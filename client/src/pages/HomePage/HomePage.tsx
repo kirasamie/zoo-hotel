@@ -21,8 +21,12 @@ import styles from './HomePage.module.css';
 
 export default function HomePage(): JSX.Element {
   const arrImages = ['one.png', 'two.png', 'three.png', 'fourd.jpg', 'five.png', 'six.png', 'seven.png', 'eight.png'];
+  document.body.style.backgroundImage = 'url("/background-filler-v2.png")';
+  // document.body.style.backgroundColor = 'rgb(15, 14, 14)';
+
   return (
     <>
+      <div className={styles.mainBackground}></div>
       <div className="textContainerLeft"></div>
       <div className="landing__info align__left">
         <h1 className="textContent">ZOoтель</h1>

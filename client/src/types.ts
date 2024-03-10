@@ -1,6 +1,7 @@
 export type EXAMPLETYPE = {
   someValue: number;
 };
+//test
 
 export type RoomImageType = {
   id: number;

@@ -6,6 +6,7 @@ import { Popover } from '@mui/material';
 import type { RoomType, RoomsType } from '../../types';
 import axios, { AxiosResponse } from 'axios';
 import RoomsPageModal from '../../components/RoomsPageComponents/RoomsPageModal';
+import GlassWrapper from '../../components/GlassWrapper/GlassWrapper';
 
 export default function RoomsPage() {
   const [currentRoom, setCurrentRoom] = useState<RoomType>();
@@ -29,29 +30,44 @@ export default function RoomsPage() {
 
   return (
     <div className={styles.roomsPageWrapper}>
-      <RoomsPageModal room={currentRoom} open={open} handleClose={handleClose} />
-      <div className={styles.rooms}>
+      <GlassWrapper width="100%">
+        <h1 className={styles.header1}>Выберите комнатку!</h1>
+      </GlassWrapper>
+
+      <div className={styles.contentWrapper}>
+        <GlassWrapper width="400px">
+          <h2 className={styles.tipHeader}>Подсказка:</h2>
+          <p className={styles.tipDescription}>На этой странице вы можете подобрать комнатку для своего питомца.</p>
+          <p className={styles.tipDescription}>Для того, чтобы определиться с выбором просто выберите одну из комнат в домике и нажмите кнопку "Нравится!"</p>
+          <p className={styles.tipDescription}>Для этого определитесь с выбором, выберите желаемую дату бронирования, выберите питомца и переходите к оплате!</p>
+          <p className={styles.tipDescription}>После успешной оплаты наш человек свяжется с Вами для дальнейшего взаимодействия, где подробно ответит на все интересующие Вас вопросы.</p>
+        </GlassWrapper>
+        <div style={{ height: '600px' }}></div>
+        <div className={styles.theHotel}></div>
+        <div className={styles.roomsWrapper}>
+          <button className={styles.roomButton}></button>
+          <button className={styles.roomButton}></button>
+          <button className={styles.roomButton}></button>
+          <button className={styles.roomButton}></button>
+          <button className={styles.roomButton}></button>
+          <button className={styles.roomButton}></button>
+          <button className={styles.roomButton}></button>
+          <button className={styles.roomButton}></button>
+          <button className={styles.roomButton}></button>
+        </div>
+
+        <RoomsPageModal room={currentRoom} open={open} handleClose={handleClose} />
+
         <PopupState variant="popover" popupId="demo-popup-popover">
           {(popupState) => (
-            <>
-              <div className={styles.roomUpperRow}>
-                {rooms.length &&
-                  rooms.slice(0, 6).map((room) => (
-                    <button key={room.id} onMouseEnter={() => void chooseRoomHandler(room.id)} {...bindTrigger(popupState)}>
-                      {String(room.roomPetType).includes('1') && <img style={{ height: '40px', width: '40px' }} src='/img/cat.png' />}
-                      {String(room.roomPetType).includes('2') && <img style={{ height: '40px', width: '40px' }} src='/img/dog.png' />}
-                    </button>
-                  ))}
-              </div>
-              <div className={styles.roomBottomRow}>
-                {rooms.length &&
-                  rooms.slice(6, 9).map((room) => (
-                    <button key={room.id} onMouseEnter={() => void chooseRoomHandler(room.id)} {...bindTrigger(popupState)}>
-                      {String(room.roomPetType).includes('1') && <img style={{ height: '40px', width: '40px' }} src='/img/cat.png' />}
-                      {String(room.roomPetType).includes('2') && <img style={{ height: '40px', width: '40px' }} src='/img/dog.png' />}
-                    </button>
-                  ))}
-              </div>
+            <div className={styles.roomsWrapper}>
+              {rooms.length &&
+                rooms.map((room) => (
+                  <button className={styles.roomButton} key={room.id} onMouseEnter={() => void chooseRoomHandler(room.id)} {...bindTrigger(popupState)}>
+                    {String(room.roomPetType).includes('1') && <img style={{ height: '40px', width: '40px' }} src="/img/cat-orange.png" />}
+                    {String(room.roomPetType).includes('2') && <img style={{ height: '40px', width: '40px' }} src="/img/dog-orange.png" />}
+                  </button>
+                ))}
               <Popover
                 {...bindPopover(popupState)}
                 anchorOrigin={{
@@ -65,7 +81,7 @@ export default function RoomsPage() {
               >
                 <RoomsPageCarousel room={currentRoom} setChoosenRoomId={setChoosenRoomId} handleOpen={handleOpen} />
               </Popover>
-            </>
+            </div>
           )}
         </PopupState>
       </div>

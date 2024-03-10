@@ -1,6 +1,6 @@
 import styles from './GlassWrapper.module.css';
 
-export default function GlassWrapper({ children, width }) {
+export default function GlassWrapper({ children, width="auto" }) {
   return (
     <div className={styles.glassFlexWrapper}>
       <div style={{ width: width }} className={styles.glassBackdrop}>

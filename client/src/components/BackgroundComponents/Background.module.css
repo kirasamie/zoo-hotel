@@ -7,6 +7,9 @@
   width: 100%;
   bottom: 0;
   left: 0;
+  z-index: -50;
+
+  /* opacity: 0.3; */
 }
 
 .track {
@@ -15,6 +18,8 @@
   height: 100px;
   overflow: hidden;
   position: absolute;
+  z-index: -40;
+  /* opacity: 0.3; */
 }
 
 .dog {
@@ -25,6 +30,7 @@
   width: 145px;
   background-image: url(/dog.gif);
   animation: pet-moving 15s linear infinite;
+  z-index: -30;
 }
 
 .cat {
@@ -36,6 +42,7 @@
   background-image: url(/cat.gif);
   background-size: cover;
   animation: pet-moving 20s linear infinite;
+  z-index: -45;
 }
 
 .mouse {
@@ -49,6 +56,7 @@
   background-repeat: no-repeat;
   animation: pet-moving 20s linear infinite;
   transform: scale(0.6) translateX(200px);
+  z-index: -45;
 }
 
 @keyframes pet-moving {
@@ -60,15 +68,16 @@
 .clouds,
 .farClouds,
 .nearClouds {
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   height: 100%;
+  z-index: -60;
+  /* opacity: 0.3; */
 }
 
 .clouds {
   overflow: hidden;
-  z-index: -1;
 }
 
 .farClouds,

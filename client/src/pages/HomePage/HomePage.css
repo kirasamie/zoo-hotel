@@ -124,7 +124,7 @@ a {
 
 .image__pet img {
   object-fit: cover;
-  opacity: 0.8;
+  /* opacity: 0.8; */
   width: 100%;
   height: calc(100vh - 65px);
 }
@@ -193,7 +193,7 @@ a {
 .ya-map-wrapper {
   display: flex;
   justify-content: center;
-  margin-bottom: 100px;
+  padding-bottom: 20px;
 }
 
 .ya-map {

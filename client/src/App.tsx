@@ -32,10 +32,18 @@ function App(): JSX.Element {
     <>
       <Background />
       <Navbar />
-     <div style={{ position: 'relative' }}>
+      <div style={{ position: 'relative' }}>
         <div style={{ minHeight: 'calc(100vh - 130px)' }}>
           <Routes>
-            <Route index element={<HomePage />}></Route>
+            <Route
+              index
+              element={
+                <div className="homePageWrapper">
+                  <HomePage />
+                </div>
+              }
+            ></Route>
+
             <Route path="auth" element={<AuthPage />}></Route>
             <Route path="account" element={<AccountPage />}>
               <Route path="orders" element={<OrderPage />}>

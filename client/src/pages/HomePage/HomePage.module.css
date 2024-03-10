@@ -33,7 +33,7 @@
 }
 .iconText {
   display: flex;
-  width: 18vw;
+  width: 250px;
   flex-direction: column;
   align-items: center;
   gap: 20px;
@@ -60,4 +60,20 @@
 .servHeader3 {
   font-size: 22px;
   margin-bottom: 40px;
+}
+
+/* .mainBackground {
+  background-image: url('/background-filler-v2.png');
+  position: absolute;
+  height: 9999vh;
+  overflow: hidden;
+  width: 100%;
+  z-index: -50;
+} */
+
+.homePageShader {
+  border-top: 3px solid black;
+  height: 30px;
+  background: linear-gradient(180deg #121212, transparent 10px);
+  background: linear-gradient(180deg, #121212,transparent, transparent 30px);
 }

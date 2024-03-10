@@ -6,7 +6,9 @@ body {
 }
 
 body {
+  z-index: -100;
   background: linear-gradient(180deg, #4142f4, #7ea7f7 600px);
+  /* background: linear-gradient(180deg, #140e3c, #27223e 600px); */
   min-height: 100vh;
 }
 
@@ -14,10 +16,10 @@ body {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   /* line-height: 1.5;
   font-weight: 400; */
-
-  /* color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424; */
+  /* color-scheme: light dark; */
+  /* color: orange; */
+  /* background-color: #242424; */
+  /* z-index: -50; */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -27,6 +29,21 @@ body {
   background-image: url('../public/img/logotype.jpg');
   background-size: 100%; */
 }
+
+.homePageWrapper {
+  /* border: 2px solid red; */
+  color: orange;
+  /* background-color: #7c94ff; */
+  /* background-image: url('/background-filler-v2.png'); */
+}
+
+/* .mainBackground {
+  background-image: url('/background-filler-v2.png');
+  position: absolute;
+  height: 9999vh;
+  overflow: hidden;
+  width: 100%;
+} */
 
 body::-webkit-scrollbar {
   background-color: #121212;

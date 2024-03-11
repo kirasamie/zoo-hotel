@@ -46,7 +46,7 @@ export default function OrderCardList(): JSX.Element {
       <div className={styles.orderInfo}>
         <CardGlassWrapper>
           <div className={styles.orderInfoInnerWrapper}>
-            <img className={styles.petImg} src={`${import.meta.env.VITE_URL.slice(0, -3)}/img/pets/${order?.Pet?.PetImages[0]?.link}`} alt="img" />
+            <img className={styles.petImg} src={`${import.meta.env.VITE_URL.slice(0, -3)}/img/pets/${order?.Pet?.PetImages[0]?.link}`} alt='img' />
             <div className={styles.orderAbout}>
               <h3 className={styles.orderAboutHeader}>Информация о заказе</h3>
               <p>
@@ -62,24 +62,24 @@ export default function OrderCardList(): JSX.Element {
 
       <OrderPostModal open={modalOpen} handleClose={() => setModalOpen(false)} orderId={orderId} />
       {isWorker && (
-        <Button variant="outlined" onClick={() => setModalOpen(true)}>
+        <Button variant='outlined' onClick={() => setModalOpen(true)}>
           Добавить пост!
         </Button>
       )}
       <div style={{ width: '60dvw' }}>
         <Swiper
-          slidesPerView={1}
+          slidesPerView={1.1}
+          centeredSlides={true}
           spaceBetween={30}
           keyboard={{
             enabled: true,
           }}
-          navigation={true}
-          modules={[Keyboard, Navigation]}
-          className="swiperPosts"
+          modules={[Keyboard]}
+          className='swiperPosts'
         >
           {posts.length
             ? posts.map((post) => (
-                <SwiperSlide key={post.id} className="swiperSlidePost">
+                <SwiperSlide key={post.id} className='swiperSlidePost'>
                   <OrderCard key={post.id} post={post} />
                 </SwiperSlide>
               ))

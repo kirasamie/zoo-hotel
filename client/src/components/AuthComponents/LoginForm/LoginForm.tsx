@@ -91,12 +91,13 @@ export default function LoginForm({ setIsLogin }): JSX.Element {
     if (inputs.email.trim().length === 0) {
       errorMsg.email = 'Необходимо ввести ваш email!';
     }
-    if (!validateEmail(inputs.email)) {
-      errorMsg.email =
-        'Ваш email необходимо ввести в формате example@example.com';
-    }
+    // if (!validateEmail(inputs.email)) {
+    //   errorMsg.email =
+    //     'Ваш email необходимо ввести в формате example@example.com';
+    // }
     setShowError({ ...errorMsg });
-    return Object.entries(errorMsg).some((el) => el[1].length !== 0);
+    // ТУТ ОТКЛЮЧЕНА ВАЛИДАЦИЯ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    return false || Object.entries(errorMsg).some((el) => el[1].length !== 0);
   };
 
   const handlerChange = (

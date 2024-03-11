@@ -5,15 +5,20 @@
   justify-content: space-evenly;
 }
 .petContainer, .orderContainer {
-  padding: 30px;
-  border: 5px solid #15bbde;
+  /* padding: 30px; */
+  /* border: 5px solid orange; */
   border-radius: 15px;
   width: 100%;
   display: flex;
   overflow: auto;
   align-items: center;
-  margin-bottom: 50px;
+  /* margin-bottom: 50px; */
 }
 .contentContainer {
   width: 50%;
+}
+.title {
+  color: orange;
+  width: 100%;
+  text-align: start;
 }

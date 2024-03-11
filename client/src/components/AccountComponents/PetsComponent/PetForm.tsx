@@ -20,6 +20,9 @@ import {
   styled,
   Button,
 } from "@mui/material";
+import GlassWrapper from "../../GlassWrapper/GlassWrapper";
+import StyledTextfield from "../../GlassWrapper/StyledTextfield";
+import StyledButton from "../../GlassWrapper/StyledButton";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -31,6 +34,14 @@ const VisuallyHiddenInput = styled("input")({
   left: 0,
   whiteSpace: "nowrap",
   width: 1,
+});
+const OrangeRadio = styled(Radio)({
+  "&.Mui-checked": {
+    color: "orange",
+  },
+  "&.MuiRadio-colorPrimary": {
+    color: "orange",
+  },
 });
 
 export type InputsPetType = {
@@ -154,14 +165,19 @@ export default function PetForm(): JSX.Element {
   return (
     <form className={styles.form}>
       {pet ? (
-        <h2>Редактирование карточки {pet?.petName}</h2>
+        <h2 style={{ color: "orange" }}>
+          Редактирование карточки {pet?.petName}
+        </h2>
       ) : (
-        <h2>Добавление карточки питомца</h2>
+        <h2 style={{ color: "orange" }}>Добавление карточки питомца</h2>
       )}
       <div className={styles.inputsContainer}>
         <div className={styles.input}>
           <FormControl>
-            <FormLabel id="demo-controlled-radio-buttons-group">
+            <FormLabel
+              style={{ color: "orange" }}
+              id="demo-controlled-radio-buttons-group"
+            >
               Вид животного
             </FormLabel>
             <RadioGroup
@@ -171,13 +187,21 @@ export default function PetForm(): JSX.Element {
               value={inputs.petType}
               onChange={(e) => handlerChange(e)}
             >
-              <FormControlLabel value={2} control={<Radio />} label="Собака" />
-              <FormControlLabel value={1} control={<Radio />} label="Кошка" />
+              <FormControlLabel
+                value={2}
+                control={<OrangeRadio />}
+                label={<span style={{ color: "orange" }}>Собака</span>}
+              />
+              <FormControlLabel
+                value={1}
+                control={<OrangeRadio />}
+                label={<span style={{ color: "orange" }}>Кошка</span>}
+              />
             </RadioGroup>
           </FormControl>
         </div>
         <div className={styles.input}>
-          <TextField
+          <StyledTextfield
             fullWidth
             id="outlined-multiline-flexible"
             label="Кличка"
@@ -189,7 +213,7 @@ export default function PetForm(): JSX.Element {
           />
         </div>
         <div className={styles.input}>
-          <TextField
+          <StyledTextfield
             fullWidth
             id="outlined-multiline-flexible"
             name="petBreed"
@@ -202,7 +226,12 @@ export default function PetForm(): JSX.Element {
         </div>
         <div className={styles.input}>
           <FormControl>
-            <FormLabel id="demo-controlled-radio-buttons-group">Пол</FormLabel>
+            <FormLabel
+              style={{ color: "orange" }}
+              id="demo-controlled-radio-buttons-group"
+            >
+              Пол
+            </FormLabel>
             <RadioGroup
               row
               aria-labelledby="demo-controlled-radio-buttons-group"
@@ -210,13 +239,21 @@ export default function PetForm(): JSX.Element {
               value={inputs.petGender}
               onChange={(e) => handlerChange(e)}
             >
-              <FormControlLabel value="Ж" control={<Radio />} label="Женский" />
-              <FormControlLabel value="М" control={<Radio />} label="Мужской" />
+              <FormControlLabel
+                value="Ж"
+                control={<OrangeRadio />}
+                label={<span style={{ color: "orange" }}>Женский</span>}
+              />
+              <FormControlLabel
+                value="М"
+                control={<OrangeRadio />}
+                label={<span style={{ color: "orange" }}>Мужской</span>}
+              />
             </RadioGroup>
           </FormControl>
         </div>
         <div className={styles.input}>
-          <TextField
+          <StyledTextfield
             fullWidth
             id="outlined-multiline-flexible"
             name="petAge"
@@ -229,7 +266,10 @@ export default function PetForm(): JSX.Element {
         </div>
         <div className={styles.input}>
           <FormControl>
-            <FormLabel id="demo-controlled-radio-buttons-group">
+            <FormLabel
+              style={{ color: "orange" }}
+              id="demo-controlled-radio-buttons-group"
+            >
               Стерилизован(-a)
             </FormLabel>
             <RadioGroup
@@ -239,13 +279,21 @@ export default function PetForm(): JSX.Element {
               value={inputs.petIsSprayed}
               onChange={(e) => handlerChange(e)}
             >
-              <FormControlLabel value={true} control={<Radio />} label="Да" />
-              <FormControlLabel value={false} control={<Radio />} label="Нет" />
+              <FormControlLabel
+                value={true}
+                control={<OrangeRadio />}
+                label={<span style={{ color: "orange" }}>Да</span>}
+              />
+              <FormControlLabel
+                value={false}
+                control={<OrangeRadio />}
+                label={<span style={{ color: "orange" }}>Нет</span>}
+              />
             </RadioGroup>
           </FormControl>
         </div>
         <div className={styles.input}>
-          <TextField
+          <StyledTextfield
             fullWidth
             multiline
             id="outlined-basic"
@@ -258,7 +306,7 @@ export default function PetForm(): JSX.Element {
           />
         </div>
         <div className={styles.input}></div>
-        <Button
+        <StyledButton
           component="label"
           role={undefined}
           variant="contained"
@@ -272,7 +320,7 @@ export default function PetForm(): JSX.Element {
             accept="image/png, image/jpeg, image/jpg"
             onChange={(e: ChangeEvent<HTMLInputElement>) => onSelectFile(e)}
           />
-        </Button>
+        </StyledButton>
 
         <div className="images">
           {selectedImages &&
@@ -294,13 +342,16 @@ export default function PetForm(): JSX.Element {
         </div>
       </div>
       {pet ? (
-        <Button onClick={() => void handlerEditPet()} variant="contained">
+        <StyledButton onClick={() => void handlerEditPet()} variant="contained">
           Сохранить
-        </Button>
+        </StyledButton>
       ) : (
-        <Button onClick={() => void handlerAddNewPet()} variant="contained">
+        <StyledButton
+          onClick={() => void handlerAddNewPet()}
+          variant="contained"
+        >
           Создать
-        </Button>
+        </StyledButton>
       )}
     </form>
   );

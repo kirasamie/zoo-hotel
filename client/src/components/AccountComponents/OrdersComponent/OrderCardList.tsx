@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
@@ -15,6 +16,15 @@ import styles from './OrderCardList.module.css';
 
 export default function OrderCardList(): JSX.Element {
   const { orderId } = useParams();
+
+  if (orderId === 'empty') {
+    return (
+      <div style={{ width: '60dvw' }}>
+        <h3 className={styles.orderAboutHeader}>Похоже, у Вас пока нет ни одного заказа. Самое время это исправть!</h3>
+      </div>
+    );
+  }
+
   const isWorker = useAppSelector((store) => store.userSlice.info.isWorker);
   const orders = useAppSelector((store) => store.orderSlice[`${isWorker ? 'ordersWorker' : 'ordersUser'}`]);
   const dispatch = useAppDispatch();

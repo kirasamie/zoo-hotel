@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 import styles from './OrderPage.module.css';
 import OrdersComponent from '../../components/AccountComponents/OrdersComponent/OrdersComponent';
 import { useAppSelector } from '../../redux/hooks';

@@ -11,6 +11,7 @@ import { useTheme } from '@mui/material/styles';
 import type { RoomType } from '../../types';
 import styles from './RoomsPageCarousel.module.css';
 import Box from '@mui/material/Box';
+import GlassWrapper from '../GlassWrapper/GlassWrapper';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -40,14 +41,19 @@ function RoomsPageCarousel({ room, setChoosenRoomId, handleOpen }: RoomProps) {
   };
 
   return (
-    <div className={styles.popupWrapper}>
+    <GlassWrapper width='500px' className={styles.popupWrapper}>
       <div className={styles.swipableViewsWrapper}>
-        <AutoPlaySwipeableViews axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'} index={activeStep} onChangeIndex={handleStepChange} enableMouseEvents>
+        <AutoPlaySwipeableViews
+          axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+          index={activeStep}
+          onChangeIndex={handleStepChange}
+          enableMouseEvents
+        >
           {images.map((image, index) => (
             <div key={`image_${image.id}`}>
               {Math.abs(activeStep - index) <= 2 ? (
                 <Box
-                  component="img"
+                  component='img'
                   sx={{
                     height: 300,
                     display: 'block',
@@ -63,16 +69,32 @@ function RoomsPageCarousel({ room, setChoosenRoomId, handleOpen }: RoomProps) {
         </AutoPlaySwipeableViews>
         <MobileStepper
           steps={maxSteps}
-          position="static"
+          position='static'
           activeStep={activeStep}
           nextButton={
-            <Button size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
-              {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+            <Button
+              size='small'
+              onClick={handleNext}
+              disabled={activeStep === maxSteps - 1}
+            >
+              {theme.direction === 'rtl' ? (
+                <KeyboardArrowLeft />
+              ) : (
+                <KeyboardArrowRight />
+              )}
             </Button>
           }
           backButton={
-            <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-              {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+            <Button
+              size='small'
+              onClick={handleBack}
+              disabled={activeStep === 0}
+            >
+              {theme.direction === 'rtl' ? (
+                <KeyboardArrowRight />
+              ) : (
+                <KeyboardArrowLeft />
+              )}
             </Button>
           }
         />
@@ -89,12 +111,19 @@ function RoomsPageCarousel({ room, setChoosenRoomId, handleOpen }: RoomProps) {
             bgcolor: 'background.default',
           }}
         >
-          <Typography>Для {String(room.roomPetType).includes('12') ? 'кошечек и собачек' : String(room.roomPetType).includes('1') ? 'кошечек' : 'собачек'}</Typography>
+          <Typography>
+            Для{' '}
+            {String(room.roomPetType).includes('12')
+              ? 'кошечек и собачек'
+              : String(room.roomPetType).includes('1')
+              ? 'кошечек'
+              : 'собачек'}
+          </Typography>
           <Typography>Цена за сутки: {room.roomPrice} рубь</Typography>
         </Paper>
         <Button
           sx={{ alignSelf: 'center' }}
-          variant="contained"
+          variant='contained'
           onClick={() => {
             setChoosenRoomId(room.id);
             handleOpen();
@@ -103,7 +132,7 @@ function RoomsPageCarousel({ room, setChoosenRoomId, handleOpen }: RoomProps) {
           Нравится!
         </Button>
       </div>
-    </div>
+    </GlassWrapper>
   );
 }
 

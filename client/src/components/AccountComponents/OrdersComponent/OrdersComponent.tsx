@@ -1,6 +1,7 @@
 import { useAppSelector } from '../../../redux/hooks';
 import { OrderType } from '../../../redux/orderSlice';
 import CardGlassWrapper from '../../GlassWrapper/CardGlassWrapper';
+import StyledButton from '../../GlassWrapper/StyledButton';
 import styles from './OrdersComponent.module.css';
 import { Link } from 'react-router-dom';
 
@@ -26,5 +27,17 @@ export default function OrdersComponent(): JSX.Element {
     );
   };
 
-  return <div className={styles.menu}>{user.isWorker ? ordersByWorker?.map((order) => <OrderLink order={order} />) : ordersByUser?.map((order) => <OrderLink order={order} />)}</div>;
+  return (
+    <div className={styles.menu}>
+      {user.isWorker ? (
+        ordersByWorker?.map((order) => <OrderLink order={order} />)
+      ) : ordersByUser.length ? (
+        ordersByUser?.map((order) => <OrderLink order={order} />)
+      ) : (
+        <Link to='/rooms'>
+          <StyledButton fullWidth>Забронировать комнатку!</StyledButton>
+        </Link>
+      )}
+    </div>
+  );
 }

@@ -41,14 +41,9 @@ function RoomsPageCarousel({ room, setChoosenRoomId, handleOpen }: RoomProps) {
   };
 
   return (
-    <GlassWrapper width='500px' className={styles.popupWrapper}>
+    <div className={styles.popupWrapper}>
       <div className={styles.swipableViewsWrapper}>
-        <AutoPlaySwipeableViews
-          axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-          index={activeStep}
-          onChangeIndex={handleStepChange}
-          enableMouseEvents
-        >
+        <AutoPlaySwipeableViews axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'} index={activeStep} onChangeIndex={handleStepChange} enableMouseEvents>
           {images.map((image, index) => (
             <div key={`image_${image.id}`}>
               {Math.abs(activeStep - index) <= 2 ? (
@@ -58,7 +53,7 @@ function RoomsPageCarousel({ room, setChoosenRoomId, handleOpen }: RoomProps) {
                     height: 300,
                     display: 'block',
                     overflow: 'hidden',
-                    width: '100%',
+                    width: '250px',
                   }}
                   src={image.link}
                   alt={image.link}
@@ -70,69 +65,83 @@ function RoomsPageCarousel({ room, setChoosenRoomId, handleOpen }: RoomProps) {
         <MobileStepper
           steps={maxSteps}
           position='static'
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            pl: 2,
+            height: '0px',
+            color: 'white',
+            backgroundColor: 'orange',
+            border: '3px solid orange',
+          }}
+          className={styles.mobileStepper}
           activeStep={activeStep}
           nextButton={
-            <Button
-              size='small'
-              onClick={handleNext}
-              disabled={activeStep === maxSteps - 1}
-            >
-              {theme.direction === 'rtl' ? (
-                <KeyboardArrowLeft />
-              ) : (
-                <KeyboardArrowRight />
-              )}
+            <Button size='medium' sx={{ color: 'white' }} onClick={handleNext} disabled={activeStep === maxSteps - 1}>
+              {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
             </Button>
           }
           backButton={
-            <Button
-              size='small'
-              onClick={handleBack}
-              disabled={activeStep === 0}
-            >
-              {theme.direction === 'rtl' ? (
-                <KeyboardArrowRight />
-              ) : (
-                <KeyboardArrowLeft />
-              )}
+            <Button size='medium' sx={{ color: 'white' }} onClick={handleBack} disabled={activeStep === 0}>
+              {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
             </Button>
           }
         />
       </div>
       <div className={styles.descriptionWrapper}>
-        <Typography sx={{ flex: 1 }}>{room.roomAbout}</Typography>
-        <Paper
-          square
-          elevation={0}
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            pl: 2,
-            bgcolor: 'background.default',
-          }}
-        >
-          <Typography>
-            Для{' '}
-            {String(room.roomPetType).includes('12')
-              ? 'кошечек и собачек'
-              : String(room.roomPetType).includes('1')
-              ? 'кошечек'
-              : 'собачек'}
-          </Typography>
-          <Typography>Цена за сутки: {room.roomPrice} рубь</Typography>
-        </Paper>
-        <Button
-          sx={{ alignSelf: 'center' }}
-          variant='contained'
-          onClick={() => {
-            setChoosenRoomId(room.id);
-            handleOpen();
-          }}
-        >
-          Нравится!
-        </Button>
+        <div>
+          <Typography sx={{ flex: 1 }}>{room.roomAbout}</Typography>
+        </div>
+        <div className={styles.wrapperLike}>
+          <Paper
+            square
+            elevation={0}
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              pl: 2,
+              color: 'orange',
+              width: 270,
+              backgroundColor: 'rgba(0, 0, 0, 0.8)',
+              border: '3px solid orange',
+              borderRadius: '20px',
+            }}
+          >
+            <Typography className={styles.aboutDescription}>
+              Для {String(room.roomPetType).includes('12') ? 'кошечек и собачек' : String(room.roomPetType).includes('1') ? 'кошечек' : 'собачек'}
+            </Typography>
+            <Typography className={styles.aboutDescription}>Цена за сутки: {room.roomPrice} рубь</Typography>
+          </Paper>
+          <Button
+            sx={{
+              alignSelf: 'center',
+              color: '#ffffff',
+              textShadow: '0 1px 2px #000000',
+              fontWeight: 'bold',
+              backgroundColor: '#f6ae2d',
+              '&:hover': {
+                backgroundColor: '#ffc862',
+                borderColor: '#0062cc',
+                boxShadow: 'none',
+              },
+              '&:active': {
+                boxShadow: 'none',
+                backgroundColor: '#ffa600',
+                borderColor: '#d38900',
+              },
+            }}
+            variant='contained'
+            onClick={() => {
+              setChoosenRoomId(room.id);
+              handleOpen();
+            }}
+            className={styles.buttonLike}
+          >
+            Нравится!
+          </Button>
+        </div>
       </div>
-    </GlassWrapper>
+    </div>
   );
 }
 

@@ -6,21 +6,18 @@ const mailer = require('../lib/nodemailer');
 const { User } = require('../db/models');
 
 router.get('/checkSession', async (req, res) => {
-  const {
-    userId,
-  } = req.session;
+  const { userId } = req.session;
   if (userId) {
     const user = await User.findOne({ where: { id: userId }, attributes: { exclude: ['password'] } });
     res.json(user);
+  } else {
+    res.sendStatus(404);
   }
-  res.status(404);
 });
 
 router.post('/register', async (req, res) => {
   try {
-    const {
-      firstName, lastName, email, password, avatar, phone,
-    } = req.body;
+    const { firstName, lastName, email, password, avatar, phone } = req.body;
     const user = await User.findOne({ where: { email } });
     if (user) {
       res.sendStatus(401);
@@ -91,9 +88,7 @@ router.post('/message', async (req, res) => {
 
 router.post('/register', async (req, res) => {
   try {
-    const {
-      firstName, lastName, email, password, avatar, phone,
-    } = req.body;
+    const { firstName, lastName, email, password, avatar, phone } = req.body;
     const hash = await bcrypt.hash(password, 10);
     const newUser = await User.create({
       firstName,
@@ -163,13 +158,16 @@ router.get('/logout', (req, res) => {
 router.patch('/edit', async (req, res) => {
   try {
     const { userId } = req.session;
-    const user = await User.update({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      password: req.body.password,
-      phone: req.body.phone,
-    }, { where: { id: userId }, returning: true, plain: true });
+    const user = await User.update(
+      {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        password: req.body.password,
+        phone: req.body.phone,
+      },
+      { where: { id: userId }, returning: true, plain: true },
+    );
     res.json(user[1]);
   } catch (error) {
     console.log(error);

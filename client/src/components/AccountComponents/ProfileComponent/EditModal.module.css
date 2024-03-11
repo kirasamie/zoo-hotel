@@ -1,5 +1,5 @@
 .modal {
-  background-color: white;
+  /* background-color: white; */
   width: fit-content;
   padding: 30px;
   border-radius: 15px;
@@ -12,6 +12,7 @@
 }
 .input {
   margin-bottom: 15px;
+  color: orange;
 }
 .modalContainer {
   display: flex;

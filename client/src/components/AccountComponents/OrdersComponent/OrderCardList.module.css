@@ -1,0 +1,30 @@
+.orderInfo {
+  width: 100%;
+  color: orange;
+  margin-bottom: 20px;
+}
+
+.orderInfoInnerWrapper {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+}
+
+.petImage {
+  height: 200px;
+  width: 200px;
+  overflow: hidden;
+}
+
+.petImg {
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.orderAbout {
+  width: 100%;
+}
+
+.orderAboutHeader {
+  text-align: center;
+}

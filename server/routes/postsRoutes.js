@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const multer = require('multer');
 const router = require('express').Router();
-const { Post } = require('../db/models');
+const { Post, User } = require('../db/models');
 
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
@@ -38,7 +38,7 @@ router.get('/:id', async (req, res) => {
   const { userId } = req.session;
   const { id } = req.params;
   try {
-    const posts = await Post.findAll({ where: { orderId: id }, order: [['createdAt', 'DESC']] });
+    const posts = await Post.findAll({ where: { orderId: id }, include: { model: User, attributes: ['avatar', 'firstName', 'lastName'] }, order: [['createdAt', 'DESC']] });
     console.log(posts.length);
     res.json(posts);
   } catch (error) {

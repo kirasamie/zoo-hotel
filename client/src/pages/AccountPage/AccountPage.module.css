@@ -3,23 +3,24 @@
     flex-direction: column;
 }
 .groupBtn {
-    border: 2px solid #15bbde;
+    border: 2px solid orange;
     width: fit-content;
     margin: 10px;
 }
 .accountNavBtn {
     border: none;
-    background-color: white;
+    background-color: black;
     padding: 10px;
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
     size: 14px;
     font-weight: 700;
-    color: #15bbde;
+    color: orange;
 }
 .accountNavBtn:hover{
     text-decoration: underline;
 }
 .activeNavBtn {
-    color: white;
-    background-color: #15bbde;
+    color: black;
+    background-color: orange
+    ;
 }

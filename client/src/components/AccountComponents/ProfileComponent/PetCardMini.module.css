@@ -15,7 +15,15 @@
 .petName {
   font-size: 24px;
   font-weight: 600;
+  color: orange;
+
 }
-.petName:hover {
-  text-decoration: underline;
+.petBreed {
+  color: orange;
+}
+.link {
+  transition: 150ms;
+}
+.link:hover {
+scale: 1.1;
 }

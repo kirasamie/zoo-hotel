@@ -1,5 +1,6 @@
 import { useAppSelector } from '../../../redux/hooks';
 import { OrderType } from '../../../redux/orderSlice';
+import CardGlassWrapper from '../../GlassWrapper/CardGlassWrapper';
 import styles from './OrdersComponent.module.css';
 import { Link } from 'react-router-dom';
 
@@ -13,11 +14,14 @@ export default function OrdersComponent(): JSX.Element {
   const OrderLink = ({ order }: { order: OrderType }) => {
     return (
       <Link key={order.id} to={`/account/orders/${order.id}`}>
-        <h3>Заказ №{order.id}</h3>
-        <span>
-          Время: {getDate(order.orderDateIn)} - {getDate(order.orderDateOut)}
-        </span>
-        <br />
+        <div className={styles.linkWrapper}>
+          <CardGlassWrapper>
+            <h3>Заказ №{order.id}</h3>
+            <span>
+              Время: {getDate(order.orderDateIn)} - {getDate(order.orderDateOut)}
+            </span>
+          </CardGlassWrapper>
+        </div>
       </Link>
     );
   };

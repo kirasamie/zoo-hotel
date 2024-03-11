@@ -7,17 +7,18 @@
 }
 .info {
   margin: 40px;
-  font-size: 20px;
+  font-size: 30px;
+  color: orange;
 }
 .profile {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 5px solid #15bbde;
+  /* border: 5px solid #15bbde; */
   border-radius: 15px;
   width: fit-content;
-  padding: 10px 20px;
+  /* padding: 10px 20px; */
 }
 .profileContainer {
   display: flex;

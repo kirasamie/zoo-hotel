@@ -1,4 +1,5 @@
 /* eslint-disable no-nested-ternary */
+
 import type { ChangeEvent, FormEvent } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
@@ -30,12 +31,13 @@ function validatePhoneNumber(phoneNumber: string) {
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
   clipPath: 'inset(50%)',
+
   height: 1,
-  overflow: 'hidden',
-  position: 'absolute',
+  overflow: "hidden",
+  position: "absolute",
   bottom: 0,
   left: 0,
-  whiteSpace: 'nowrap',
+  whiteSpace: "nowrap",
   width: 1,
 });
 
@@ -62,28 +64,32 @@ export type SecretWordType = {
 };
 
 export default function RegisterForm({ setIsLogin }): JSX.Element {
-  const key = '6LdZkJApAAAAAGu1pAW565A-PtYW1Hze2wV2hq8p';
+  const key = "6LdZkJApAAAAAGu1pAW565A-PtYW1Hze2wV2hq8p";
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const initialStateRegisterForm = {
+
     firstName: '',
     lastName: '',
     email: '',
     password: '',
     avatar: '',
     phone: '',
+
   };
 
   const [inputs, setInputs] = useState<InputsUserType>(
     initialStateRegisterForm
   );
   const [inputSecretWord, setInputSecretWord] = useState<SecretWordType>({
-    secretWord: '',
+    secretWord: "",
   });
   const [formRegistration, setFormRegistration] = useState<boolean>(false);
+
   const [showError, setShowError] = useState<ErrorMsgType>({});
   const [message, setMessage] = useState<SecretWordType>({ secretWord: '' });
+
 
   const handlerClose = () => {
     setFormRegistration(false);
@@ -110,7 +116,9 @@ export default function RegisterForm({ setIsLogin }): JSX.Element {
         `${import.meta.env.VITE_URL}/image`,
         data,
         {
+
           headers: { 'Content-Type': 'multipart/form-data' },
+
           withCredentials: true,
         }
       );
@@ -187,20 +195,20 @@ export default function RegisterForm({ setIsLogin }): JSX.Element {
 
   const handlerRegister = async (): Promise<void> => {
     if (String(message) === inputSecretWord.secretWord) {
-      console.log('success!');
+      console.log("success!");
       dispatch(fetchRegisterUser(inputs))
         .then((res) => {
-          if (res.meta.requestStatus === 'fulfilled') {
-            console.log('THIS IS RES', res);
-            navigate('/');
+          if (res.meta.requestStatus === "fulfilled") {
+            console.log("THIS IS RES", res);
+            navigate("/");
             sendFile();
           }
         })
         .catch((error) => console.log(error));
       setFormRegistration(false);
     } else {
-      console.log('missed!');
-      navigate('/');
+      console.log("missed!");
+      navigate("/");
       setFormRegistration(false);
     }
   };
@@ -325,7 +333,6 @@ export default function RegisterForm({ setIsLogin }): JSX.Element {
                   label='Введите код-подтверждения'
                   type='text'
                   fullWidth
-                  variant='standard'
                 />
               </DialogContent>
               <DialogActions>

@@ -7,6 +7,7 @@ import {
 } from "../../../redux/pet/async-action";
 import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
+import StyledButton from "../../GlassWrapper/StyledButton";
 
 export default function PetCard() {
   const pets = useAppSelector((store) => store.petSlice.pets);
@@ -40,13 +41,21 @@ export default function PetCard() {
         {pet?.petType === 1 ? (
           <h2 className={styles.title}>
             {" "}
-            <img className={styles.iconCat} src="/img/cat.png" alt="cat" />
+            <img
+              className={styles.iconCat}
+              src="/img/cat-orange.png"
+              alt="cat"
+            />
             {pet?.petName}
           </h2>
         ) : (
           <h2 className={styles.title}>
             {" "}
-            <img className={styles.iconDog} src="/img/dog.png" alt="dog" />
+            <img
+              className={styles.iconDog}
+              src="/img/dog-orange.png"
+              alt="dog"
+            />
             {pet?.petName}
           </h2>
         )}
@@ -74,16 +83,19 @@ export default function PetCard() {
           <span>Дополнительная информация о животном: {pet?.petAbout}</span>
         </div>
         <div>
-          <Button
+          <StyledButton
             onClick={() => navigate(`/account/pets/edit/${pet?.id}`)}
             className={styles.editButton}
             variant="contained"
           >
             Редактировать
-          </Button>
-          <Button onClick={() => void deleteHandler()} variant="contained">
+          </StyledButton>
+          <StyledButton
+            onClick={() => void deleteHandler()}
+            variant="contained"
+          >
             Удалить
-          </Button>
+          </StyledButton>
         </div>
       </>
     </div>

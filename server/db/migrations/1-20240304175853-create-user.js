@@ -27,6 +27,7 @@ module.exports = {
       },
       avatar: {
         type: Sequelize.STRING,
+        defaultValue: 'user.png',
       },
       phone: {
         allowNull: false,

@@ -2,6 +2,7 @@ import { useAppSelector } from '../../../redux/hooks';
 import { OrderType } from '../../../redux/orderSlice';
 import CardGlassWrapper from '../../GlassWrapper/CardGlassWrapper';
 import StyledButton from '../../GlassWrapper/StyledButton';
+import OrderProgressBar from './OrderProgressBar';
 import styles from './OrdersComponent.module.css';
 import { Link } from 'react-router-dom';
 
@@ -21,6 +22,7 @@ export default function OrdersComponent(): JSX.Element {
             <span>
               Время: {getDate(order.orderDateIn)} - {getDate(order.orderDateOut)}
             </span>
+            <OrderProgressBar dateIn={order.orderDateIn} dateOut={order.orderDateOut} />
           </CardGlassWrapper>
         </div>
       </Link>

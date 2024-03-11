@@ -11,11 +11,21 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { useAppDispatch } from '../../../redux/hooks';
 import { fetchRegisterUser } from '../../../redux/thunkActions';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { Button, TextField, Box, styled } from '@mui/material';
+import { Button, TextField, Box, styled, InputAdornment } from '@mui/material';
 import GlassWrapper from '../../GlassWrapper/GlassWrapper';
 import StyledTextfield from '../../GlassWrapper/StyledTextfield';
 import StyledButton from '../../GlassWrapper/StyledButton';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+
+function validateEmail(email: string) {
+  return email.toLowerCase().match(/^[a-z/._/0-9]*[@][a-z]*[/.][a-z]{2,4}$/);
+}
+
+function validatePhoneNumber(phoneNumber: string) {
+  return phoneNumber.match(
+    /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/
+  );
+}
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -30,12 +40,21 @@ const VisuallyHiddenInput = styled('input')({
 });
 
 export type InputsUserType = {
-  firstName?: string;
-  lastName?: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
   avatar?: string;
-  phone?: number;
+  phone: string;
+};
+
+export type ErrorMsgType = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  phone: string;
+  captchaReponse: string;
 };
 
 export type SecretWordType = {
@@ -53,22 +72,28 @@ export default function RegisterForm({ setIsLogin }): JSX.Element {
     email: '',
     password: '',
     avatar: '',
-    phone: 0,
+    phone: '',
   };
 
-  const [inputs, setInputs] = useState<InputsUserType>(initialStateRegisterForm);
+  const [inputs, setInputs] = useState<InputsUserType>(
+    initialStateRegisterForm
+  );
   const [inputSecretWord, setInputSecretWord] = useState<SecretWordType>({
     secretWord: '',
   });
   const [formRegistration, setFormRegistration] = useState<boolean>(false);
+  const [showError, setShowError] = useState<ErrorMsgType>({});
   const [message, setMessage] = useState<SecretWordType>({ secretWord: '' });
 
   const handlerClose = () => {
     setFormRegistration(false);
   };
 
-  const handlerChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+  const handlerChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ): void => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setShowError((prev) => ({ ...prev, [e.target.name]: '' }));
   };
 
   const [avatarFile, setAvatarFile] = useState();
@@ -81,10 +106,14 @@ export default function RegisterForm({ setIsLogin }): JSX.Element {
     const data = new FormData();
     if (avatarFile) {
       data.append('avatar', avatarFile);
-      const response = await axios.post(`${import.meta.env.VITE_URL}/image`, data, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-        withCredentials: true,
-      });
+      const response = await axios.post(
+        `${import.meta.env.VITE_URL}/image`,
+        data,
+        {
+          headers: { 'Content-Type': 'multipart/form-data' },
+          withCredentials: true,
+        }
+      );
       console.log(response);
     }
   };
@@ -101,14 +130,58 @@ export default function RegisterForm({ setIsLogin }): JSX.Element {
     }));
   };
 
+  const checkError = () => {
+    const captchaResponse = grecaptcha.getResponse();
+    const errorMsg = {
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      phone: '',
+      captchaReponse: '',
+    };
+
+    if (inputs.firstName.trim().length === 0) {
+      errorMsg.firstName = 'Необходимо ввести ваше имя!';
+    }
+    if (inputs.lastName.trim().length === 0) {
+      errorMsg.lastName = 'Необходимо ввести вашу фамилию!';
+    }
+    if (inputs.password.trim().length === 0) {
+      errorMsg.password = 'Необходимо ввести ваш пароль!';
+    }
+    if (inputs.email.trim().length === 0) {
+      errorMsg.email = 'Необходимо ввести ваш email!';
+    }
+    if (captchaResponse.length === 0) {
+      errorMsg.captchaReponse = 'Необходимо пройти ReCaptcha!';
+    }
+    if (!validateEmail(inputs.email)) {
+      errorMsg.email =
+        'Ваш email необходимо ввести в формате example@example.com';
+    }
+    if (inputs?.phone.length === 0) {
+      errorMsg.phone =
+        'Необходимо ввести ваш номер в формате +7912345678 или 8912345678';
+    }
+    if (!validatePhoneNumber(inputs.phone)) {
+      errorMsg.phone =
+        'Необходимо ввести ваш номер в формате +7912345678 или 8912345678';
+    }
+    setShowError({ ...errorMsg });
+    return Object.entries(errorMsg).some((el) => el[1].length !== 0);
+  };
+
   const handlerSendMessage = async (): Promise<void> => {
-    axios
-      .post(`${import.meta.env.VITE_URL}/user/message`, inputs, {
-        withCredentials: true,
-      })
-      .then((res) => setMessage(res.data.secretWord))
-      .catch((error) => console.log(error));
-    setFormRegistration(true);
+    if (!checkError()) {
+      axios
+        .post(`${import.meta.env.VITE_URL}/user/message`, inputs, {
+          withCredentials: true,
+        })
+        .then((res) => setMessage(res.data.secretWord))
+        .catch((error) => console.log(error));
+      setFormRegistration(true);
+    }
   };
   console.log(message);
 
@@ -133,31 +206,93 @@ export default function RegisterForm({ setIsLogin }): JSX.Element {
   };
 
   return (
-    <div className="authContainer">
-      <GlassWrapper width="600px">
-        <StyledTextfield label="Ваше имя" type="text" name="firstName" onChange={(e) => void handlerChange(e)} />
-        <StyledTextfield label="Ваша фамилия" type="text" name="lastName" onChange={(e) => void handlerChange(e)} />
-        <StyledTextfield label="Контактный номер телефона" type="text" name="phone" onChange={(e) => void handlerChange(e)} />
-        <StyledTextfield label="Email" type="text" name="email" onChange={(e) => void handlerChange(e)} />
-        <StyledTextfield label="Пароль" type="password" name="password" onChange={(e) => void handlerChange(e)} />
-        <div style={{ display: 'flex', flexDirection: 'row', gap: '10px', width: '100%' }}>
-          <StyledTextfield disabled type="text" name="avatar" value={avatarFile?.name || 'Файл не выбран'} onChange={(e) => void handlerChange(e)} />
+    <div className='authContainer'>
+      <GlassWrapper width='600px'>
+        <StyledTextfield
+          error={!!showError.firstName}
+          helperText={showError.firstName}
+          label='Ваше имя'
+          type='text'
+          name='firstName'
+          onChange={(e) => void handlerChange(e)}
+        />
+        <StyledTextfield
+          error={!!showError.lastName}
+          helperText={showError.lastName}
+          label='Ваша фамилия'
+          type='text'
+          name='lastName'
+          onChange={(e) => void handlerChange(e)}
+        />
+        <StyledTextfield
+          error={!!showError.phone}
+          helperText={showError.phone}
+          label='Контактный номер телефона'
+          sx={{
+            color: 'white',
+          }}
+          type='text'
+          name='phone'
+          onChange={(e) => void handlerChange(e)}
+        />
+        <StyledTextfield
+          error={!!showError.email}
+          helperText={showError.email}
+          label='Email'
+          type='text'
+          name='email'
+          onChange={(e) => void handlerChange(e)}
+        />
+        <StyledTextfield
+          error={!!showError.password}
+          helperText={showError.password}
+          label='Пароль'
+          type='password'
+          name='password'
+          onChange={(e) => void handlerChange(e)}
+        />
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            gap: '10px',
+            width: '100%',
+          }}
+        >
+          <StyledTextfield
+            disabled
+            type='text'
+            name='avatar'
+            value={avatarFile?.name || 'Файл не выбран'}
+            onChange={(e) => void handlerChange(e)}
+          />
           <StyledButton
             sx={{ width: '300px' }}
-            component="label"
+            component='label'
             role={undefined}
             tabIndex={-1}
             startIcon={<CloudUploadIcon />}
             disableElevation
           >
             Загрузить аватар
-            <VisuallyHiddenInput type="file" name="avatar" accept="image/png, image/jpeg, image/jpg" onChange={(e: ChangeEvent<HTMLInputElement>) => void setAvatarFile(e.target.files[0])} />
+            <VisuallyHiddenInput
+              type='file'
+              name='avatar'
+              accept='image/png, image/jpeg, image/jpg'
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                void setAvatarFile(e.target.files[0])
+              }
+            />
           </StyledButton>
         </div>
-        <div>
-          <ReCAPTCHA theme='dark' sitekey="6LfClZApAAAAAHWVRUGDt1nEt451W4Le8kHU_7lN" />
+        <div style={{ color: '#d32f2f' }}>
+          <ReCAPTCHA
+            theme='dark'
+            sitekey='6LfClZApAAAAAHWVRUGDt1nEt451W4Le8kHU_7lN'
+          />
+          {showError.captchaReponse}
         </div>
-        <StyledButton color="success" onClick={() => void handlerSendMessage()}>
+        <StyledButton color='success' onClick={() => void handlerSendMessage()}>
           Регистрация
         </StyledButton>
         <StyledButton onClick={() => setIsLogin(true)}>
@@ -170,17 +305,34 @@ export default function RegisterForm({ setIsLogin }): JSX.Element {
               onClose={() => void handlerClose()}
               PaperProps={{
                 component: 'form',
-                onChange: (e: ChangeEvent<HTMLInputElement>) => void handlerChangeSecretWord(e),
+                onChange: (e: ChangeEvent<HTMLInputElement>) =>
+                  void handlerChangeSecretWord(e),
               }}
             >
               <DialogTitle>Subscribe</DialogTitle>
               <DialogContent>
-                <DialogContentText>Для завершения регистрации, необходимо подтвердить код-подтверждения, отправленный на электронную почту "{inputs.email}".</DialogContentText>
-                <TextField autoFocus required margin="dense" id="name" name="secretWord" label="Введите код-подтверждения" type="text" fullWidth variant="standard" />
+                <DialogContentText>
+                  Для завершения регистрации, необходимо подтвердить
+                  код-подтверждения, отправленный на электронную почту "
+                  {inputs.email}".
+                </DialogContentText>
+                <TextField
+                  autoFocus
+                  required
+                  margin='dense'
+                  id='name'
+                  name='secretWord'
+                  label='Введите код-подтверждения'
+                  type='text'
+                  fullWidth
+                  variant='standard'
+                />
               </DialogContent>
               <DialogActions>
                 <Button onClick={() => void handlerClose()}>Cancel</Button>
-                <Button onClick={() => void handlerRegister()}>Subscribe</Button>
+                <Button onClick={() => void handlerRegister()}>
+                  Subscribe
+                </Button>
               </DialogActions>
             </Dialog>
           </>

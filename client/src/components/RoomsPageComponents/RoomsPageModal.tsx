@@ -166,6 +166,7 @@ export default function RoomsPageModal({ room, open, handleClose }: ModalPropsTy
   return (
     <div>
       <Modal
+        className='modalOpen'
         open={open}
         onClose={() => {
           handleClose();

@@ -73,14 +73,29 @@ export default function PetCard() {
           ))}
         </div>
         <div className={styles.info}>
-          <span>Кличка животного: {pet?.petName}</span>
-          <span>Порода животного: {pet?.petBreed}</span>
-          <span>Пол животного: {pet?.petGender}</span>
-          <span>Возраст животного в годах: {pet?.petAge}</span>
           <span>
-            Стерилизация животного: {pet?.petIsSprayed ? "Да" : "Нет"}
+            Кличка: <span className={styles.petIndo}>{pet?.petName}</span>{" "}
           </span>
-          <span>Дополнительная информация о животном: {pet?.petAbout}</span>
+          <span>
+            Порода: <span className={styles.petIndo}>{pet?.petBreed}</span>{" "}
+          </span>
+          <span>
+            Пол: <span className={styles.petIndo}>{pet?.petGender}</span>
+          </span>
+          <span>
+            Возраст в годах:{" "}
+            <span className={styles.petIndo}>{pet?.petAge}</span>
+          </span>
+          <span>
+            Стерилизация:{" "}
+            <span className={styles.petIndo}>
+              {pet?.petIsSprayed ? "Да" : "Нет"}
+            </span>
+          </span>
+          <span>
+            Дополнительная информация:{" "}
+            <span className={styles.petIndo}>{pet?.petAbout}</span>
+          </span>
         </div>
         <div>
           <StyledButton

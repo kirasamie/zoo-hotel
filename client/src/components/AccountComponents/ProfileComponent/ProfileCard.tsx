@@ -20,10 +20,19 @@ export default function ProfileCard() {
           />
 
           <div className={styles.info}>
-            <div>Имя: {user.firstName}</div>
-            <div>Фамилия: {user?.lastName}</div>
-            <div>Email: {user?.email}</div>
-            <div>Контактный телефон: {user?.phone}</div>
+            <div>
+              Имя: <span className={styles.userInfo}>{user.firstName}</span>{" "}
+            </div>
+            <div>
+              Фамилия: <span className={styles.userInfo}>{user?.lastName}</span>{" "}
+            </div>
+            <div>
+              Email: <span className={styles.userInfo}>{user?.email}</span>
+            </div>
+            <div>
+              Контактный телефон:{" "}
+              <span className={styles.userInfo}>{user?.phone}</span>
+            </div>
           </div>
         </div>
         <StyledButton onClick={() => setIsOpenModal(true)}>

@@ -5,6 +5,9 @@ import { useAppDispatch } from "../../../redux/hooks";
 import { fetchEditUser } from "../../../redux/thunkActions";
 import { UserType } from "../../../redux/userSlice";
 import styles from "./EditModal.module.css";
+import StyledTextfield from "../../GlassWrapper/StyledTextfield";
+import GlassWrapper from "../../GlassWrapper/GlassWrapper";
+import StyledButton from "../../GlassWrapper/StyledButton";
 
 export default function EditModal({
   user,
@@ -58,57 +61,59 @@ export default function EditModal({
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <div className={styles.modal}>
-        <h2 className={styles.input}>Редактирование</h2>
-        <div className={styles.inputModal}>
-          <TextField
-            className={styles.input}
-            fullWidth
-            id="outlined-multiline-flexible"
-            name="firstName"
-            value={inputs.firstName}
-            onChange={(e) => handlerChange(e)}
-            label="Имя"
-            multiline
-            maxRows={4}
-          />
-          <TextField
-            className={styles.input}
-            fullWidth
-            id="outlined-multiline-flexible"
-            name="lastName"
-            value={inputs.lastName}
-            onChange={(e) => handlerChange(e)}
-            label="Фамилия"
-            multiline
-            maxRows={4}
-          />
-          <TextField
-            className={styles.input}
-            fullWidth
-            id="outlined-multiline-flexible"
-            name="email"
-            value={inputs.email}
-            onChange={(e) => handlerChange(e)}
-            label="Email"
-            multiline
-            maxRows={4}
-          />
-          <TextField
-            className={styles.input}
-            fullWidth
-            id="outlined-multiline-flexible"
-            name="phone"
-            value={inputs.phone}
-            onChange={(e) => handlerChange(e)}
-            label="Контактный телефон"
-            multiline
-            maxRows={4}
-          />
-        </div>
+      <GlassWrapper width="600px">
+        <div className={styles.modal}>
+          <h2 className={styles.input}>Редактирование</h2>
+          <div className={styles.inputModal}>
+            <StyledTextfield
+              style={{ marginBottom: "20px" }}
+              fullWidth
+              id="outlined-multiline-flexible"
+              name="firstName"
+              value={inputs.firstName}
+              onChange={(e) => handlerChange(e)}
+              label="Имя"
+              multiline
+              maxRows={4}
+            />
+            <StyledTextfield
+              style={{ marginBottom: "20px" }}
+              fullWidth
+              id="outlined-multiline-flexible"
+              name="lastName"
+              value={inputs.lastName}
+              onChange={(e) => handlerChange(e)}
+              label="Фамилия"
+              multiline
+              maxRows={4}
+            />
+            <StyledTextfield
+              style={{ marginBottom: "20px" }}
+              fullWidth
+              id="outlined-multiline-flexible"
+              name="email"
+              value={inputs.email}
+              onChange={(e) => handlerChange(e)}
+              label="Email"
+              multiline
+              maxRows={4}
+            />
+            <StyledTextfield
+              style={{ marginBottom: "20px" }}
+              fullWidth
+              id="outlined-multiline-flexible"
+              name="phone"
+              value={inputs.phone}
+              onChange={(e) => handlerChange(e)}
+              label="Контактный телефон"
+              multiline
+              maxRows={4}
+            />
+          </div>
 
-        <Button onClick={handlerEditUser}>Cохранить</Button>
-      </div>
+          <StyledButton onClick={handlerEditUser}>Cохранить</StyledButton>
+        </div>
+      </GlassWrapper>
     </Modal>
   );
 }

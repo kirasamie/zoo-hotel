@@ -3,11 +3,10 @@ import { PostType } from '../../../redux/posts/postsSlice';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { Button, TextField } from '@mui/material';
 import styles from './OrderCard.module.css';
-import {
-  fetchAddNewComment,
-  fetchCheckAllComments,
-} from '../../../redux/comment/async-action';
-import './OrderCard.css';
+import { fetchAddNewComment, fetchCheckAllComments } from '../../../redux/comment/async-action';
+import CardGlassWrapper from '../../GlassWrapper/CardGlassWrapper';
+import StyledTextfield from '../../GlassWrapper/StyledTextfield';
+import StyledButton from '../../GlassWrapper/StyledButton';
 
 type PostPropsType = {
   post: PostType;
@@ -37,112 +36,65 @@ const OrderCard = React.memo(({ post }: PostPropsType) => {
   const getFancyDate = (dateStr: string) => {
     const date = new Date(dateStr);
     const today = new Date().toLocaleDateString();
-    return `${
-      date.toLocaleDateString() === today
-        ? 'Сегодня,'
-        : date.toLocaleDateString()
-    } в ${date.toLocaleTimeString().slice(0, -3)}`;
+    return `${date.toLocaleDateString() === today ? 'Сегодня,' : date.toLocaleDateString()} в ${date.toLocaleTimeString().slice(0, -3)}`;
   };
 
   useEffect(() => {
     // void dispatch(fetchCheckAllComments());
-    setFilteredComments(
-      comments.filter((comment) => comment.postId === post.id)
-    );
+    setFilteredComments(comments.filter((comment) => comment.postId === post.id));
   }, [comments, post.id]);
 
   return (
     <>
-      <div className='card'>
-        <img
-          src={`${import.meta.env.VITE_URL.slice(0, -3)}/img/posts/${
-            post.postPhotoLink
-          }`}
-          className='card__image'
-          alt='post photo'
-        />
-        <div className='card__content'>
-          <span className='card__title'>{post.title}</span>
-          <br />
-          <br />
-          <p>{post.body}</p>
-          <br />
-          <div className='time'>{getFancyDate(post.createdAt)}</div>
-          <div className={styles.commentaryDiv}>
-            {showComment ? (
-              <Button
-                variant='outlined'
-                color='error'
-                className='commentaryButton'
-                onClick={() => void setShowComment((prev) => !prev)}
-              >
-                Закрыть
-              </Button>
-            ) : (
-              <Button
-                variant='outlined'
-                color='success'
-                className='commentaryButton'
-                onClick={() => void setShowComment((prev) => !prev)}
-              >
-                Комментировать
-              </Button>
-            )}
+      <CardGlassWrapper>
+        <div className={styles.postInfo}>
+          <h3 className={styles.postHeader}>{post.title}</h3>
+          <div className={styles.postImageWrapper}>
+            <img className={styles.postImage} src={`${import.meta.env.VITE_URL.slice(0, -3)}/img/posts/${post.postPhotoLink}`} alt="post photo" />
           </div>
-          <div>
-            {showComment ? (
-              <form className={styles.addComment}>
-                <TextField
-                  id='standard-basic'
-                  label='Напишите комментарий'
-                  variant='standard'
-                  onChange={(e: HTMLInputElement) => void handlerChange(e)}
-                  name='body'
-                  value={input.body}
-                />
-                <Button
-                  variant='outlined'
-                  color='success'
-                  onClick={() => void handlerAddComment()}
-                >
-                  Опубликовать
-                </Button>
-              </form>
-            ) : null}
+          <p className={styles.postBody}>{post.body}</p>
+          <div className={styles.postFooter}>
+            <div className="time">{getFancyDate(post.createdAt)}</div>
+            <div>
+              Работник:{' '}
+              <span style={{ color: 'white' }}>
+                {post?.User?.firstName} {post?.User?.lastName}
+              </span>
+            </div>
           </div>
         </div>
-      </div>
-      <div className='comments'>
-        <div className='chat-container'>
-          <ul className='chat'>
-            {filteredComments?.map((comment) => {
-              console.log(comment);
 
-              // post.id === comment.postId ? (
-              return (
-                <>
-                  <li
-                    className={`message ${
-                      user.id === comment.userId ? 'right' : 'left'
-                    }`}
-                  >
-                    <img
-                      className='logo'
-                      src={`${import.meta.env.VITE_URL.slice(
-                        0,
-                        -3
-                      )}img/avatars/${comment.User?.avatar}`}
-                      alt='logotype'
-                    />
-                    {comment.body}
-                  </li>
-                </>
-              );
-            })}
-          </ul>
+        <div className={styles.horizontalDivider}></div>
+
+        <ul className={styles.chat}>
+          {filteredComments.length ? (
+            filteredComments?.map((comment) => (
+              <li key={comment.id} className={user.id === comment.userId ? styles.chatMessageWrapperRight : styles.chatMessageWrapperLeft}>
+                <div className={user.id === comment.userId ? styles.chatMessageRight : styles.chatMessageLeft}>
+                  <div className={styles.userAvatarWrapper}>
+                    <img className={styles.userAvatar} src={`${import.meta.env.VITE_URL.slice(0, -3)}img/avatars/${comment.User?.avatar}`} alt="logotype" />
+                  </div>
+                  <div className={styles.chatMessage}>
+                    <span data-worker={`${comment.User.isWorker}`} className={`${user.id === comment.userId ? styles.chatUserNameRight : styles.chatUserNameLeft} ${styles.chatUserName}`}>
+                      {comment?.User?.firstName} {comment?.User?.lastName}
+                    </span>
+                    <span className={user.id === comment.userId ? styles.chatContentRight : styles.chatContentLeft}>{comment.body}</span>
+                  </div>
+                </div>
+              </li>
+            ))
+          ) : (
+            <h3 className={styles.noCommentsHeader}>Комментариев пока нет. Оставьте первый!</h3>
+          )}
+        </ul>
+
+        <div className={styles.horizontalDivider}></div>
+
+        <div className={styles.commentForm}>
+            <StyledTextfield label="Ваш комментарий" onChange={(e: HTMLInputElement) => void handlerChange(e)} name="body" value={input.body}/>
+            <StyledButton onClick={() => void handlerAddComment()}>Отправить</StyledButton>
         </div>
-      </div>
-      {/* )} */}
+      </CardGlassWrapper>
     </>
   );
 });

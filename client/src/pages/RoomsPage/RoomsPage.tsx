@@ -44,18 +44,6 @@ export default function RoomsPage() {
         </GlassWrapper>
         <div style={{ height: '600px' }}></div>
         <div className={styles.theHotel}></div>
-        <div className={styles.roomsWrapper}>
-          <button className={styles.roomButton}></button>
-          <button className={styles.roomButton}></button>
-          <button className={styles.roomButton}></button>
-          <button className={styles.roomButton}></button>
-          <button className={styles.roomButton}></button>
-          <button className={styles.roomButton}></button>
-          <button className={styles.roomButton}></button>
-          <button className={styles.roomButton}></button>
-          <button className={styles.roomButton}></button>
-        </div>
-
         <RoomsPageModal room={currentRoom} open={open} handleClose={handleClose} />
 
         <PopupState variant="popover" popupId="demo-popup-popover">

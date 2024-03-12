@@ -150,11 +150,7 @@ export default function HomePage(): JSX.Element {
             <CardGlassWrapper>
               <div className={styles.iconText}>
                 <div className={styles.imgWrapper}>
-                  <img
-                    className={styles.img}
-                    src="/img/walkingDog.png"
-                    alt="dog"
-                  />
+                  <img className={styles.img} src="/img/room.png" alt="dog" />
                 </div>
                 <p className={styles.servHeader}>Индивидуальные комнатки</p>
                 <p className={styles.servContent}>
@@ -211,11 +207,25 @@ export default function HomePage(): JSX.Element {
             <CardGlassWrapper>
               <div className={styles.iconText}>
                 <div className={styles.imgWrapper}>
-                  <img
-                    className={styles.img}
-                    src="/img/dogFood.png"
-                    alt="dogFood"
-                  />
+                  <div className={styles.iconContainer}>
+                    <img
+                      className={styles.imgIcon}
+                      src="/img/groom.png"
+                      alt="dogFood"
+                    />
+                    <div>
+                      <img
+                        className={styles.imgIcon}
+                        src="/img/training.png"
+                        alt="dogFood"
+                      />
+                      <img
+                        className={styles.imgIcon}
+                        src="/img/taxi.png"
+                        alt="dogFood"
+                      />
+                    </div>
+                  </div>
                 </div>
                 <p className={styles.servHeader}>Дополнительные услуги</p>
                 <p className={styles.servContent}>

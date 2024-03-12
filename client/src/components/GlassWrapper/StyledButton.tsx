@@ -18,6 +18,11 @@ const OrangeButton = styled(Button)({
   '&:focus': {
     boxShadow: '0 0 0 0.2rem rgba(255, 200, 98,.5)',
   },
+  '&:disabled': {
+    border: '1px solid #f6ae2d',
+    color: '#ffffff',
+    textShadow: '0 1px 2px #000000',
+  },
 });
 
 export default function StyledButton(props) {

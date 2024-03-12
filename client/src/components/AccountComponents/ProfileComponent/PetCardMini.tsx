@@ -2,7 +2,10 @@ import { Link } from "react-router-dom";
 import { PetItemType } from "../../../models/Pet";
 import styles from "./PetCardMini.module.css";
 import GlassWrapper from "../../GlassWrapper/GlassWrapper";
+import { useAppSelector } from "../../../redux/hooks";
 export default function PetCardMini({ pet }: { pet: PetItemType }) {
+  console.log(pet);
+  
   return (
     <Link
       className={styles.link}

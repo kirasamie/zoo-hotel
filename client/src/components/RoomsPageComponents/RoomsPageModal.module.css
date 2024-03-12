@@ -3,6 +3,11 @@
     display: flex;
     flex-direction: row;
     gap: 10px;
+    color: orange;
+}
+
+.dividedForm input {
+    border-color: orange;
 }
 
 .paymentButtonWrapper {
@@ -20,14 +25,36 @@
 
 .optionsPriceList {
     flex: 1;
-    list-style-position: inside;
+    /* list-style-position: inside; */
+    color: orange;
+
+    /* letter-spacing: 0.4px; */
 }
+
 
 .finalCost {
   width: 100%;
   text-align: center;
 }
 
-.modalOpen {
-    background-color: black;
+.glassWrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.orderTitle {
+    margin-bottom: 15px;
+    color: orange;
+}
+
+.inputWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.inputDescription {
+    align-self: flex-end;
 }

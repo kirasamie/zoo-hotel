@@ -8,9 +8,29 @@ import axios from 'axios';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { RoomType } from '../../types';
 import { fetchCheckOrdersByRoom } from '../../redux/thunkActions';
-import { TextField, Typography, Box, Button, Modal, MenuItem, Select, SelectChangeEvent, InputLabel, FormControl, FormHelperText, Checkbox, FormControlLabel, FormGroup } from '@mui/material';
+import {
+  TextField,
+  Typography,
+  Box,
+  Button,
+  Modal,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  InputLabel,
+  FormControl,
+  FormHelperText,
+  Checkbox,
+  FormControlLabel,
+  FormGroup,
+  styled,
+  InputBase,
+} from '@mui/material';
 import { useNavigate } from 'react-router';
 import styles from './RoomsPageModal.module.css';
+import GlassWrapper from '../GlassWrapper/GlassWrapper';
+import StyledTextfield from '../GlassWrapper/StyledTextfield';
+import StyledButton from '../GlassWrapper/StyledButton';
 
 const optionsPrices = {
   '1': 1000,
@@ -27,12 +47,55 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  // width: '70%',
+  width: '50%',
   bgcolor: 'background.paper',
-  borderRadius: '4px',
-  boxShadow: 24,
+  borderRadius: '20px',
   p: 4,
+  // background: 'url("/background-filler-v2.png") fixed',
+  // border: '3px solid orange',
+  // backgroundColor: 'rgba(0, 0, 0, 0.8)',
+  // display: 'flex',
+  // flexDirection: 'column',
+  // justifyContent: 'center',
+  // alignItems: 'center',
+  // backdropFilter: 'blur(8px)',
+  // color: 'orange',
+  // gap: '10px',
+  // boxShadow: '-5px 5px 20px 1px black',
+  // flex: '1 1 auto',
 };
+
+const StyledInputSelect = styled(Select)(({ theme }) => ({
+  '& .MuiInputBase-input': {
+    color: 'white',
+  },
+  '& .MuiInputBase-input.Mui-disabled': {
+    WebkitTextFillColor: 'orange',
+  },
+  '& label': {
+    color: 'orange',
+  },
+  '& label.Mui-focused': {
+    color: 'white',
+  },
+
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: 'orange',
+    },
+    '&:hover fieldset': {
+      borderColor: 'white',
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: 'orange',
+    },
+
+    '&.Mui-disabled fieldset': {
+      color: 'white',
+      borderColor: 'orange',
+    },
+  },
+}));
 
 type ModalPropsType = {
   room: RoomType;
@@ -202,7 +265,7 @@ export default function RoomsPageModal({ room, open, handleClose }: ModalPropsTy
   return (
     <div>
       <Modal
-        className="modalOpen"
+        className={styles.modalOpen}
         open={open}
         onClose={() => {
           handleClose();
@@ -232,115 +295,341 @@ export default function RoomsPageModal({ room, open, handleClose }: ModalPropsTy
           });
           setDays(0);
         }}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
       >
-        <Box sx={style}>
-          <div className={styles.dividedForm}>
-            <FormControl error={!!petSelectError} sx={{ flex: 1 }}>
-              <InputLabel id="demo-simple-select-autowidth-label">Выберите вашего питомца</InputLabel>
-              <Select
-                labelId="demo-simple-select-autowidth-label"
-                id="demo-simple-select-autowidth"
-                name="petId"
-                value={inputs.petId}
-                onChange={changeHandler}
-                autoWidth
-                label="Выберите вашего питомца"
-              >
-                {pets.length ? (
-                  pets.map((pet) => <MenuItem value={String(pet.id)}>{pet.petName}</MenuItem>)
-                ) : (
-                  <MenuItem>
-                    <Button onClick={() => void navigate('/account/pets/new')}>Создайте карточку питомца!</Button>
-                  </MenuItem>
-                )}
-              </Select>
-              <FormHelperText>{petSelectError}</FormHelperText>
-            </FormControl>
-
-            <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="ru">
-              <DateRangePicker
-                disablePast
-                shouldDisableDate={(date) => {
-                  return getBannedDates(dates).flat().includes(new Date(date.$d).toLocaleDateString());
-                }}
-                slots={{ field: SingleInputDateRangeField }}
-                name="allowedRange"
-                label="Выберите даты заезда и выезда"
-                onChange={changeDateRangeHandler}
-                slotProps={{
-                  textField: {
-                    helperText: calendarError,
-                    error: !!calendarError,
+        {/* <Box sx={style}> */}
+        <GlassWrapper width='800px' className={styles.glassWrapper}>
+          <h2 className={styles.orderTitle}>Создать заказ</h2>
+          <div className={styles.inputWrapper}>
+            <div className={styles.dividedForm}>
+              <FormControl
+                error={!!petSelectError}
+                sx={{
+                  flex: 1,
+                  '& .MuiSelect-nativeInput': { borderColor: 'orange' },
+                  '& .MuiSelect-select': {
+                    color: 'white',
+                    borderColor: 'orange',
                   },
-                  popper: {
-                    sx: {
-                      '.MuiDateRangePickerDay-day.Mui-disabled': {
-                        border: '1px solid orange',
-                      },
-                      '.MuiDateRangeCalendar-root>div:first-child': {
-                        opacity: '0',
+                  '& .MuiInputBase-root filedset': { borderColor: 'orange' },
+                  '& .MuiInputLabel-root': { color: 'orange' },
+                  '& label.Mui-focused': {
+                    color: 'white',
+                  },
+                }}
+              >
+                <InputLabel
+                  // sx={{
+                  //   '& .MuiSelect-nativeInput': { borderColor: 'orange', fontSize: '20px' },
+                  // }}
+                  id='demo-simple-select-autowidth-label'
+                >
+                  Выберите вашего питомца
+                </InputLabel>
+                <Select
+                  // sx={{
+                  //   '& .MuiSelect-select': {
+                  //     color: 'white',
+                  //   },
+                  // }}
+                  labelId='demo-simple-select-autowidth-label'
+                  id='demo-simple-select-autowidth'
+                  name='petId'
+                  value={inputs.petId}
+                  onChange={changeHandler}
+                  autoWidth
+                  label='Выберите вашего питомца'
+                  // input={<StyledInputSelect />}
+                >
+                  {pets.length ? (
+                    pets.map((pet) => (
+                      <MenuItem sx={{ borderColor: 'orange', backgroundColor: 'black', color: 'orange' }} value={String(pet.id)}>
+                        {pet.petName}
+                      </MenuItem>
+                    ))
+                  ) : (
+                    <MenuItem sx={{ borderColor: 'orange', backgroundColor: 'black', color: 'orange' }}>
+                      <Button onClick={() => void navigate('/account/pets/new')}>Создайте карточку питомца!</Button>
+                    </MenuItem>
+                  )}
+                </Select>
+                <FormHelperText>{petSelectError}</FormHelperText>
+              </FormControl>
+              <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='ru'>
+                <DateRangePicker
+                  disablePast
+                  shouldDisableDate={(date) => {
+                    return getBannedDates(dates).flat().includes(new Date(date.$d).toLocaleDateString());
+                  }}
+                  slots={{ field: SingleInputDateRangeField }}
+                  name='allowedRange'
+                  label='Выберите даты заезда и выезда'
+                  onChange={changeDateRangeHandler}
+                  slotProps={{
+                    textField: {
+                      helperText: calendarError,
+                      error: !!calendarError,
+                    },
+                    popper: {
+                      sx: {
+                        '.MuiDateRangePickerDay-day.Mui-disabled': {
+                          border: '1px solid orange',
+                        },
+                        '.MuiDateRangeCalendar-root>div:first-child': {
+                          opacity: '0',
+                        },
                       },
                     },
-                  },
-                }}
-                sx={{
-                  '& .Mui-disabled': { color: '#FF0000' },
-                  flex: 1,
-                }}
-              />
-            </LocalizationProvider>
+                  }}
+                  sx={{
+                    color: 'orange',
+                    borderColor: 'orange',
+                    '& .Mui-disabled': { color: '#FF0000' },
+                    flex: 1,
+                    '& .MuiInputBase-input': { color: 'white' },
+                    '& .MuiInputBase-root': { borderColor: 'orange', color: 'orange' },
+                    '& .MuiFormLabel-root': { color: 'orange' },
+                    '& label.Mui-focused': { color: 'white' },
+                    '& .MuiOutlinedInput-root': {
+                      '& fieldset': {
+                        borderColor: 'orange',
+                      },
+                      '&:hover fieldset': {
+                        borderColor: 'white',
+                      },
+                      '&.Mui-focused fieldset': {
+                        borderColor: 'orange',
+                      },
+
+                      '&.Mui-disabled fieldset': {
+                        color: 'white',
+                        borderColor: 'orange',
+                      },
+                    },
+                  }}
+                />
+              </LocalizationProvider>
+            </div>
+
+            <StyledTextfield
+              className={styles.inputDescription}
+              size='medium'
+              name='description'
+              value={inputs.description}
+              label='Напишите дополнительный комментарий для заказа (по желанию)'
+              maxRows={15}
+              multiline
+              fullWidth
+              onChange={changeHandler}
+            />
           </div>
-          <TextField
-            sx={{ marginTop: '10px' }}
-            name="description"
-            value={inputs.description}
-            label="Напишите дополнительный комментарий для заказа (по желанию)"
-            maxRows={15}
-            multiline
-            fullWidth
-            onChange={changeHandler}
-          />
 
           <div className={styles.dividedForm}>
             <FormGroup sx={{ flex: 1 }}>
-              <FormControlLabel name="1" onChange={optionsChangeHandler} checked={optionsInputs['1']} control={<Checkbox size="small" />} label="Груминг" />
-              <FormControlLabel name="2" onChange={optionsChangeHandler} checked={optionsInputs['2']} control={<Checkbox size="small" />} label="Занятия с кинологом" />
-              <FormControlLabel name="3" onChange={optionsChangeHandler} checked={optionsInputs['3']} control={<Checkbox size="small" />} label="Консультация зоопсихолога" />
-              <FormControlLabel name="4" onChange={optionsChangeHandler} checked={optionsInputs['4']} control={<Checkbox size="small" />} label="Зоотакси" />
-              <FormControlLabel name="5" onChange={optionsChangeHandler} checked={optionsInputs['5']} control={<Checkbox size="small" />} label="Приготовление пищи для питомца" />
-              <FormControlLabel name="6" onChange={optionsChangeHandler} checked={optionsInputs['6']} control={<Checkbox size="small" />} label="Фотоотчет более 1 раза в день" />
-              <FormControlLabel name="7" onChange={optionsChangeHandler} checked={optionsInputs['7']} control={<Checkbox size="small" />} label="Подготовка собаки к выставке" />
+              <FormControlLabel
+                name='1'
+                onChange={optionsChangeHandler}
+                checked={optionsInputs['1']}
+                control={
+                  <Checkbox
+                    sx={{
+                      color: 'orange',
+                      '&.Mui-checked': {
+                        color: 'orange',
+                      },
+                      '&.Mui-checked + span': {
+                        color: 'white',
+                      },
+                    }}
+                    size='small'
+                  />
+                }
+                label='Груминг'
+              />
+              <FormControlLabel
+                name='2'
+                onChange={optionsChangeHandler}
+                checked={optionsInputs['2']}
+                control={
+                  <Checkbox
+                    sx={{
+                      color: 'orange',
+                      '&.Mui-checked': {
+                        color: 'orange',
+                      },
+                      '&.Mui-checked + span': {
+                        color: 'white',
+                      },
+                    }}
+                    size='small'
+                  />
+                }
+                label='Занятия с кинологом'
+              />
+              <FormControlLabel
+                name='3'
+                onChange={optionsChangeHandler}
+                checked={optionsInputs['3']}
+                control={
+                  <Checkbox
+                    sx={{
+                      color: 'orange',
+                      '&.Mui-checked': {
+                        color: 'orange',
+                      },
+                      '&.Mui-checked + span': {
+                        color: 'white',
+                      },
+                    }}
+                    size='small'
+                  />
+                }
+                label='Консультация зоопсихолога'
+              />
+              <FormControlLabel
+                name='4'
+                onChange={optionsChangeHandler}
+                checked={optionsInputs['4']}
+                control={
+                  <Checkbox
+                    sx={{
+                      color: 'orange',
+                      '&.Mui-checked': {
+                        color: 'orange',
+                      },
+                      '&.Mui-checked + span': {
+                        color: 'white',
+                      },
+                    }}
+                    size='small'
+                  />
+                }
+                label='Зоотакси'
+              />
+              <FormControlLabel
+                name='5'
+                onChange={optionsChangeHandler}
+                checked={optionsInputs['5']}
+                control={
+                  <Checkbox
+                    sx={{
+                      color: 'orange',
+                      '&.Mui-checked': {
+                        color: 'orange',
+                      },
+                      '&.Mui-checked + span': {
+                        color: 'white',
+                      },
+                    }}
+                    size='small'
+                  />
+                }
+                label='Приготовление пищи для питомца'
+              />
+              <FormControlLabel
+                name='6'
+                onChange={optionsChangeHandler}
+                checked={optionsInputs['6']}
+                control={
+                  <Checkbox
+                    sx={{
+                      color: 'orange',
+                      '&.Mui-checked': {
+                        color: 'orange',
+                      },
+                      '&.Mui-checked + span': {
+                        color: 'white',
+                      },
+                    }}
+                    size='small'
+                  />
+                }
+                label='Фотоотчет более 1 раза в день'
+              />
+              <FormControlLabel
+                name='7'
+                onChange={optionsChangeHandler}
+                checked={optionsInputs['7']}
+                control={
+                  <Checkbox
+                    sx={{
+                      color: 'orange',
+                      '&.Mui-checked': {
+                        color: 'orange',
+                      },
+                      '&.Mui-checked + span': {
+                        color: 'white',
+                      },
+                    }}
+                    size='small'
+                  />
+                }
+                label='Подготовка собаки к выставке'
+              />
             </FormGroup>
             <div className={styles.prices}>
               {!!days && (
                 <>
                   <ul className={styles.optionsPriceList}>
-                    {optionsInputs['1'] && <li>Груминг: {optionsPrices['1']} руб</li>}
-                    {optionsInputs['2'] && <li>Занятия с кинологом: {optionsPrices['2']} руб</li>}
-                    {optionsInputs['3'] && <li>Консультация зоопсихолога: {optionsPrices['3']} руб</li>}
-                    {optionsInputs['4'] && <li>Зоотакси: {optionsPrices['4']} руб</li>}
-                    {optionsInputs['5'] && <li>Приготовление пищи для питомца: {optionsPrices['5']} руб</li>}
-                    {optionsInputs['6'] && <li>Фотоотчет более 1 раза в день: {optionsPrices['6']} руб</li>}
-                    {optionsInputs['7'] && <li>Подготовка собаки к выставке: {optionsPrices['7']} руб</li>}
+                    {optionsInputs['1'] && (
+                      <li>
+                        Груминг: <span style={{ color: 'white' }}> {optionsPrices['1']} руб</span>
+                      </li>
+                    )}
+                    {optionsInputs['2'] && (
+                      <li>
+                        Занятия с кинологом: <span style={{ color: 'white' }}>{optionsPrices['2']} руб</span>
+                      </li>
+                    )}
+                    {optionsInputs['3'] && (
+                      <li>
+                        Консультация зоопсихолога: <span style={{ color: 'white' }}>{optionsPrices['3']} руб</span>
+                      </li>
+                    )}
+                    {optionsInputs['4'] && (
+                      <li>
+                        Зоотакси: <span style={{ color: 'white' }}>{optionsPrices['4']} руб</span>
+                      </li>
+                    )}
+                    {optionsInputs['5'] && (
+                      <li>
+                        Приготовление пищи для питомца: <span style={{ color: 'white' }}>{optionsPrices['5']} руб</span>
+                      </li>
+                    )}
+                    {optionsInputs['6'] && (
+                      <li>
+                        Фотоотчет более 1 раза в день: <span style={{ color: 'white' }}>{optionsPrices['6']} руб</span>
+                      </li>
+                    )}
+                    {optionsInputs['7'] && (
+                      <li>
+                        Подготовка собаки к выставке: <span style={{ color: 'white' }}>{optionsPrices['7']} руб</span>
+                      </li>
+                    )}
                     <br />
                     <li>
-                      Проживание: {room?.roomPrice} руб за {days} дней = {room?.roomPrice * days} руб
+                      Проживание:{' '}
+                      <span style={{ color: 'white' }}>
+                        {room?.roomPrice} руб за {days} дней = {room?.roomPrice * days} руб
+                      </span>
                     </li>
                   </ul>
-                  <span className={styles.finalCost}>Итого к оплате: {room?.roomPrice * days + optionsPrice} руб</span>
+                  <span className={styles.finalCost}>
+                    Итого к оплате: <span style={{ color: 'white' }}>{room?.roomPrice * days + optionsPrice} руб</span>{' '}
+                  </span>
                 </>
               )}
             </div>
           </div>
 
           <div className={styles.paymentButtonWrapper}>
-            <Button disabled={!allowPayment} variant="contained" onClick={() => void paymentHandler()}>
+            <StyledButton disabled={!allowPayment} className={styles.buttonBuy} variant='contained' onClick={() => void paymentHandler()}>
               Оплатить
-            </Button>
+            </StyledButton>
           </div>
-        </Box>
+        </GlassWrapper>
+        {/* </Box> */}
       </Modal>
     </div>
   );

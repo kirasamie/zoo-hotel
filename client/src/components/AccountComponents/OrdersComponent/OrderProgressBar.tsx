@@ -72,11 +72,11 @@ export default function OrderProgressBar({ dateIn, dateOut }: OrderProgressBarPr
         {status[0] === 'orange' ? (
           <span style={{ color: status[0] }}>Ожидаем прибытия...</span>
         ) : status[0] === 'blue' ? (
-          <span style={{ color: status[0] }}>В работе...</span>
+          <span style={{ color: 'lightblue' }}>В работе</span>
         ) : (
-          <span style={{ color: status[0] }}>Выполнен!</span>
+          <span style={{ color: 'lightgreen' }}>Выполнен!</span>
         )}
-        <LinearProgress variant="determinate" color={status[0]} value={status[1]} />
+        <LinearProgress variant="determinate" color={status[0]} value={status[1]} style={{ marginTop: '3px'}}/>
       </div>
     </ThemeProvider>
   );

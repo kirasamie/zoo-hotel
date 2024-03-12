@@ -200,7 +200,7 @@ export default function RegisterForm({ setIsLogin }): JSX.Element {
         .then((res) => {
           if (res.meta.requestStatus === "fulfilled") {
             console.log("THIS IS RES", res);
-            navigate("/");
+            navigate("/account/pets/empty");
             sendFile();
           }
         })

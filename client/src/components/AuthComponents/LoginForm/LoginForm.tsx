@@ -112,7 +112,7 @@ export default function LoginForm({ setIsLogin }): JSX.Element {
         .then((res) => {
           if (res.meta.requestStatus === 'fulfilled') {
             const { isWorker } = res.payload;
-            isWorker ? navigate('/account/orders') : navigate('/account/pets');
+            isWorker ? navigate('/account') : navigate('/account/pets');
             setShowError((prev) => ({ ...prev, [e.target.name]: '', msg: '' }));
           } else {
             const status = Number(res.error.message?.slice(-3));

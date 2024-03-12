@@ -10,7 +10,8 @@
   border-radius: 15px;
   width: 100%;
   display: flex;
-  overflow: auto;
+  overflow-y: hidden;
+  overflow-x: auto;
   align-items: center;
   /* margin-bottom: 50px; */
 }
@@ -21,4 +22,24 @@
   color: orange;
   width: 100%;
   text-align: start;
+}
+
+.petContainer::-webkit-scrollbar {
+  background-color: #121212;
+  border-radius: 4px;
+  height: 10px;
+}
+
+.petContainer::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+.petContainer::-webkit-scrollbar-thumb {
+  background: #f6ae2d;
+  border-radius: 4px;
+  border: 1px solid #121212;
+}
+
+.petContainer::-webkit-scrollbar-thumb:hover {
+  background: #ffc862;
 }

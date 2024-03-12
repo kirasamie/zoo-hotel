@@ -10,6 +10,7 @@ export type OrderType = {
     orderDateOut: string;
     addInfo?: string;
     paymentStatus: boolean;
+    addServices: string;
     Pet: PetItemType
 }
 

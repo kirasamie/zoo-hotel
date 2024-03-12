@@ -1,7 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const multer = require('multer');
 const router = require('express').Router();
-const { Post, User } = require('../db/models');
+const { Post, User, Order } = require('../db/models');
+const mailer = require('../lib/nodemailer');
+
+const { FRONT_URL } = process.env;
 
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
@@ -58,6 +61,25 @@ router.post('/', async (req, res) => {
         orderId,
         workerId: userId,
       });
+      const postForUser = await Post.findOne({ include: { model: Order, where: { id: newPost.orderId }, include: { model: User } } });
+      const emailUser = postForUser.Order.User.email;
+      const message = {
+        to: emailUser,
+        subject: 'Отель для животных ZooHotel!',
+        html: `
+          <h2>У вас новое сообщение от ZooHotel!</h2>
+          <br/>
+          <p> Здравствуйте, ${postForUser.Order.User.lastName} ${postForUser.Order.User.firstName}</p>
+          <br/>
+          <p> К вашему заказу №${newPost.orderId} добавлен новый пост!
+          </p>
+          <p><a href='${FRONT_URL}/account/orders/${newPost.orderId}'>>Посмотреть пост!</a></p>
+          <br/>
+          <p>С Уважением,</p>
+          <p>Администрация ZooHotel KiraJuckieKate</p>
+          `,
+      };
+      mailer(message);
       res.json(newPost);
     } catch (error) {
       console.log(error);

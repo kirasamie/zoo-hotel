@@ -1,0 +1,21 @@
+.modalForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+}
+
+.modalWindow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.formWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+}

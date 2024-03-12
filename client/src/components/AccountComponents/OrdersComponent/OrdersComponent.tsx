@@ -18,9 +18,9 @@ export default function OrdersComponent(): JSX.Element {
       <Link key={order.id} to={`/account/orders/${order.id}`}>
         <div className={styles.linkWrapper}>
           <CardGlassWrapper>
-            <h3>Заказ №{order.id}</h3>
+            <h3>Заказ №{order.id}, <span style={{ color: 'white' }}>{order?.Pet?.petName}</span></h3>
             <span>
-              Время: {getDate(order.orderDateIn)} - {getDate(order.orderDateOut)}
+              Даты: <span style={{ color: 'white' }}>{getDate(order.orderDateIn)}</span> - <span style={{ color: 'white' }}>{getDate(order.orderDateOut)}</span>
             </span>
             <OrderProgressBar dateIn={order.orderDateIn} dateOut={order.orderDateOut} />
           </CardGlassWrapper>

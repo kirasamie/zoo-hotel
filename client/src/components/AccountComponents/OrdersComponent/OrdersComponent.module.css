@@ -6,6 +6,10 @@
   gap: 10px;
 }
 
+.menu a {
+  text-decoration: none;
+}
+
 .linkWrapper {
   color: orange;
   text-decoration: none;

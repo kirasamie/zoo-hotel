@@ -52,7 +52,6 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   const { userId } = req.session;
   const { title, body, orderId, workerId } = req.body;
-  console.log(userId, workerId);
   if (userId === workerId) {
     try {
       const newPost = await Post.create({
@@ -73,7 +72,9 @@ router.post('/', async (req, res) => {
           <br/>
           <p> К вашему заказу №${newPost.orderId} добавлен новый пост!
           </p>
-          <p><a href='${FRONT_URL}/account/orders/${newPost.orderId}'>>Посмотреть пост!</a></p>
+          <p>
+            <a style="cursor:pointer;" href="${FRONT_URL}/account/orders/${newPost.orderId}">Посмотреть пост!</a>
+          </p>
           <br/>
           <p>С Уважением,</p>
           <p>Администрация ZooHotel KiraJuckieKate</p>

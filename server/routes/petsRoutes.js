@@ -9,7 +9,7 @@ router.get('/all', async (req, res) => {
       where: { petUserId: userId },
       include: { model: PetImage },
     });
-    console.log(allPets);
+    console.log('all pets', allPets);
     res.json(allPets);
   } catch (error) {
     console.log(error);
@@ -18,15 +18,7 @@ router.get('/all', async (req, res) => {
 
 router.post('/new', async (req, res) => {
   const { userId } = req.session;
-  const {
-    petName,
-    petBreed,
-    petType,
-    petGender,
-    petAge,
-    petIsSprayed,
-    petAbout,
-  } = req.body;
+  const { petName, petBreed, petType, petGender, petAge, petIsSprayed, petAbout } = req.body;
   try {
     const newPet = await Pet.create({
       petName,
@@ -38,7 +30,8 @@ router.post('/new', async (req, res) => {
       petAbout,
       petUserId: userId,
     });
-    res.json(newPet);
+    const findNewPet = await Pet.findOne({ where: { id: newPet.id }, include: { model: PetImage } });
+    res.json(findNewPet);
   } catch (error) {
     console.log(error);
   }
@@ -47,15 +40,7 @@ router.post('/new', async (req, res) => {
 router.patch('/edit/:id', async (req, res) => {
   const { userId } = req.session;
   const { id } = req.params;
-  const {
-    petName,
-    petBreed,
-    petType,
-    petGender,
-    petAge,
-    petIsSprayed,
-    petAbout,
-  } = req.body;
+  const { petName, petBreed, petType, petGender, petAge, petIsSprayed, petAbout } = req.body;
   try {
     const editedPet = await Pet.update(
       {
@@ -67,7 +52,7 @@ router.patch('/edit/:id', async (req, res) => {
         petIsSprayed,
         petAbout,
       },
-      { where: { petUserId: userId, id }, returning: true, plain: true }
+      { where: { petUserId: userId, id }, returning: true, plain: true },
     );
     res.json(editedPet[1]);
   } catch (error) {

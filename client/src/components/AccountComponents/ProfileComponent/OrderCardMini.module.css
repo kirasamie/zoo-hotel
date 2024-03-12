@@ -1,34 +1,27 @@
-.photo {
-  background-size: cover;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  background-position: center;
-}
 .container {
-  margin-right: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  color: orange;
+  gap: 8px;
 }
+
 .petName {
   font-size: 24px;
   font-weight: 600;
-  color: orange;
+  color: white;
 }
-.petBreed, .paymentStatus {
-  color: orange;
-}
+
 .dateContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: orange;
 }
-.link {
-  transition: 150ms;
+
+.container {
+  transition: 0.3s;
 }
-.link:hover {
-scale: 1.1;
+
+.link:hover .container {
+  scale: 1.1;
 }

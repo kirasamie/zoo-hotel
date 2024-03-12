@@ -1,8 +1,7 @@
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import styles from './PetCard.module.css';
 import { useNavigate, useParams } from 'react-router-dom';
-import { fetchCheckAllPets, fetchDelPet } from '../../../redux/pet/async-action';
-import { Button } from '@mui/material';
+import { fetchDelPet } from '../../../redux/pet/async-action';
 import { useEffect, useState } from 'react';
 import StyledButton from '../../GlassWrapper/StyledButton';
 

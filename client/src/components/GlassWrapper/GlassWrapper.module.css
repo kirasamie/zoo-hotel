@@ -9,6 +9,7 @@
   backdrop-filter: blur(8px);
   margin: 20px;
   flex: 1 1 auto;
+  border-radius: 20px;
 }
 
 .glassWrapper {

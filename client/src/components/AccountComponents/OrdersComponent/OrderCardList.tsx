@@ -84,7 +84,7 @@ export default function OrderCardList(): JSX.Element {
   return (
     <div>
       <div className={styles.orderInfo}>
-        <CardGlassWrapper>
+        <CardGlassWrapper styles={{ justifyContent: 'flex-start' }}>
           <div className={styles.orderInfoInnerWrapper}>
             {pet?.PetImages?.length !== 0 ? (
               <>
@@ -111,6 +111,9 @@ export default function OrderCardList(): JSX.Element {
                 </p>
                 <p>
                   О питомце: <span style={{ color: 'white' }}>{order?.Pet.petAbout}</span>
+                </p>
+                <p>
+                  Комментарий к заказу: <span style={{ color: 'white' }}>{order?.addInfo}</span>
                 </p>
               </div>
               {addServicesNumber?.length !== 0 && (

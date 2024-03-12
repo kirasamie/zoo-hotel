@@ -8,7 +8,7 @@ import axios from 'axios';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { RoomType } from '../../types';
 import { fetchCheckOrdersByRoom } from '../../redux/thunkActions';
-import { Button, Modal, MenuItem, Select, SelectChangeEvent, InputLabel, FormControl, FormHelperText, Checkbox, FormControlLabel, FormGroup, styled } from '@mui/material';
+import { Modal, MenuItem, Select, SelectChangeEvent, InputLabel, FormControl, FormHelperText, Checkbox, FormControlLabel, FormGroup } from '@mui/material';
 import { useNavigate } from 'react-router';
 import styles from './RoomsPageModal.module.css';
 import GlassWrapper from '../GlassWrapper/GlassWrapper';
@@ -24,61 +24,6 @@ const optionsPrices = {
   '6': 300,
   '7': 1000,
 };
-
-const style = {
-  position: 'absolute' as const,
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: '50%',
-  bgcolor: 'background.paper',
-  borderRadius: '20px',
-  p: 4,
-  // background: 'url("/background-filler-v2.png") fixed',
-  // border: '3px solid orange',
-  // backgroundColor: 'rgba(0, 0, 0, 0.8)',
-  // display: 'flex',
-  // flexDirection: 'column',
-  // justifyContent: 'center',
-  // alignItems: 'center',
-  // backdropFilter: 'blur(8px)',
-  // color: 'orange',
-  // gap: '10px',
-  // boxShadow: '-5px 5px 20px 1px black',
-  // flex: '1 1 auto',
-};
-
-const StyledInputSelect = styled(Select)(({ theme }) => ({
-  '& .MuiInputBase-input': {
-    color: 'white',
-  },
-  '& .MuiInputBase-input.Mui-disabled': {
-    WebkitTextFillColor: 'orange',
-  },
-  '& label': {
-    color: 'orange',
-  },
-  '& label.Mui-focused': {
-    color: 'white',
-  },
-
-  '& .MuiOutlinedInput-root': {
-    '& fieldset': {
-      borderColor: 'orange',
-    },
-    '&:hover fieldset': {
-      borderColor: 'white',
-    },
-    '&.Mui-focused fieldset': {
-      borderColor: 'orange',
-    },
-
-    '&.Mui-disabled fieldset': {
-      color: 'white',
-      borderColor: 'orange',
-    },
-  },
-}));
 
 type ModalPropsType = {
   room: RoomType;
@@ -104,7 +49,6 @@ export default function RoomsPageModal({ room, open, handleClose }: ModalPropsTy
   const dates = useAppSelector((store) => store.orderSlice.ordersRoom);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  // const [orders, setOrders] = useState<Array<OrderType>>([]);
   const [mainOrder, setMainOrder] = useState<OrderType>({
     userId: 0,
     petId: 0,

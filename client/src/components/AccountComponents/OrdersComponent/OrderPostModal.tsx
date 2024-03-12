@@ -72,24 +72,24 @@ export default function OrderPostModal({ open, handleClose, orderId }: ModalProp
   };
 
   return (
-    <Modal open={open} onClose={handleClose} aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
-      <GlassWrapper width='40vw' className={styles.modalWindow}>
+    <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+      <GlassWrapper width="40vw" className={styles.modalWindow}>
         <div className={styles.modalForm}>
-          <StyledTextfield name='title' value={inputs.title} label='Заголовок' fullWidth onChange={changeHandler} />
-          <StyledTextfield name='body' value={inputs.body} label='Описание' maxRows={15} multiline fullWidth onChange={changeHandler} />
+          <StyledTextfield name="title" value={inputs.title} label="Заголовок" fullWidth onChange={changeHandler} />
+          <StyledTextfield name="body" value={inputs.body} label="Описание" maxRows={15} multiline fullWidth onChange={changeHandler} />
           <div className={styles.formWrapper}>
-            <StyledTextfield disabled type='text' name='avatar' value={postImage?.name || 'Файл не выбран'} />
-            <StyledButton sx={{ width: '240px' }} component='label' role={undefined} tabIndex={-1} startIcon={<CloudUploadIcon />} disableElevation>
+            <StyledTextfield disabled type="text" name="avatar" value={postImage?.name || 'Файл не выбран'} />
+            <StyledButton sx={{ width: '240px' }} component="label" role={undefined} tabIndex={-1} startIcon={<CloudUploadIcon />} disableElevation>
               Загрузить фото
               <VisuallyHiddenInput
-                type='file'
-                name='avatar'
-                accept='image/png, image/jpeg, image/jpg'
+                type="file"
+                name="avatar"
+                accept="image/png, image/jpeg, image/jpg"
                 onChange={(e: ChangeEvent<HTMLInputElement>) => void setPostImage(e.target.files ? e.target.files[0] : null)}
               />
             </StyledButton>
           </div>
-          <StyledButton variant='contained' onClick={() => void uploadHandler()}>
+          <StyledButton variant="contained" onClick={() => void uploadHandler()}>
             Опубликовать
           </StyledButton>
         </div>

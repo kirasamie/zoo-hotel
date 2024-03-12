@@ -1,0 +1,16 @@
+.container {
+ 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px !important;
+
+}
+.icon {
+  height: 40px;
+  width: 50px;
+  transition: 200ms;
+}
+.icon:hover {
+scale: 1.1;
+}

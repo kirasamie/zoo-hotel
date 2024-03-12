@@ -1,45 +1,53 @@
-
 .container {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
 }
-.petContainer, .orderContainer {
-  /* padding: 30px; */
-  /* border: 5px solid orange; */
+
+.petContainer,
+.orderContainer {
   border-radius: 15px;
   width: 100%;
   display: flex;
   overflow-y: hidden;
   overflow-x: auto;
   align-items: center;
-  /* margin-bottom: 50px; */
 }
+
+.orderContainer {
+  gap: 20px;
+}
+
 .contentContainer {
   width: 50%;
 }
+
 .title {
   color: orange;
   width: 100%;
   text-align: start;
 }
 
-.petContainer::-webkit-scrollbar {
+.petContainer::-webkit-scrollbar,
+.orderContainer::-webkit-scrollbar {
   background-color: #121212;
   border-radius: 4px;
   height: 10px;
 }
 
-.petContainer::-webkit-scrollbar-track {
+.petContainer::-webkit-scrollbar-track,
+.orderContainer::-webkit-scrollbar-track {
   border-radius: 10px;
 }
 
-.petContainer::-webkit-scrollbar-thumb {
+.petContainer::-webkit-scrollbar-thumb,
+.orderContainer::-webkit-scrollbar-thumb {
   background: #f6ae2d;
   border-radius: 4px;
   border: 1px solid #121212;
 }
 
-.petContainer::-webkit-scrollbar-thumb:hover {
+.petContainer::-webkit-scrollbar-thumb:hover,
+.orderContainer::-webkit-scrollbar-thumb:hover {
   background: #ffc862;
 }

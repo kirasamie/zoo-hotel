@@ -2,7 +2,6 @@ import './HomePage.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import { YMaps, Map, FullscreenControl, Placemark, TypeSelector, TrafficControl } from '@pbe/react-yandex-maps';
-
 import 'swiper/css';
 import 'swiper/css/navigation';
 import styles from './HomePage.module.css';
@@ -10,17 +9,6 @@ import GlassWrapper from '../../components/GlassWrapper/GlassWrapper';
 import CardGlassWrapper from '../../components/GlassWrapper/CardGlassWrapper';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
-// const placemark = new Placemark([55.75, 37.61], {
-//   balloonContent: '<img src="http://img-fotki.yandex.ru/get/6114/82599242.2d6/0_88b97_ec425cf5_M" />',
-//   iconContent: "Azerbaijan"
-// }, {
-//   preset: "islands#yellowStretchyIcon",
-//   // Disabling the close balloon button.
-//   balloonCloseButton: false,
-//   // The balloon will open and close when the placemark icon is clicked.
-//   hideIconOnBalloonOpen: false
-// });
-// geoMap.geoObjects.add(placemark);
 const handlerUp = () => {
   window.scrollTo({
     top: 0,
@@ -31,8 +19,6 @@ const handlerUp = () => {
 
 export default function HomePage(): JSX.Element {
   const arrImages = ['one.png', 'two.png', 'three.png', 'fourd.jpg', 'five.png', 'six.png', 'seven.png', 'eight.png'];
-  // document.body.style.backgroundImage = 'url("/background-filler-v2.png")';
-  // document.body.style.backgroundColor = 'rgb(15, 14, 14)';
 
   return (
     <>
@@ -173,6 +159,7 @@ export default function HomePage(): JSX.Element {
           </div>
         </div>
       </GlassWrapper>
+      
       {/* <GlassWrapper width="90vw">
         <div className={styles.servicesContainer}>
           <h2 className={styles.servHeader2}>

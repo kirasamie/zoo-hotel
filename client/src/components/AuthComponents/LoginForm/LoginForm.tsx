@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAppDispatch } from '../../../redux/hooks';
-import { fetchLoginUser } from '../../../redux/thunkActions';
+import { fetchCheckUser, fetchLoginUser } from '../../../redux/thunkActions';
 import { Box, Button, TextField, alpha, styled } from '@mui/material';
 import GlassWrapper from '../../GlassWrapper/GlassWrapper';
 
@@ -112,6 +112,7 @@ export default function LoginForm({ setIsLogin }): JSX.Element {
         .then((res) => {
           if (res.meta.requestStatus === 'fulfilled') {
             const { isWorker } = res.payload;
+            void dispatch(fetchCheckUser());
             isWorker ? navigate('/account') : navigate('/account/pets');
             setShowError((prev) => ({ ...prev, [e.target.name]: '', msg: '' }));
           } else {

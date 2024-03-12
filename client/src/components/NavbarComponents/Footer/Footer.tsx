@@ -6,7 +6,7 @@ export default function Footer(): JSX.Element {
     <footer className={styles.container}>
       <div className={styles.phoneContainer}>
         <PhoneInTalkIcon sx={{ color: 'orange', width: 30, height: 30 }} />
-        <span className={styles.spanText}>+7(966)996-99-66</span>
+        <span className={styles.spanText}>+7 (966) 996-99-66</span>
       </div>
       <div>
         <img className={styles.icon} src='/img/telegram.svg' alt='telegram' />

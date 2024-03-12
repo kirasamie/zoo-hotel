@@ -16,3 +16,26 @@ footer {
   justify-content: space-between;
   padding: 20px !important;
 }
+.logo {
+  height: 60px;
+  width: 60px;
+  transition: 200ms;
+}
+.logoContainer {
+  display: flex;
+align-items: center;
+text-decoration: none;
+font-family: "Bebas Neue", sans-serif;
+font-size: 30px;
+}
+.logoTitle {
+  color: orange;
+  transition: 200ms;
+}
+.logoContainer:hover .logoTitle {
+  filter:sepia(100%)
+}
+.logoContainer:hover .logo {
+  filter:sepia(100%)
+}
+

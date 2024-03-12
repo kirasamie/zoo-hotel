@@ -86,7 +86,23 @@ export default function OrderCardList(): JSX.Element {
       <div className={styles.orderInfo}>
         <CardGlassWrapper>
           <div className={styles.orderInfoInnerWrapper}>
-            <img className={styles.petImg} src={`${import.meta.env.VITE_URL.slice(0, -3)}/img/pets/${order?.Pet?.PetImages[0]?.link}`} alt="img" />
+            {pet?.PetImages?.length !== 0 ? (
+              <>
+                {pet?.PetImages[0] && (
+                  <div className={styles.photoOne}>
+                    <img src={`${import.meta.env.VITE_URL.slice(0, -3)}/img/pets/${pet?.PetImages[0]?.link}`} alt="imagePet" />
+                  </div>
+                )}
+              </>
+            ) : pet?.petType === 1 ? (
+              <div className={styles.photoOne}>
+                <img src="/catAvatar.png" alt="cat" />
+              </div>
+            ) : (
+              <div className={styles.photoOne}>
+                <img src="/dogAvatar.png" alt="dog" />
+              </div>
+            )}
             <div className={styles.orderAbout}>
               <div>
                 <h3 className={styles.orderAboutHeader}>Информация о заказе</h3>

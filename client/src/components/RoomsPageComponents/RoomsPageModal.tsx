@@ -8,24 +8,7 @@ import axios from 'axios';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { RoomType } from '../../types';
 import { fetchCheckOrdersByRoom } from '../../redux/thunkActions';
-import {
-  TextField,
-  Typography,
-  Box,
-  Button,
-  Modal,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-  InputLabel,
-  FormControl,
-  FormHelperText,
-  Checkbox,
-  FormControlLabel,
-  FormGroup,
-  styled,
-  InputBase,
-} from '@mui/material';
+import { Button, Modal, MenuItem, Select, SelectChangeEvent, InputLabel, FormControl, FormHelperText, Checkbox, FormControlLabel, FormGroup, styled } from '@mui/material';
 import { useNavigate } from 'react-router';
 import styles from './RoomsPageModal.module.css';
 import GlassWrapper from '../GlassWrapper/GlassWrapper';
@@ -33,12 +16,12 @@ import StyledTextfield from '../GlassWrapper/StyledTextfield';
 import StyledButton from '../GlassWrapper/StyledButton';
 
 const optionsPrices = {
-  '1': 1000,
-  '2': 1000,
-  '3': 1000,
-  '4': 1000,
-  '5': 1000,
-  '6': 1000,
+  '1': 500,
+  '2': 2000,
+  '3': 2000,
+  '4': 500,
+  '5': 800,
+  '6': 300,
   '7': 1000,
 };
 
@@ -295,11 +278,11 @@ export default function RoomsPageModal({ room, open, handleClose }: ModalPropsTy
           });
           setDays(0);
         }}
-        aria-labelledby='modal-modal-title'
-        aria-describedby='modal-modal-description'
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
       >
         {/* <Box sx={style}> */}
-        <GlassWrapper width='800px' className={styles.glassWrapper}>
+        <GlassWrapper width="800px" className={styles.glassWrapper}>
           <h2 className={styles.orderTitle}>Создать заказ</h2>
           <div className={styles.inputWrapper}>
             <div className={styles.dividedForm}>
@@ -307,64 +290,64 @@ export default function RoomsPageModal({ room, open, handleClose }: ModalPropsTy
                 error={!!petSelectError}
                 sx={{
                   flex: 1,
-                  '& .MuiSelect-nativeInput': { borderColor: 'orange' },
-                  '& .MuiSelect-select': {
+                  '& .MuiInputBase-input': {
                     color: 'white',
-                    borderColor: 'orange',
                   },
-                  '& .MuiInputBase-root filedset': { borderColor: 'orange' },
-                  '& .MuiInputLabel-root': { color: 'orange' },
+                  '& .MuiInputBase-input.Mui-disabled': {
+                    WebkitTextFillColor: 'orange',
+                  },
+                  '& label': {
+                    color: 'orange',
+                  },
                   '& label.Mui-focused': {
                     color: 'white',
                   },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: 'orange',
+                    },
+                    '&:hover fieldset': {
+                      borderColor: 'white',
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: 'orange',
+                    },
+                  },
                 }}
               >
-                <InputLabel
-                  // sx={{
-                  //   '& .MuiSelect-nativeInput': { borderColor: 'orange', fontSize: '20px' },
-                  // }}
-                  id='demo-simple-select-autowidth-label'
-                >
-                  Выберите вашего питомца
-                </InputLabel>
+                <InputLabel id="demo-simple-select-autowidth-label">Выберите вашего питомца</InputLabel>
                 <Select
-                  // sx={{
-                  //   '& .MuiSelect-select': {
-                  //     color: 'white',
-                  //   },
-                  // }}
-                  labelId='demo-simple-select-autowidth-label'
-                  id='demo-simple-select-autowidth'
-                  name='petId'
+                  labelId="demo-simple-select-autowidth-label"
+                  id="demo-simple-select-autowidth"
+                  name="petId"
                   value={inputs.petId}
                   onChange={changeHandler}
                   autoWidth
-                  label='Выберите вашего питомца'
-                  // input={<StyledInputSelect />}
+                  label="Выберите вашего питомца"
                 >
                   {pets.length ? (
                     pets.map((pet) => (
-                      <MenuItem sx={{ borderColor: 'orange', backgroundColor: 'black', color: 'orange' }} value={String(pet.id)}>
+                      <MenuItem value={String(pet.id)}>
                         {pet.petName}
                       </MenuItem>
                     ))
                   ) : (
                     <MenuItem sx={{ borderColor: 'orange', backgroundColor: 'black', color: 'orange' }}>
-                      <Button onClick={() => void navigate('/account/pets/new')}>Создайте карточку питомца!</Button>
+                      <StyledButton onClick={() => void navigate('/account/pets/new')}>Создайте карточку питомца!</StyledButton>
                     </MenuItem>
                   )}
                 </Select>
                 <FormHelperText>{petSelectError}</FormHelperText>
               </FormControl>
-              <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='ru'>
+              <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="ru">
                 <DateRangePicker
                   disablePast
                   shouldDisableDate={(date) => {
                     return getBannedDates(dates).flat().includes(new Date(date.$d).toLocaleDateString());
                   }}
                   slots={{ field: SingleInputDateRangeField }}
-                  name='allowedRange'
-                  label='Выберите даты заезда и выезда'
+                  name="allowedRange"
+                  label="Выберите даты заезда и выезда"
                   onChange={changeDateRangeHandler}
                   slotProps={{
                     textField: {
@@ -414,10 +397,10 @@ export default function RoomsPageModal({ room, open, handleClose }: ModalPropsTy
 
             <StyledTextfield
               className={styles.inputDescription}
-              size='medium'
-              name='description'
+              size="medium"
+              name="description"
               value={inputs.description}
-              label='Напишите дополнительный комментарий для заказа (по желанию)'
+              label="Напишите дополнительный комментарий для заказа (по желанию)"
               maxRows={15}
               multiline
               fullWidth
@@ -428,13 +411,13 @@ export default function RoomsPageModal({ room, open, handleClose }: ModalPropsTy
           <div className={styles.dividedForm}>
             <FormGroup sx={{ flex: 1 }}>
               <FormControlLabel
-                name='1'
+                name="1"
                 onChange={optionsChangeHandler}
                 checked={optionsInputs['1']}
                 control={
                   <Checkbox
                     sx={{
-                      color: 'orange',
+                      color: 'white',
                       '&.Mui-checked': {
                         color: 'orange',
                       },
@@ -442,19 +425,19 @@ export default function RoomsPageModal({ room, open, handleClose }: ModalPropsTy
                         color: 'white',
                       },
                     }}
-                    size='small'
+                    size="small"
                   />
                 }
-                label='Груминг'
+                label="Груминг"
               />
               <FormControlLabel
-                name='2'
+                name="2"
                 onChange={optionsChangeHandler}
                 checked={optionsInputs['2']}
                 control={
                   <Checkbox
                     sx={{
-                      color: 'orange',
+                      color: 'white',
                       '&.Mui-checked': {
                         color: 'orange',
                       },
@@ -462,19 +445,19 @@ export default function RoomsPageModal({ room, open, handleClose }: ModalPropsTy
                         color: 'white',
                       },
                     }}
-                    size='small'
+                    size="small"
                   />
                 }
-                label='Занятия с кинологом'
+                label="Занятия с кинологом"
               />
               <FormControlLabel
-                name='3'
+                name="3"
                 onChange={optionsChangeHandler}
                 checked={optionsInputs['3']}
                 control={
                   <Checkbox
                     sx={{
-                      color: 'orange',
+                      color: 'white',
                       '&.Mui-checked': {
                         color: 'orange',
                       },
@@ -482,19 +465,19 @@ export default function RoomsPageModal({ room, open, handleClose }: ModalPropsTy
                         color: 'white',
                       },
                     }}
-                    size='small'
+                    size="small"
                   />
                 }
-                label='Консультация зоопсихолога'
+                label="Консультация зоопсихолога"
               />
               <FormControlLabel
-                name='4'
+                name="4"
                 onChange={optionsChangeHandler}
                 checked={optionsInputs['4']}
                 control={
                   <Checkbox
                     sx={{
-                      color: 'orange',
+                      color: 'white',
                       '&.Mui-checked': {
                         color: 'orange',
                       },
@@ -502,19 +485,19 @@ export default function RoomsPageModal({ room, open, handleClose }: ModalPropsTy
                         color: 'white',
                       },
                     }}
-                    size='small'
+                    size="small"
                   />
                 }
-                label='Зоотакси'
+                label="Зоотакси"
               />
               <FormControlLabel
-                name='5'
+                name="5"
                 onChange={optionsChangeHandler}
                 checked={optionsInputs['5']}
                 control={
                   <Checkbox
                     sx={{
-                      color: 'orange',
+                      color: 'white',
                       '&.Mui-checked': {
                         color: 'orange',
                       },
@@ -522,19 +505,19 @@ export default function RoomsPageModal({ room, open, handleClose }: ModalPropsTy
                         color: 'white',
                       },
                     }}
-                    size='small'
+                    size="small"
                   />
                 }
-                label='Приготовление пищи для питомца'
+                label="Приготовление пищи для питомца"
               />
               <FormControlLabel
-                name='6'
+                name="6"
                 onChange={optionsChangeHandler}
                 checked={optionsInputs['6']}
                 control={
                   <Checkbox
                     sx={{
-                      color: 'orange',
+                      color: 'white',
                       '&.Mui-checked': {
                         color: 'orange',
                       },
@@ -542,19 +525,19 @@ export default function RoomsPageModal({ room, open, handleClose }: ModalPropsTy
                         color: 'white',
                       },
                     }}
-                    size='small'
+                    size="small"
                   />
                 }
-                label='Фотоотчет более 1 раза в день'
+                label="Фотоотчет более 1 раза в день"
               />
               <FormControlLabel
-                name='7'
+                name="7"
                 onChange={optionsChangeHandler}
                 checked={optionsInputs['7']}
                 control={
                   <Checkbox
                     sx={{
-                      color: 'orange',
+                      color: 'white',
                       '&.Mui-checked': {
                         color: 'orange',
                       },
@@ -562,10 +545,10 @@ export default function RoomsPageModal({ room, open, handleClose }: ModalPropsTy
                         color: 'white',
                       },
                     }}
-                    size='small'
+                    size="small"
                   />
                 }
-                label='Подготовка собаки к выставке'
+                label="Подготовка собаки к выставке"
               />
             </FormGroup>
             <div className={styles.prices}>
@@ -624,7 +607,7 @@ export default function RoomsPageModal({ room, open, handleClose }: ModalPropsTy
           </div>
 
           <div className={styles.paymentButtonWrapper}>
-            <StyledButton disabled={!allowPayment} className={styles.buttonBuy} variant='contained' onClick={() => void paymentHandler()}>
+            <StyledButton disabled={!allowPayment} className={styles.buttonBuy} variant="contained" onClick={() => void paymentHandler()}>
               Оплатить
             </StyledButton>
           </div>

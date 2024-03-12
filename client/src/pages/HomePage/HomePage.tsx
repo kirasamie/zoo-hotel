@@ -1,6 +1,6 @@
-import './HomePage.css';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination } from 'swiper/modules';
+import "./HomePage.css";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper/modules";
 import {
   YMaps,
   Map,
@@ -8,13 +8,13 @@ import {
   Placemark,
   TypeSelector,
   TrafficControl,
-} from '@pbe/react-yandex-maps';
+} from "@pbe/react-yandex-maps";
 
-import 'swiper/css';
-import 'swiper/css/navigation';
-import styles from './HomePage.module.css';
-import GlassWrapper from '../../components/GlassWrapper/GlassWrapper';
-import CardGlassWrapper from '../../components/GlassWrapper/CardGlassWrapper';
+import "swiper/css";
+import "swiper/css/navigation";
+import styles from "./HomePage.module.css";
+import GlassWrapper from "../../components/GlassWrapper/GlassWrapper";
+import CardGlassWrapper from "../../components/GlassWrapper/CardGlassWrapper";
 
 // const placemark = new Placemark([55.75, 37.61], {
 //   balloonContent: '<img src="http://img-fotki.yandex.ru/get/6114/82599242.2d6/0_88b97_ec425cf5_M" />',
@@ -30,14 +30,14 @@ import CardGlassWrapper from '../../components/GlassWrapper/CardGlassWrapper';
 
 export default function HomePage(): JSX.Element {
   const arrImages = [
-    'one.png',
-    'two.png',
-    'three.png',
-    'fourd.jpg',
-    'five.png',
-    'six.png',
-    'seven.png',
-    'eight.png',
+    "one.png",
+    "two.png",
+    "three.png",
+    "fourd.jpg",
+    "five.png",
+    "six.png",
+    "seven.png",
+    "eight.png",
   ];
   // document.body.style.backgroundImage = 'url("/background-filler-v2.png")';
   // document.body.style.backgroundColor = 'rgb(15, 14, 14)';
@@ -45,22 +45,22 @@ export default function HomePage(): JSX.Element {
   return (
     <>
       <div className={styles.mainBackground}></div>
-      <div className='textContainerLeft'></div>
-      <div className='landing__info align__left'>
-        <h1 className='textContent'>ZOoтель</h1>
-        <p className='textContent'>
+      <div className="textContainerLeft"></div>
+      <div className="landing__info align__left">
+        <h1 className="textContent">ZOoтель</h1>
+        <p className="textContent">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error aut ea
           fuga cum? Odit, sed culpa harum laborum excepturi quibusdam!
         </p>
         <br />
-        <button className='textContent'>
-          <a href='#/'>Забронировать комнату</a>
+        <button className="textContent">
+          <a href="#/">Забронировать комнату</a>
         </button>
       </div>
 
-      <div className='body'>
-        <section className='container__center' id='landing__area'>
-          <div className='landing__content center__row'>
+      <div className="body">
+        <section className="container__center" id="landing__area">
+          <div className="landing__content center__row">
             <Swiper
               autoplay={{
                 delay: 2500,
@@ -70,12 +70,12 @@ export default function HomePage(): JSX.Element {
                 clickable: true,
               }}
               modules={[Autoplay, Pagination]}
-              className='mySwiper'
+              className="mySwiper"
             >
               {arrImages.map((image) => (
                 <SwiperSlide key={image}>
-                  <div className='image__pet'>
-                    <img src={`./img/main/${image}`} alt='animal' />
+                  <div className="image__pet">
+                    <img src={`./img/main/${image}`} alt="animal" />
                   </div>
                 </SwiperSlide>
               ))}
@@ -86,43 +86,63 @@ export default function HomePage(): JSX.Element {
 
       <div className={styles.homePageShader}></div>
 
-      <GlassWrapper width='90vw'>
-        <div className='home-steps-wrapper'>
+      <GlassWrapper width="90vw">
+        <div className="home-steps-wrapper">
           <h2>
             Для того, чтобы начать пользоваться нашим сервисом нужно сделать три
             простых шага:
           </h2>
-          <div className='home-steps-card-wrapper'>
-            <CardGlassWrapper>
-              <div className='step step-1' />
+          <div className="home-steps-card-wrapper" style={{ gap: "10px" }}>
+            <CardGlassWrapper width="450px">
+              <div className="step step-1" />
               <h3>Шаг 1:</h3>
               <div>
-                <p>Ознакомьтесь с правилами и зарегистрируйтесь</p>
+                <img className={styles.imgForm} src="/img/reg.png" alt="reg" />
               </div>
-            </CardGlassWrapper>
-
-            <CardGlassWrapper>
-              <div className='step step-2' />
-              <h3>Шаг 2:</h3>
               <div>
-                <p>
-                  Заполните карточку вашего четверомногоногнмогого друга в
-                  личном кабинете
+                <p style={{ color: "white" }}>
+                  Ознакомьтесь с правилами и зарегистрируйтесь
                 </p>
               </div>
             </CardGlassWrapper>
 
-            <CardGlassWrapper>
-              <div className='step step-3' />
+            <CardGlassWrapper width="450px">
+              <div className="step step-2" />
+              <h3>Шаг 2:</h3>
+              <div>
+                <img
+                  className={styles.imgForm}
+                  src="/img/petForm.png"
+                  alt="reg"
+                />
+              </div>
+              <div>
+                <p style={{ color: "white" }}>
+                  Заполните карточку вашего четвероного друга в личном кабинете
+                </p>
+              </div>
+            </CardGlassWrapper>
+
+            <CardGlassWrapper width="450px">
+              <div className="step step-3" />
               <h3>Шаг 3:</h3>
               <div>
-                <p>Забронируйте комнату в нашем отеле!</p>
+                <img
+                  className={styles.imgForm}
+                  src="/img/petForm.png"
+                  alt="reg"
+                />
+              </div>
+              <div>
+                <p style={{ color: "white" }}>
+                  Забронируйте комнату в нашем отеле!
+                </p>
               </div>
             </CardGlassWrapper>
           </div>
         </div>
       </GlassWrapper>
-      <GlassWrapper width='90vw'>
+      <GlassWrapper width="90vw">
         <div className={styles.servicesContainer}>
           <h2 className={styles.servHeader2}>Наши услуги</h2>
           <h3 className={styles.servHeader3}>Преимущества ZooHotel</h3>
@@ -132,8 +152,8 @@ export default function HomePage(): JSX.Element {
                 <div className={styles.imgWrapper}>
                   <img
                     className={styles.img}
-                    src='/img/walkingDog.png'
-                    alt='dog'
+                    src="/img/walkingDog.png"
+                    alt="dog"
                   />
                 </div>
                 <p className={styles.servHeader}>Индивидуальные комнатки</p>
@@ -147,8 +167,8 @@ export default function HomePage(): JSX.Element {
                 <div className={styles.imgWrapper}>
                   <img
                     className={styles.img}
-                    src='/img/walkingDog.png'
-                    alt='dog'
+                    src="/img/walkingDog.png"
+                    alt="dog"
                   />
                 </div>
                 <p className={styles.servHeader}>Выгул 2-3 раза в день</p>
@@ -162,8 +182,8 @@ export default function HomePage(): JSX.Element {
                 <div className={styles.imgWrapper}>
                   <img
                     className={styles.img}
-                    src='/img/camera.png'
-                    alt='camera'
+                    src="/img/camera.png"
+                    alt="camera"
                   />
                 </div>
                 <p className={styles.servHeader}>Фото-отчет ежедневно</p>
@@ -177,8 +197,8 @@ export default function HomePage(): JSX.Element {
                 <div className={styles.imgWrapper}>
                   <img
                     className={styles.img}
-                    src='/img/dogFood.png'
-                    alt='dogFood'
+                    src="/img/dogFood.png"
+                    alt="dogFood"
                   />
                 </div>
                 <p className={styles.servHeader}>Миски и лежанки</p>
@@ -193,8 +213,8 @@ export default function HomePage(): JSX.Element {
                 <div className={styles.imgWrapper}>
                   <img
                     className={styles.img}
-                    src='/img/dogFood.png'
-                    alt='dogFood'
+                    src="/img/dogFood.png"
+                    alt="dogFood"
                   />
                 </div>
                 <p className={styles.servHeader}>Дополнительные услуги</p>
@@ -206,7 +226,7 @@ export default function HomePage(): JSX.Element {
           </div>
         </div>
       </GlassWrapper>
-      <GlassWrapper width='90vw'>
+      <GlassWrapper width="90vw">
         <div className={styles.servicesContainer}>
           <h2 className={styles.servHeader2}>
             Забронируйте место для вашего питомца прямо сейчас
@@ -221,15 +241,15 @@ export default function HomePage(): JSX.Element {
         </div>
       </GlassWrapper>
 
-      <GlassWrapper width='90vw'>
+      <GlassWrapper width="90vw">
         <h2 className={styles.servHeader2}>Мы на карте</h2>
         <h3 className={styles.servHeader3}>
           Лорем хренем ипсум шмипсум бибиди бобиди бум
         </h3>
         <YMaps>
-          <div className='ya-map-wrapper'>
+          <div className="ya-map-wrapper">
             <Map
-              className='ya-map'
+              className="ya-map"
               defaultState={{
                 center: [46.287837853706414, 47.94919350240244],
                 zoom: 13,
@@ -238,21 +258,21 @@ export default function HomePage(): JSX.Element {
               <FullscreenControl />
               <Placemark
                 geometry={[46.287837853706414, 47.94919350240244]}
-                modules={['geoObject.addon.balloon']}
+                modules={["geoObject.addon.balloon"]}
                 properties={{
-                  balloonContent: 'dasda',
-                  balloonContentHeader: 'Zoотель',
+                  balloonContent: "dasda",
+                  balloonContentHeader: "Zoотель",
                   balloonContentBody:
                     '<h1 class="ya-map-placemark">ZH</h1><p style="width: 200px">Описание нашего прекрасного отеля которое я не придумал</p>',
-                  balloonContentFooter: 'with love by KirKateJuckie',
+                  balloonContentFooter: "with love by KirKateJuckie",
                   autoPan: true,
                 }}
                 options={{
-                  preset: 'islands#blackDogIcon',
+                  preset: "islands#blackDogIcon",
                 }}
               />
-              <TypeSelector options={{ float: 'right' }} />
-              <TrafficControl options={{ float: 'right' }} />
+              <TypeSelector options={{ float: "right" }} />
+              <TrafficControl options={{ float: "right" }} />
             </Map>
           </div>
         </YMaps>

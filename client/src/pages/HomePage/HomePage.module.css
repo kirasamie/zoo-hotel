@@ -77,3 +77,15 @@
   background: linear-gradient(180deg #121212, transparent 10px);
   background: linear-gradient(180deg, #121212,transparent, transparent 30px);
 }
+
+.imgForm {
+  height: 400px;
+  width: 300px;
+  border-radius: 5px;
+}
+.imgForm {
+  transition: 100ms;
+}
+.imgForm:hover {
+  transform: scale(1.2);
+}

@@ -1,0 +1,88 @@
+"filename", "language", "JavaScript", "JSON", "TypeScript JSX", "XML", "CSS", "TypeScript", "HTML", "comment", "blank", "total"
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\index.html", "HTML", 0, 0, 0, 0, 0, 0, 3, 0, 0, 3
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\package-lock.json", "JSON", 0, 64, 0, 0, 0, 0, 0, 0, 0, 64
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\package.json", "JSON", 0, 2, 0, 0, 0, 0, 0, 0, 0, 2
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\public\img\gmail.svg", "XML", 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\public\img\logo.svg", "XML", 0, 0, 0, 9, 0, 0, 0, 0, 0, 9
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\public\img\telegram.svg", "XML", 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\public\img\vk.svg", "XML", 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\App.tsx", "TypeScript JSX", 0, 0, 11, 0, 0, 0, 0, 0, -1, 10
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\AccountComponents\OrdersComponent\OrderCard.module.css", "CSS", 0, 0, 0, 0, 130, 0, 0, 0, 27, 157
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\AccountComponents\OrdersComponent\OrderCard.tsx", "TypeScript JSX", 0, 0, 63, 0, 0, 0, 0, 1, 9, 73
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\AccountComponents\OrdersComponent\OrderCardList.css", "CSS", 0, 0, 0, 0, -138, 0, 0, 0, -28, -166
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\AccountComponents\OrdersComponent\OrderCardList.module.css", "CSS", 0, 0, 0, 0, 38, 0, 0, 0, 6, 44
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\AccountComponents\OrdersComponent\OrderCardList.tsx", "TypeScript JSX", 0, 0, 122, 0, 0, 0, 0, 1, 6, 129
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\AccountComponents\OrdersComponent\OrderPostModal.module.css", "CSS", 0, 0, 0, 0, 19, 0, 0, 0, 3, 22
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\AccountComponents\OrdersComponent\OrderPostModal.tsx", "TypeScript JSX", 0, 0, 16, 0, 0, 0, 0, 0, -3, 13
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\AccountComponents\OrdersComponent\OrderProgressBar.tsx", "TypeScript JSX", 0, 0, 72, 0, 0, 0, 0, 0, 12, 84
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\AccountComponents\OrdersComponent\OrdersComponent.module.css", "CSS", 0, 0, 0, 0, 10, 0, 0, 0, 4, 14
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\AccountComponents\OrdersComponent\OrdersComponent.tsx", "TypeScript JSX", 0, 0, 19, 0, 0, 0, 0, 0, 0, 19
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\AccountComponents\PetsComponent\EmptyPet.module.css", "CSS", 0, 0, 0, 0, 3, 0, 0, 0, 0, 3
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\AccountComponents\PetsComponent\EmptyPet.tsx", "TypeScript JSX", 0, 0, 4, 0, 0, 0, 0, 0, 1, 5
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\AccountComponents\PetsComponent\PetCard.module.css", "CSS", 0, 0, 0, 0, 58, 0, 0, 3, 6, 67
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\AccountComponents\PetsComponent\PetCard.tsx", "TypeScript JSX", 0, 0, 57, 0, 0, 0, 0, 0, 3, 60
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\AccountComponents\PetsComponent\PetForm.tsx", "TypeScript JSX", 0, 0, 42, 0, 0, 0, 0, 2, 1, 45
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\AccountComponents\PetsComponent\PetMenu.module.css", "CSS", 0, 0, 0, 0, 41, 0, 0, 0, 9, 50
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\AccountComponents\PetsComponent\PetMenu.tsx", "TypeScript JSX", 0, 0, 12, 0, 0, 0, 0, 0, 1, 13
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\AccountComponents\ProfileComponent\EditModal.module.css", "CSS", 0, 0, 0, 0, 20, 0, 0, 1, 1, 22
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\AccountComponents\ProfileComponent\EditModal.tsx", "TypeScript JSX", 0, 0, 112, 0, 0, 0, 0, 1, 7, 120
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\AccountComponents\ProfileComponent\OrderCardMini.module.css", "CSS", 0, 0, 0, 0, 8, 0, 0, 0, 0, 8
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\AccountComponents\ProfileComponent\OrderCardMini.tsx", "TypeScript JSX", 0, 0, 7, 0, 0, 0, 0, 0, 1, 8
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\AccountComponents\ProfileComponent\PetCardMini.module.css", "CSS", 0, 0, 0, 0, 7, 0, 0, 0, 2, 9
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\AccountComponents\ProfileComponent\PetCardMini.tsx", "TypeScript JSX", 0, 0, 10, 0, 0, 0, 0, 0, 2, 12
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\AccountComponents\ProfileComponent\Profile.module.css", "CSS", 0, 0, 0, 0, 19, 0, 0, 3, 4, 26
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\AccountComponents\ProfileComponent\ProfileCard.module.css", "CSS", 0, 0, 0, 0, 2, 0, 0, 2, 0, 4
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\AccountComponents\ProfileComponent\ProfileCard.tsx", "TypeScript JSX", 0, 0, -31, 0, 0, 0, 0, -1, -5, -37
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\AccountComponents\ProfileComponent\ProfileComponent.tsx", "TypeScript JSX", 0, 0, 5, 0, 0, 0, 0, 0, 2, 7
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\AuthComponents\AuthWrapper\AuthWrapper.tsx", "TypeScript JSX", 0, 0, -2, 0, 0, 0, 0, 0, 0, -2
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\AuthComponents\LoginForm\LoginForm.tsx", "TypeScript JSX", 0, 0, 81, 0, 0, 0, 0, 2, 5, 88
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\AuthComponents\RegisterForm\RegisterForm.tsx", "TypeScript JSX", 0, 0, 46, 0, 0, 0, 0, -1, 13, 58
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\BackgroundComponents\Background.module.css", "CSS", 0, 0, 0, 0, 94, 0, 0, 3, 14, 111
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\BackgroundComponents\Background.tsx", "TypeScript JSX", 0, 0, 17, 0, 0, 0, 0, 0, 2, 19
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\GlassWrapper\CardGlassWrapper.module.css", "CSS", 0, 0, 0, 0, 15, 0, 0, 0, 2, 17
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\GlassWrapper\CardGlassWrapper.tsx", "TypeScript JSX", 0, 0, 10, 0, 0, 0, 0, 0, 2, 12
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\GlassWrapper\GlassWrapper.module.css", "CSS", 0, 0, 0, 0, 26, 0, 0, 0, 3, 29
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\GlassWrapper\GlassWrapper.tsx", "TypeScript JSX", 0, 0, 13, 0, 0, 0, 0, 0, 2, 15
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\GlassWrapper\StyledButton.tsx", "TypeScript JSX", 0, 0, 28, 0, 0, 0, 0, 0, 3, 31
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\GlassWrapper\StyledTextfield.tsx", "TypeScript JSX", 0, 0, 33, 0, 0, 0, 0, 0, 5, 38
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\NavbarComponents\Footer\Footer.module.css", "CSS", 0, 0, 0, 0, 14, 0, 0, 0, 2, 16
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\NavbarComponents\Footer\Footer.tsx", "TypeScript JSX", 0, 0, 13, 0, 0, 0, 0, 0, 1, 14
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\NavbarComponents\Navbar\Navbar.module.css", "CSS", 0, 0, 0, 0, 32, 0, 0, 0, 1, 33
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\NavbarComponents\Navbar\Navbar.tsx", "TypeScript JSX", 0, 0, 30, 0, 0, 0, 0, 0, 1, 31
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\RoomsPageComponents\RoomsPageCarousel.module.css", "CSS", 0, 0, 0, 0, 17, 0, 0, 8, 6, 31
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\RoomsPageComponents\RoomsPageCarousel.tsx", "TypeScript JSX", 0, 0, 38, 0, 0, 0, 0, 0, 0, 38
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\RoomsPageComponents\RoomsPageModal.module.css", "CSS", 0, 0, 0, 0, 48, 0, 0, 2, 11, 61
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\components\RoomsPageComponents\RoomsPageModal.tsx", "TypeScript JSX", 0, 0, 405, 0, 0, 0, 0, 15, 7, 427
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\index.css", "CSS", 0, 0, 0, 0, 27, 0, 0, 12, 7, 46
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\pages\AccountPage\AccountPage.module.css", "CSS", 0, 0, 0, 0, 0, 0, 0, 0, 4, 4
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\pages\AccountPage\AccountPage.tsx", "TypeScript JSX", 0, 0, -7, 0, 0, 0, 0, 0, 0, -7
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\pages\HomePage\HomePage.css", "CSS", 0, 0, 0, 0, 34, 0, 0, 15, 10, 59
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\pages\HomePage\HomePage.module.css", "CSS", 0, 0, 0, 0, 83, 0, 0, 8, 10, 101
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\pages\HomePage\HomePage.tsx", "TypeScript JSX", 0, 0, 89, 0, 0, 0, 0, 16, 6, 111
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\pages\OrderPage\OrderPage.module.css", "CSS", 0, 0, 0, 0, -7, 0, 0, 0, 0, -7
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\pages\OrderPage\OrderPage.tsx", "TypeScript JSX", 0, 0, 1, 0, 0, 0, 0, 0, 1, 2
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\pages\PetPage\PetPage.tsx", "TypeScript JSX", 0, 0, 6, 0, 0, 0, 0, 0, 0, 6
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\pages\RoomsPage\RoomsPage.module.css", "CSS", 0, 0, 0, 0, 57, 0, 0, 1, 7, 65
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\pages\RoomsPage\RoomsPage.tsx", "TypeScript JSX", 0, 0, 2, 0, 0, 0, 0, 0, 2, 4
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\redux\comment\async-action.ts", "TypeScript", 0, 0, 0, 0, 0, 18, 0, 0, 3, 21
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\redux\comment\commentSlice.ts", "TypeScript", 0, 0, 0, 0, 0, 19, 0, 0, 3, 22
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\redux\comment\types.ts", "TypeScript", 0, 0, 0, 0, 0, 13, 0, 0, 4, 17
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\redux\orderSlice.ts", "TypeScript", 0, 0, 0, 0, 0, 1, 0, 0, 0, 1
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\client\src\redux\store.ts", "TypeScript", 0, 0, 0, 0, 0, 4, 0, 0, 0, 4
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\server\db\migrations\4-20240304180118-create-order.js", "JavaScript", 3, 0, 0, 0, 0, 0, 0, 0, 0, 3
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\server\db\migrations\6-20240305104011-create-pet-image.js", "JavaScript", 1, 0, 0, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\server\db\migrations\9-20240307152058-create-comment.js", "JavaScript", 9, 0, 0, 0, 0, 0, 0, 0, 0, 9
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\server\db\models\comment.js", "JavaScript", 2, 0, 0, 0, 0, 0, 0, 0, 0, 2
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\server\db\models\order.js", "JavaScript", 1, 0, 0, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\server\db\models\user.js", "JavaScript", 1, 0, 0, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\server\db\seeders\20240311135258-seedUsers.js", "JavaScript", 44, 0, 0, 0, 0, 0, 0, 1, 2, 47
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\server\db\seeders\20240312134308-seedPets.js", "JavaScript", 34, 0, 0, 0, 0, 0, 0, 1, 3, 38
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\server\db\seeders\20240312134313-seedOrders.js", "JavaScript", 46, 0, 0, 0, 0, 0, 0, 1, 3, 50
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\server\package-lock.json", "JSON", 0, 390, 0, 0, 0, 0, 0, 0, 0, 390
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\server\routes\commentRoutes.js", "JavaScript", 32, 0, 0, 0, 0, 0, 0, 9, 5, 46
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\server\routes\orderRoutes.js", "JavaScript", 2, 0, 0, 0, 0, 0, 0, 0, 0, 2
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\server\routes\petsRoutes.js", "JavaScript", -15, 0, 0, 0, 0, 0, 0, 0, 0, -15
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\server\routes\stripeRoutes.js", "JavaScript", 24, 0, 0, 0, 0, 0, 0, 0, 0, 24
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\server\routes\usersRoutes.js", "JavaScript", 3, 0, 0, 0, 0, 0, 0, 0, 0, 3
+"c:\Users\jucki\OneDrive\Рабочий стол\Elbrus Folder\FINALPROJECT\zoo-hotel\server\server.js", "JavaScript", 2, 0, 0, 0, 0, 0, 0, 0, 0, 2
+"Total", "-", 189, 456, 1324, 12, 657, 55, 3, 106, 220, 3022

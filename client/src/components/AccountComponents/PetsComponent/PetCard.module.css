@@ -28,8 +28,8 @@
 }
 
 .photoContainer:hover .photoTwo {
-transform: translateX(110%);
-/* transition: 0.3s ease; */
+  transform: translateX(110%);
+  /* transition: 0.3s ease; */
 }
 
 .photoContainer:hover .photoThree {
@@ -39,8 +39,8 @@ transform: translateX(110%);
 
 .photoContainer {
   display: flex;
-  width: 1000px;
   position: relative;
+  width: 250px;
   /* flex-direction: row; */
 }
 
@@ -67,23 +67,22 @@ transform: translateX(110%);
   width: 200px;
   height: 200px;
   border-radius: 20px;
+  object-fit: cover;
 }
 .withoutButton {
   display: flex;
 }
 .withoutButton .info {
   padding: 20px 0;
-  margin-left: auto;
 }
 .info {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   margin-bottom: 10px;
   color: orange;
 }
 .editButton {
-  margin-right: 5px !important;
+  margin-right: 10px !important;
 }
 .iconCat {
   width: 30px;

@@ -89,18 +89,18 @@ export default function OrderCardList(): JSX.Element {
             {pet?.PetImages?.length !== 0 ? (
               <>
                 {pet?.PetImages[0] && (
-                  <div className={styles.photoOne}>
-                    <img src={`${import.meta.env.VITE_URL.slice(0, -3)}/img/pets/${pet?.PetImages[0]?.link}`} alt="imagePet" />
+                  <div className={styles.petImg}>
+                    <img className={styles.petImage} src={`${import.meta.env.VITE_URL.slice(0, -3)}/img/pets/${pet?.PetImages[0]?.link}`} alt="imagePet" />
                   </div>
                 )}
               </>
             ) : pet?.petType === 1 ? (
-              <div className={styles.photoOne}>
-                <img src="/catAvatar.png" alt="cat" />
+              <div className={styles.petImg}>
+                <img className={styles.petImage} src="/catAvatar.png" alt="cat" />
               </div>
             ) : (
-              <div className={styles.photoOne}>
-                <img src="/dogAvatar.png" alt="dog" />
+              <div className={styles.petImg}>
+                <img className={styles.petImage} src="/dogAvatar.png" alt="dog" />
               </div>
             )}
             <div className={styles.orderAbout}>

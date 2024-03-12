@@ -5,18 +5,8 @@ import { fetchAddNewPet, fetchCheckAllPets, fetchEditPet } from '../../../redux/
 import { useNavigate, useParams } from 'react-router-dom';
 import { ChangeEvent, useEffect, useState } from 'react';
 import axios from 'axios';
-import {
-  // Autocomplete,
-  FormControl,
-  FormControlLabel,
-  FormLabel,
-  Radio,
-  RadioGroup,
-  TextField,
-  styled,
-  Button,
-} from '@mui/material';
-import GlassWrapper from '../../GlassWrapper/GlassWrapper';
+import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, styled } from '@mui/material';
+
 import StyledTextfield from '../../GlassWrapper/StyledTextfield';
 import StyledButton from '../../GlassWrapper/StyledButton';
 
@@ -98,7 +88,7 @@ export default function PetForm(): JSX.Element {
 
     if (avatarPet) {
       const arrPetsImages = avatarPet.map((avatar) => {
-        return avatar.file;
+        return avatar?.file;
       });
       arrPetsImages.forEach((arr) => {
         data.append('pets', arr);
@@ -161,50 +151,50 @@ export default function PetForm(): JSX.Element {
       <div className={styles.inputsContainer}>
         <div className={styles.input}>
           <FormControl>
-            <FormLabel style={{ color: 'orange' }} id='demo-controlled-radio-buttons-group'>
+            <FormLabel style={{ color: 'orange' }} id="demo-controlled-radio-buttons-group">
               Вид животного
             </FormLabel>
-            <RadioGroup row aria-labelledby='demo-controlled-radio-buttons-group' name='petType' value={inputs.petType} onChange={(e) => handlerChange(e)}>
+            <RadioGroup row aria-labelledby="demo-controlled-radio-buttons-group" name="petType" value={inputs.petType} onChange={(e) => handlerChange(e)}>
               <FormControlLabel value={2} control={<OrangeRadio />} label={<span style={{ color: 'orange' }}>Собака</span>} />
               <FormControlLabel value={1} control={<OrangeRadio />} label={<span style={{ color: 'orange' }}>Кошка</span>} />
             </RadioGroup>
           </FormControl>
         </div>
         <div className={styles.input}>
-          <StyledTextfield fullWidth id='outlined-multiline-flexible' label='Кличка' name='petName' value={inputs.petName} onChange={(e) => handlerChange(e)} multiline maxRows={4} />
+          <StyledTextfield fullWidth id="outlined-multiline-flexible" label="Кличка" name="petName" value={inputs.petName} onChange={(e) => handlerChange(e)} multiline maxRows={4} />
         </div>
         <div className={styles.input}>
-          <StyledTextfield fullWidth id='outlined-multiline-flexible' name='petBreed' value={inputs.petBreed} onChange={(e) => handlerChange(e)} label='Порода' multiline maxRows={4} />
+          <StyledTextfield fullWidth id="outlined-multiline-flexible" name="petBreed" value={inputs.petBreed} onChange={(e) => handlerChange(e)} label="Порода" multiline maxRows={4} />
         </div>
         <div className={styles.input}>
           <FormControl>
-            <FormLabel style={{ color: 'orange' }} id='demo-controlled-radio-buttons-group'>
+            <FormLabel style={{ color: 'orange' }} id="demo-controlled-radio-buttons-group">
               Пол
             </FormLabel>
-            <RadioGroup row aria-labelledby='demo-controlled-radio-buttons-group' name='petGender' value={inputs.petGender} onChange={(e) => handlerChange(e)}>
-              <FormControlLabel value='Ж' control={<OrangeRadio />} label={<span style={{ color: 'orange' }}>Женский</span>} />
-              <FormControlLabel value='М' control={<OrangeRadio />} label={<span style={{ color: 'orange' }}>Мужской</span>} />
+            <RadioGroup row aria-labelledby="demo-controlled-radio-buttons-group" name="petGender" value={inputs.petGender} onChange={(e) => handlerChange(e)}>
+              <FormControlLabel value="Ж" control={<OrangeRadio />} label={<span style={{ color: 'orange' }}>Женский</span>} />
+              <FormControlLabel value="М" control={<OrangeRadio />} label={<span style={{ color: 'orange' }}>Мужской</span>} />
             </RadioGroup>
           </FormControl>
         </div>
         <div className={styles.input}>
           <StyledTextfield
             fullWidth
-            id='outlined-multiline-flexible'
-            name='petAge'
+            id="outlined-multiline-flexible"
+            name="petAge"
             value={inputs.petAge === 0 ? '' : inputs.petAge}
             onChange={(e) => handlerChange(e)}
-            label='Возраст в годах'
+            label="Возраст в годах"
             multiline
             maxRows={4}
           />
         </div>
         <div className={styles.input}>
           <FormControl>
-            <FormLabel style={{ color: 'orange' }} id='demo-controlled-radio-buttons-group'>
+            <FormLabel style={{ color: 'orange' }} id="demo-controlled-radio-buttons-group">
               Стерилизован(-a)
             </FormLabel>
-            <RadioGroup row aria-labelledby='demo-controlled-radio-buttons-group' name='petIsSprayed' value={inputs.petIsSprayed} onChange={(e) => handlerChange(e)}>
+            <RadioGroup row aria-labelledby="demo-controlled-radio-buttons-group" name="petIsSprayed" value={inputs.petIsSprayed} onChange={(e) => handlerChange(e)}>
               <FormControlLabel value={true} control={<OrangeRadio />} label={<span style={{ color: 'orange' }}>Да</span>} />
               <FormControlLabel value={false} control={<OrangeRadio />} label={<span style={{ color: 'orange' }}>Нет</span>} />
             </RadioGroup>
@@ -214,28 +204,30 @@ export default function PetForm(): JSX.Element {
           <StyledTextfield
             fullWidth
             multiline
-            id='outlined-basic'
-            label='Расскажите о питомце'
-            variant='outlined'
+            id="outlined-basic"
+            label="Расскажите о питомце"
+            variant="outlined"
             value={inputs.petAbout}
             onChange={(e) => handlerChange(e)}
-            name='petAbout'
+            name="petAbout"
             rows={4}
           />
         </div>
-        <div className={styles.input}></div>
-        <StyledButton component='label' role={undefined} variant='contained' tabIndex={-1}>
-          Загрузить фото питомца (до 3х фото)
-          <VisuallyHiddenInput type='file' name='pets' multiple accept='image/png, image/jpeg, image/jpg' onChange={(e: ChangeEvent<HTMLInputElement>) => onSelectFile(e)} />
-        </StyledButton>
-
-        <div className='images'>
+        <div className={styles.uploadInput}>
+          <StyledButton component="label" role={undefined} variant="contained" tabIndex={-1}>
+            Загрузить фото питомца (до 3х фото)
+            <VisuallyHiddenInput type="file" name="pets" multiple accept="image/png, image/jpeg, image/jpg" onChange={(e: ChangeEvent<HTMLInputElement>) => onSelectFile(e)} />
+          </StyledButton>
+        </div>
+        <div className={styles.uploadedImagesWrapper}>
           {selectedImages &&
             selectedImages.map((image, index) => {
               return index < 3 ? (
-                <div key={image} className='image'>
-                  <img src={image} height='200' alt='upload' />
-                  <button onClick={() => deleteHandler(image)}>delete image</button>
+                <div key={image} className={styles.uploadedImageWrapper}>
+                  <img src={image} height="200" alt="upload" className={styles.uploadedImage} />
+                  <button onClick={() => deleteHandler(image)} className={styles.uploadedImageDeleteBtn}>
+                    X
+                  </button>
                   <p>{index + 1}</p>
                 </div>
               ) : (
@@ -245,11 +237,11 @@ export default function PetForm(): JSX.Element {
         </div>
       </div>
       {pet ? (
-        <StyledButton onClick={() => void handlerEditPet()} variant='contained'>
+        <StyledButton onClick={() => void handlerEditPet()} variant="contained">
           Сохранить
         </StyledButton>
       ) : (
-        <StyledButton onClick={() => void handlerAddNewPet()} variant='contained'>
+        <StyledButton onClick={() => void handlerAddNewPet()} variant="contained">
           Создать
         </StyledButton>
       )}

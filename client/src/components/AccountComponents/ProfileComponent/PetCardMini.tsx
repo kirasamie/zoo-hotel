@@ -12,15 +12,15 @@ export default function PetCardMini({ pet }: { pet: PetItemType }) {
         <div>
           {pet?.PetImages?.length !== 0 ? (
             <div className={styles.photo}>
-              <img src={`${import.meta.env.VITE_URL.slice(0, -3)}/img/pets/${pet?.PetImages[0]?.link}`} alt='imagePet' />
+              <img className={styles.photoImg} src={`${import.meta.env.VITE_URL.slice(0, -3)}/img/pets/${pet?.PetImages[0]?.link}`} alt="imagePet" />
             </div>
           ) : pet?.petType === 1 ? (
             <div className={styles.photo}>
-              <img src='/catAvatar.png' alt='cat' />
+              <img src="/catAvatar.png" alt="cat" />
             </div>
           ) : (
             <div className={styles.photo}>
-              <img src='/dogAvatar.png' alt='dog' />
+              <img src="/dogAvatar.png" alt="dog" />
             </div>
           )}
         </div>

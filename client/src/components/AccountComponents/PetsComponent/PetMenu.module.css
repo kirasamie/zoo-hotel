@@ -1,9 +1,11 @@
 .menu {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  padding: 15px;
+  align-items: center;
+  gap: 20px;
+  padding: 0 10px;
   height: 100%;
+  width: 100%;
   max-height: 70vh;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -38,14 +40,12 @@
   width: 35px;
   height: 35px;
   margin-right: 5px;
-  
 }
 .iconText {
   display: flex;
   align-items: center;
   color: orange;
   transition: 150ms;
- 
 }
 
 .link {
@@ -54,5 +54,5 @@
 }
 
 .link:hover {
-scale: 1.1;
+  scale: 1.1;
 }

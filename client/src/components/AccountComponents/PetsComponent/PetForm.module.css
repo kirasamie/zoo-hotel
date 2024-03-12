@@ -1,7 +1,30 @@
 .form {
   display: flex;
   flex-direction: column;
-  align-items:center;
+  align-items: center;
+  height: 70vh;
+  width: 70%;
+  overflow-y: scroll;
+}
+
+.form::-webkit-scrollbar {
+  background-color: #121212;
+  border-radius: 4px;
+  width: 10px;
+}
+
+.form::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+.form::-webkit-scrollbar-thumb {
+  background: #f6ae2d;
+  border-radius: 4px;
+  border: 1px solid #121212;
+}
+
+.form::-webkit-scrollbar-thumb:hover {
+  background: #ffc862;
 }
 
 .inputsContainer {
@@ -10,4 +33,49 @@
 }
 .input {
   margin: 15px;
+}
+
+.uploadInput {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.uploadedImagesWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+}
+
+.uploadedImageWrapper {
+  margin-top: 20px;
+  position: relative;
+  height: 200px;
+  width: 200px;
+}
+
+.uploadedImage {
+  position: absolute;
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.uploadedImageDeleteBtn {
+  position: absolute;
+  height: 200px;
+  width: 200px;
+  opacity: 0;
+  transition: 0.3s;
+  border-radius: 20px;
+  background-color: black;
+  border: none;
+  color: white;
+  font-size: 30px;
+}
+
+.uploadedImageDeleteBtn:hover {
+  opacity: 0.4;
 }

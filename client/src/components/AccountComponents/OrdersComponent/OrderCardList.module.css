@@ -14,6 +14,8 @@
   height: 200px;
   width: 200px;
   overflow: hidden;
+  object-fit: cover;
+  border-radius: 20px;
 }
 
 .petImg {

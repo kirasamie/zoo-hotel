@@ -53,29 +53,29 @@ export default function PetCard() {
             <>
               {pet?.PetImages[0] && (
                 <div className={styles.photoOne}>
-                  <img src={`${import.meta.env.VITE_URL.slice(0, -3)}/img/pets/${pet?.PetImages[0]?.link}`} alt='imagePet' />
+                  <img className={styles.photoPet} src={`${import.meta.env.VITE_URL.slice(0, -3)}/img/pets/${pet?.PetImages[0]?.link}`} alt='imagePet' />
                 </div>
               )}
 
               {pet?.PetImages[1] && (
                 <div className={styles.photoTwo}>
-                  <img src={`${import.meta.env.VITE_URL.slice(0, -3)}/img/pets/${pet?.PetImages[1]?.link}`} alt='imagePet' />
+                  <img  className={styles.photoPet} src={`${import.meta.env.VITE_URL.slice(0, -3)}/img/pets/${pet?.PetImages[1]?.link}`} alt='imagePet' />
                 </div>
               )}
 
               {pet?.PetImages[2] && (
                 <div className={styles.photoThree}>
-                  <img src={`${import.meta.env.VITE_URL.slice(0, -3)}/img/pets/${pet?.PetImages[2]?.link}`} alt='imagePet' />
+                  <img  className={styles.photoPet} src={`${import.meta.env.VITE_URL.slice(0, -3)}/img/pets/${pet?.PetImages[2]?.link}`} alt='imagePet' />
                 </div>
               )}
             </>
           ) : pet?.petType === 1 ? (
             <div className={styles.photoOne}>
-              <img src='/catAvatar.png' alt='cat' />
+              <img className={styles.photoPet} src='/catAvatar.png' alt='cat' />
             </div>
           ) : (
             <div className={styles.photoOne}>
-              <img src='/dogAvatar.png' alt='dog' />
+              <img className={styles.photoPet} src='/dogAvatar.png' alt='dog' />
             </div>
           )}
         </div>

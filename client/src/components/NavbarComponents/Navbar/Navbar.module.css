@@ -21,6 +21,14 @@ footer {
   width: 60px;
   transition: 200ms;
 }
+
+.logoAvatar {
+  height: 53px;
+  width: 53px;
+  border-radius: 100%;
+  border: 1px solid orange;
+}
+
 .logoContainer {
   display: flex;
 align-items: center;

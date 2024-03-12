@@ -5,7 +5,11 @@
   padding: 25px;
   display: flex;
   flex-direction: column;
-  
+  gap: 10px;
+}
+
+.container .buttonContainer {
+  align-self: center;
 }
 
 .photos {
@@ -23,9 +27,53 @@
   background-position: center;
 }
 
+.photoContainer:hover .photoTwo {
+transform: translateX(110%);
+/* transition: 0.3s ease; */
+}
+
+.photoContainer:hover .photoThree {
+  transform: translateX(220%);
+  /* transition: 0.5s ease; */
+}
+
+.photoContainer {
+  display: flex;
+  width: 1000px;
+  position: relative;
+  /* flex-direction: row; */
+}
+
+.photoOne,
+.photoTwo,
+.photoThree {
+  position: absolute;
+  transition: 0.3s ease;
+}
+
+.photoOne {
+  position: absolute;
+  z-index: 1;
+}
+
+.photoTwo {
+  position: absolute;
+}
+.photoThree {
+  position: absolute;
+}
+
 img {
   width: 200px;
   height: 200px;
+  border-radius: 20px;
+}
+.withoutButton {
+  display: flex;
+}
+.withoutButton .info {
+  padding: 20px 0;
+  margin-left: auto;
 }
 .info {
   display: flex;

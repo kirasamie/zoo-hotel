@@ -7,7 +7,7 @@ export default function OrderPage(): JSX.Element {
   return (
     <div className={styles.container}>
       <div styles={{ maxHeight: '70vh' }}>
-        <GlassWrapper width='300px'>
+        <GlassWrapper width="300px" padding={'6px'}>
           <OrdersComponent />
         </GlassWrapper>
       </div>

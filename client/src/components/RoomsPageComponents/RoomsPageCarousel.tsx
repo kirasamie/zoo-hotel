@@ -11,7 +11,6 @@ import { useTheme } from '@mui/material/styles';
 import type { RoomType } from '../../types';
 import styles from './RoomsPageCarousel.module.css';
 import Box from '@mui/material/Box';
-import GlassWrapper from '../GlassWrapper/GlassWrapper';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 

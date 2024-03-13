@@ -18,16 +18,40 @@
   border-radius: 20px;
 }
 
+.clientPetImage {
+  height: 90px;
+  width: 90px;
+  overflow: hidden;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.clientOrderInfoWrapper {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  padding-bottom: 10px;
+  margin-left: 20px;
+}
+
+.clientAddServices {
+  padding-top: 10px;
+  margin-left: 20px;
+}
+
 .petImg {
   object-fit: cover;
   border-radius: 20px;
 }
 
-.orderAbout {
+.clientOrderAbout {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-left: 10px;
 }
 
 .orderAboutHeader {

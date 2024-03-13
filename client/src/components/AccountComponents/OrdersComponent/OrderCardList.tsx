@@ -82,19 +82,19 @@ export default function OrderCardList(): JSX.Element {
   }, [order]);
 
   return (
-    <div>
+    <div style={{ height: '100%' }}>
       <div className={styles.orderInfo}>
         <CardGlassWrapper styles={{ justifyContent: 'flex-start' }}>
           <div className={styles.orderInfoInnerWrapper}>
-            {pet?.PetImages?.length !== 0 ? (
+            {order?.Pet?.PetImages?.length !== 0 ? (
               <>
-                {pet?.PetImages[0] && (
+                {order?.Pet?.PetImages[0] && (
                   <div className={styles.petImg}>
-                    <img className={styles.petImage} src={`${import.meta.env.VITE_URL.slice(0, -3)}/img/pets/${pet?.PetImages[0]?.link}`} alt="imagePet" />
+                    <img className={styles.petImage} src={`${import.meta.env.VITE_URL.slice(0, -3)}/img/pets/${order?.Pet?.PetImages[0]?.link}`} alt="imagePet" />
                   </div>
                 )}
               </>
-            ) : pet?.petType === 1 ? (
+            ) : order?.Pet?.petType === 1 ? (
               <div className={styles.petImg}>
                 <img className={styles.petImage} src="/catAvatar.png" alt="cat" />
               </div>
@@ -103,7 +103,8 @@ export default function OrderCardList(): JSX.Element {
                 <img className={styles.petImage} src="/dogAvatar.png" alt="dog" />
               </div>
             )}
-            <div className={styles.orderAbout}>
+
+            <div className={styles.clientOrderAbout}>
               <div>
                 <h3 className={styles.orderAboutHeader}>Информация о заказе</h3>
                 <p>
@@ -182,13 +183,17 @@ export default function OrderCardList(): JSX.Element {
           modules={[Keyboard]}
           className="swiperPosts"
         >
-          {posts.length
-            ? posts.map((post) => (
-                <SwiperSlide key={post.id} className="swiperSlidePost">
-                  <OrderCard key={post.id} post={post} />
-                </SwiperSlide>
-              ))
-            : null}
+          {posts.length ? (
+            posts.map((post) => (
+              <SwiperSlide key={post.id} className="swiperSlidePost">
+                <OrderCard key={post.id} post={post} />
+              </SwiperSlide>
+            ))
+          ) : (
+            <CardGlassWrapper style={{ alignSelf: 'center' }}>
+              <h3 style={{ color: 'orange' }}>Похоже, у питомца по кличке {order?.Pet?.petName} пока нет постов.</h3>
+            </CardGlassWrapper>
+          )}
         </Swiper>
       </div>
     </div>

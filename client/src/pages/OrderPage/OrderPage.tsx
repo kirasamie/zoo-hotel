@@ -6,10 +6,11 @@ import GlassWrapper from '../../components/GlassWrapper/GlassWrapper';
 export default function OrderPage(): JSX.Element {
   return (
     <div className={styles.container}>
-      <GlassWrapper width="300px">
-        <OrdersComponent />
-      </GlassWrapper>
-
+      <div styles={{ maxHeight: '70vh' }}>
+        <GlassWrapper width='300px'>
+          <OrdersComponent />
+        </GlassWrapper>
+      </div>
       <GlassWrapper>
         <Outlet />
       </GlassWrapper>

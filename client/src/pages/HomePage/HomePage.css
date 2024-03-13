@@ -39,7 +39,7 @@ body {
   top: 40px;
   left: 40px;
   width: 400px;
-  height: 220px;
+  height: 200px;
   z-index: 2;
   padding: 20px 40px;
 }
@@ -50,12 +50,11 @@ body {
   top: 40px;
   left: 40px;
   width: 400px;
-  height: 220px;
+  height: 200px;
   z-index: 2;
   opacity: 0.4;
   background-color: black;
 }
-
 
 /* h1 {
   font-weight: 300;
@@ -140,13 +139,16 @@ a {
 
 .home-steps-wrapper {
   height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .home-steps-card-wrapper {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  height: 100%;
+  width: 100%;
 }
 
 .home-steps-card {
@@ -193,7 +195,8 @@ a {
 .ya-map-wrapper {
   display: flex;
   justify-content: center;
-  padding-bottom: 20px;
+  padding-bottom: 40px;
+  border-radius: 20px;
 }
 
 .ya-map {
@@ -214,13 +217,11 @@ a {
   margin: 10px auto;
 }
 
-ymaps[class$="balloon"] {
-box-shadow: none;
-border: 1px solid red;
+ymaps[class$='balloon'] {
+  box-shadow: none;
 }
 
-
-ymaps[class$="balloon__content"] {
+ymaps[class$='balloon__content'] {
   background: url('/background-filler-v2.png') fixed;
   background-size: contain;
   width: 100%;
@@ -239,22 +240,21 @@ ymaps[class$="balloon__content"] {
   /* flex: 1 1 auto; */
 }
 
-ymaps[class$="balloon__layout"] {
+ymaps[class$='balloon__layout'] {
   border: 3px solid orange;
   /* border-radius: 20px; */
-  width: 200px;
+  width: 300px;
 }
 
-
-ymaps[class$="balloon__close-button"] {
+ymaps[class$='balloon__close-button'] {
   margin: 6px 3px;
-   border: 2px solid black;
-   height: 20px;
-   border-radius: 15px;
+  border: 2px solid black;
+  height: 20px;
+  border-radius: 15px;
   background-color: orange;
 }
 
-ymaps[class$="balloon__close-button"] ::after {
+ymaps[class$='balloon__close-button'] ::after {
   background-color: orange;
 }
 
@@ -267,8 +267,7 @@ ymaps[class$="balloon__close-button"] ::after {
   background-color: rgba(0, 0, 0, 0.8);
 } */
 
-
-ymaps[class$="balloon__tail"]::after {
+ymaps[class$='balloon__tail']::after {
   opacity: 0.3;
   /* display: none; */
   background-color: rgba(0, 0, 0, 0.8);

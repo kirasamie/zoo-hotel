@@ -50,11 +50,11 @@ const OrderCard = React.memo(({ post }: PostPropsType) => {
         <div className={styles.postInfo}>
           <h3 className={styles.postHeader}>{post.title}</h3>
           <div className={styles.postImageWrapper}>
-            <img className={styles.postImage} src={`${import.meta.env.VITE_URL.slice(0, -3)}/img/posts/${post.postPhotoLink}`} alt="post photo" />
+            <img className={styles.postImage} src={`${import.meta.env.VITE_URL.slice(0, -3)}/img/posts/${post.postPhotoLink}`} alt='post photo' />
           </div>
           <p className={styles.postBody}>{post.body}</p>
           <div className={styles.postFooter}>
-            <div className="time">{getFancyDate(post.createdAt)}</div>
+            <div className='time'>{getFancyDate(post.createdAt)}</div>
             <div>
               Работник:{' '}
               <span style={{ color: 'white' }}>
@@ -72,7 +72,15 @@ const OrderCard = React.memo(({ post }: PostPropsType) => {
               <li key={comment.id} className={user.id === comment.userId ? styles.chatMessageWrapperRight : styles.chatMessageWrapperLeft}>
                 <div className={user.id === comment.userId ? styles.chatMessageRight : styles.chatMessageLeft}>
                   <div className={styles.userAvatarWrapper}>
-                    <img className={styles.userAvatar} src={`${import.meta.env.VITE_URL.slice(0, -3)}img/avatars/${comment.User?.avatar}`} alt="logotype" />
+                    {/* <img className={styles.userAvatar} src={`${import.meta.env.VITE_URL.slice(0, -3)}img/avatars/${comment.User?.avatar}`} alt="logotype" />
+                     */}
+                    {comment.User?.avatar ? (
+                      <img className={styles.userAvatar} src={`${import.meta.env.VITE_URL.slice(0, -3)}/img/avatars/${comment.User?.avatar}`} alt='imageUser' />
+                    ) : user.isWorker ? (
+                      <img className={styles.userAvatar} src='/worker.png' alt='imageUser' />
+                    ) : (
+                      <img className={styles.userAvatar} src='/user.png' alt='imageUser' />
+                    )}
                   </div>
                   <div className={styles.chatMessage}>
                     <span data-worker={`${comment.User.isWorker}`} className={`${user.id === comment.userId ? styles.chatUserNameRight : styles.chatUserNameLeft} ${styles.chatUserName}`}>
@@ -91,8 +99,8 @@ const OrderCard = React.memo(({ post }: PostPropsType) => {
         <div className={styles.horizontalDivider}></div>
 
         <div className={styles.commentForm}>
-            <StyledTextfield label="Ваш комментарий" onChange={(e: HTMLInputElement) => void handlerChange(e)} name="body" value={input.body}/>
-            <StyledButton onClick={() => void handlerAddComment()}>Отправить</StyledButton>
+          <StyledTextfield label='Ваш комментарий' onChange={(e: HTMLInputElement) => void handlerChange(e)} name='body' value={input.body} />
+          <StyledButton onClick={() => void handlerAddComment()}>Отправить</StyledButton>
         </div>
       </CardGlassWrapper>
     </>

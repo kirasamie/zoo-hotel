@@ -15,7 +15,7 @@ const handlerUp = () => {
     left: 0,
     behavior: 'smooth',
   });
-}
+};
 
 export default function HomePage(): JSX.Element {
   const arrImages = ['one.png', 'two.png', 'three.png', 'fourd.jpg', 'five.png', 'six.png', 'seven.png', 'eight.png'];
@@ -23,19 +23,19 @@ export default function HomePage(): JSX.Element {
   return (
     <>
       <div className={styles.mainBackground}></div>
-      <div className='textContainerLeft'></div>
-      <div className='landing__info align__left'>
-        <h1 className='textContent'>ZOoтель</h1>
-        <p className='textContent'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error aut ea fuga cum? Odit, sed culpa harum laborum excepturi quibusdam!</p>
+      <div className="textContainerLeft"></div>
+      <div className="landing__info align__left">
+        <h1 className="textContent">ZOoтель</h1>
+        <p className="textContent">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error aut ea fuga cum? Odit, sed culpa harum laborum excepturi quibusdam!</p>
         <br />
-        <button className='textContent'>
-          <a href='#/'>Забронировать комнату</a>
+        <button className="textContent">
+          <a href="#/">Забронировать комнату</a>
         </button>
       </div>
 
-      <div className='body'>
-        <section className='container__center' id='landing__area'>
-          <div className='landing__content center__row'>
+      <div className="body">
+        <section className="container__center" id="landing__area">
+          <div className="landing__content center__row">
             <Swiper
               autoplay={{
                 delay: 2500,
@@ -45,12 +45,12 @@ export default function HomePage(): JSX.Element {
                 clickable: true,
               }}
               modules={[Autoplay, Pagination]}
-              className='mySwiper'
+              className="mySwiper"
             >
               {arrImages.map((image) => (
                 <SwiperSlide key={image}>
-                  <div className='image__pet'>
-                    <img src={`./img/main/${image}`} alt='animal' />
+                  <div className="image__pet">
+                    <img src={`./img/main/${image}`} alt="animal" />
                   </div>
                 </SwiperSlide>
               ))}
@@ -61,46 +61,46 @@ export default function HomePage(): JSX.Element {
 
       <div className={styles.homePageShader}></div>
 
-      <GlassWrapper width='90vw'>
-        <div className='home-steps-wrapper'>
+      <GlassWrapper width="90vw">
+        <div className="home-steps-wrapper">
           <h2>Для того, чтобы начать пользоваться нашим сервисом нужно сделать три простых шага:</h2>
-          <div className='home-steps-card-wrapper' style={{ gap: '10px' }}>
-            <CardGlassWrapper width='450px'>
-              <div className='step step-1' />
+          <div className={styles.homeStepsCardWrapper}>
+            <CardGlassWrapper width="25vw">
+              <div className="step step-1" />
               <h3>Шаг 1:</h3>
               <div>
-                <img className={styles.imgForm} src='/img/reg.png' alt='reg' />
+                <img className={styles.imgForm} src="/img/step-1.png" alt="reg" />
               </div>
-              <div>
-                <p style={{ color: 'white' }}>Ознакомьтесь с правилами и зарегистрируйтесь</p>
+              <div className={styles.stepParagraphWrapper}>
+                <p style={{ color: 'white', textAlign: 'center' }}>Ознакомьтесь с правилами и зарегистрируйтесь</p>
               </div>
             </CardGlassWrapper>
 
-            <CardGlassWrapper width='450px'>
-              <div className='step step-2' />
+            <CardGlassWrapper width="25vw">
+              <div className="step step-2" />
               <h3>Шаг 2:</h3>
               <div>
-                <img className={styles.imgForm} src='/img/petForm.png' alt='reg' />
+                <img className={styles.imgForm} src="/img/step-2.png" alt="reg" />
               </div>
-              <div>
-                <p style={{ color: 'white' }}>Заполните карточку вашего четвероного друга в личном кабинете</p>
+              <div className={styles.stepParagraphWrapper}>
+                <p style={{ color: 'white', textAlign: 'center' }}>Заполните карточку вашего четвероногого друга в личном кабинете</p>
               </div>
             </CardGlassWrapper>
 
-            <CardGlassWrapper width='450px'>
-              <div className='step step-3' />
+            <CardGlassWrapper width="25vw">
+              <div className="step step-3" />
               <h3>Шаг 3:</h3>
               <div>
-                <img className={styles.imgForm} src='/img/petForm.png' alt='reg' />
+                <img className={styles.imgForm} src="/img/step-3.png" alt="reg" />
               </div>
-              <div>
-                <p style={{ color: 'white' }}>Забронируйте комнату в нашем отеле!</p>
+              <div className={styles.stepParagraphWrapper}>
+                <p style={{ color: 'white', textAlign: 'center' }}>Забронируйте комнату в нашем отеле!</p>
               </div>
             </CardGlassWrapper>
           </div>
         </div>
       </GlassWrapper>
-      <GlassWrapper width='90vw'>
+      <GlassWrapper width="90vw">
         <div className={styles.servicesContainer}>
           <h2 className={styles.servHeader2}>Наши услуги</h2>
           <h3 className={styles.servHeader3}>Преимущества ZooHotel</h3>
@@ -108,7 +108,7 @@ export default function HomePage(): JSX.Element {
             <CardGlassWrapper>
               <div className={styles.iconText}>
                 <div className={styles.imgWrapper}>
-                  <img className={styles.img} src='/img/room.png' alt='dog' />
+                  <img className={styles.img} src="/img/room.png" alt="dog" />
                 </div>
                 <p className={styles.servHeader}>Индивидуальные комнатки</p>
                 <p className={styles.servContent}>Комфорт и уход, достойный вашего питомца</p>
@@ -117,7 +117,7 @@ export default function HomePage(): JSX.Element {
             <CardGlassWrapper>
               <div className={styles.iconText}>
                 <div className={styles.imgWrapper}>
-                  <img className={styles.img} src='/img/walkingDog.png' alt='dog' />
+                  <img className={styles.img} src="/img/walkingDog.png" alt="dog" />
                 </div>
                 <p className={styles.servHeader}>Выгул 2-3 раза в день</p>
                 <p className={styles.servContent}>Ваш питомец не останется без внимания</p>
@@ -126,7 +126,7 @@ export default function HomePage(): JSX.Element {
             <CardGlassWrapper>
               <div className={styles.iconText}>
                 <div className={styles.imgWrapper}>
-                  <img className={styles.img} src='/img/camera.png' alt='camera' />
+                  <img className={styles.img} src="/img/camera.png" alt="camera" />
                 </div>
                 <p className={styles.servHeader}>Фото-отчет ежедневно</p>
                 <p className={styles.servContent}>Постоянная связь и визуальная информация о вашем друге</p>
@@ -135,7 +135,7 @@ export default function HomePage(): JSX.Element {
             <CardGlassWrapper>
               <div className={styles.iconText}>
                 <div className={styles.imgWrapper}>
-                  <img className={styles.img} src='/img/dogFood.png' alt='dogFood' />
+                  <img className={styles.img} src="/img/dogFood.png" alt="dogFood" />
                 </div>
                 <p className={styles.servHeader}>Миски и лежанки</p>
                 <p className={styles.servContent}>Питательный рацион и отличный отдых для любых пород собак и кошек</p>
@@ -145,10 +145,10 @@ export default function HomePage(): JSX.Element {
               <div className={styles.iconText}>
                 <div className={styles.imgWrapper}>
                   <div className={styles.iconContainer}>
-                    <img className={styles.imgIcon} src='/img/groom.png' alt='dogFood' />
+                    <img className={styles.imgIcon} src="/img/groom.png" alt="dogFood" />
                     <div>
-                      <img className={styles.imgIcon} src='/img/training.png' alt='dogFood' />
-                      <img className={styles.imgIcon} src='/img/taxi.png' alt='dogFood' />
+                      <img className={styles.imgIcon} src="/img/training.png" alt="dogFood" />
+                      <img className={styles.imgIcon} src="/img/taxi.png" alt="dogFood" />
                     </div>
                   </div>
                 </div>
@@ -159,7 +159,7 @@ export default function HomePage(): JSX.Element {
           </div>
         </div>
       </GlassWrapper>
-      
+
       {/* <GlassWrapper width="90vw">
         <div className={styles.servicesContainer}>
           <h2 className={styles.servHeader2}>
@@ -175,13 +175,13 @@ export default function HomePage(): JSX.Element {
         </div>
       </GlassWrapper> */}
 
-      <GlassWrapper width='90vw' style={{ marginBottom: '200px' }}>
+      <GlassWrapper width="90vw" style={{ marginBottom: '100px' }}>
         <h2 className={styles.servHeader2}>Мы на карте</h2>
         <h3 className={styles.servHeader3}>Лорем хренем ипсум шмипсум бибиди бобиди бум</h3>
         <YMaps>
-          <div className='ya-map-wrapper'>
+          <div className="ya-map-wrapper">
             <Map
-              className='ya-map'
+              className="ya-map"
               defaultState={{
                 center: [46.287837853706414, 47.94919350240244],
                 zoom: 13,

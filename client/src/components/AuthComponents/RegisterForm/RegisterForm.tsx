@@ -204,23 +204,23 @@ export default function RegisterForm({ setIsLogin }): JSX.Element {
   };
 
   return (
-    <div className='authContainer'>
-      <GlassWrapper width='600px'>
-        <StyledTextfield error={!!showError.firstName} helperText={showError.firstName} label='Ваше имя' type='text' name='firstName' onChange={(e) => void handlerChange(e)} />
-        <StyledTextfield error={!!showError.lastName} helperText={showError.lastName} label='Ваша фамилия' type='text' name='lastName' onChange={(e) => void handlerChange(e)} />
+    <div className="authContainer">
+      <GlassWrapper width="600px">
+        <StyledTextfield error={!!showError.firstName} helperText={showError.firstName} label="Ваше имя" type="text" name="firstName" onChange={(e) => void handlerChange(e)} />
+        <StyledTextfield error={!!showError.lastName} helperText={showError.lastName} label="Ваша фамилия" type="text" name="lastName" onChange={(e) => void handlerChange(e)} />
         <StyledTextfield
           error={!!showError.phone}
           helperText={showError.phone}
-          label='Контактный номер телефона'
+          label="Контактный номер телефона"
           sx={{
             color: 'white',
           }}
-          type='text'
-          name='phone'
+          type="text"
+          name="phone"
           onChange={(e) => void handlerChange(e)}
         />
-        <StyledTextfield error={!!showError.email} helperText={showError.email} label='Email' type='text' name='email' onChange={(e) => void handlerChange(e)} />
-        <StyledTextfield error={!!showError.password} helperText={showError.password} label='Пароль' type='password' name='password' onChange={(e) => void handlerChange(e)} />
+        <StyledTextfield error={!!showError.email} helperText={showError.email} label="Email" type="text" name="email" onChange={(e) => void handlerChange(e)} />
+        <StyledTextfield error={!!showError.password} helperText={showError.password} label="Пароль" type="password" name="password" onChange={(e) => void handlerChange(e)} />
         <div
           style={{
             display: 'flex',
@@ -229,15 +229,15 @@ export default function RegisterForm({ setIsLogin }): JSX.Element {
             width: '100%',
           }}
         >
-          <StyledTextfield disabled type='text' name='avatar' value={avatarFile?.name || 'Файл не выбран'} onChange={(e) => void handlerChange(e)} />
-          <StyledButton sx={{ width: '300px' }} component='label' role={undefined} tabIndex={-1} startIcon={<CloudUploadIcon />} disableElevation>
+          <StyledTextfield disabled type="text" name="avatar" value={avatarFile?.name || 'Файл не выбран'} onChange={(e) => void handlerChange(e)} />
+          <StyledButton sx={{ width: '300px' }} component="label" role={undefined} tabIndex={-1} startIcon={<CloudUploadIcon />} disableElevation>
             Загрузить аватар
-            <VisuallyHiddenInput type='file' name='avatar' accept='image/png, image/jpeg, image/jpg' onChange={(e: ChangeEvent<HTMLInputElement>) => void setAvatarFile(e.target.files[0])} />
+            <VisuallyHiddenInput type="file" name="avatar" accept="image/png, image/jpeg, image/jpg" onChange={(e: ChangeEvent<HTMLInputElement>) => void setAvatarFile(e.target.files[0])} />
           </StyledButton>
         </div>
         <div>
           <FormControlLabel
-            name='checkBox'
+            name="checkBox"
             sx={{ color: 'orange' }}
             onChange={(e) => void setOptionInput((prev) => ({ ...prev, [e.target.name]: e.target.checked }))}
             checked={optionInput['checkBox']}
@@ -252,18 +252,18 @@ export default function RegisterForm({ setIsLogin }): JSX.Element {
                     color: 'white',
                   },
                 }}
-                size='medium'
+                size="medium"
               />
             }
-            label='Согласен с рассылкой уведомлений от сайта ZOoHotel'
+            label="Согласен с рассылкой уведомлений от сайта ZOoHotel"
           />
           <h4 style={{ color: '#d32f2f', textAlign: 'center', textDecoration: 'none' }}>{showError.checkBoxCheck}</h4>
         </div>
         <div style={{ color: '#d32f2f' }}>
-          <ReCAPTCHA theme='dark' sitekey='6LfClZApAAAAAHWVRUGDt1nEt451W4Le8kHU_7lN' />
+          <ReCAPTCHA theme="dark" sitekey="6LfClZApAAAAAHWVRUGDt1nEt451W4Le8kHU_7lN" />
           <h4 style={{ color: '#d32f2f', textAlign: 'center', textDecoration: 'none' }}>{showError.captchaReponse}</h4>
         </div>
-        <StyledButton color='success' onClick={() => void handlerSendMessage()}>
+        <StyledButton color="success" onClick={() => void handlerSendMessage()}>
           Регистрация
         </StyledButton>
         <StyledButton onClick={() => setIsLogin(true)}>Уже зарегистрированы? Войти</StyledButton>
@@ -283,7 +283,6 @@ export default function RegisterForm({ setIsLogin }): JSX.Element {
                 alignItems: 'center',
                 borderRadius: '20px',
                 padding: '20px',
-                gap: '10px',
                 boxShadow: '-5px 5px 20px 1px black',
                 flex: '1 1 auto',
               },
@@ -293,10 +292,10 @@ export default function RegisterForm({ setIsLogin }): JSX.Element {
           >
             <DialogTitle sx={{ textAlign: 'center', color: 'orange', fontWeight: 'bolder' }}>Регистрация</DialogTitle>
             <DialogContent>
-              <DialogContentText sx={{ color: 'orange' }}>
-                Для завершения регистрации, необходимо подтвердить код-подтверждения, отправленный на электронную почту <span style={{ fontWeight: 'bolder' }}>"{inputs.email}"</span>.
+              <DialogContentText sx={{ color: 'orange', textAlign: 'center', marginBottom: '10px' }}>
+                Для завершения регистрации, необходимо ввести код-подтверждение, отправленный на электронную почту <span style={{ fontWeight: 'bolder' }}>"{inputs.email}"</span>.
               </DialogContentText>
-              <StyledTextfield autoFocus required margin='dense' id='name' name='secretWord' label='Введите код-подтверждения' type='text' fullWidth />
+              <StyledTextfield autoFocus required margin="dense" id="name" name="secretWord" label="Введите код-подтверждения" type="text" fullWidth />
             </DialogContent>
             <DialogActions>
               <StyledButton onClick={() => void handlerClose()}>Отменить</StyledButton>

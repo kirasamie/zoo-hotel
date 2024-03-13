@@ -12,12 +12,12 @@ export default function PetPage(): JSX.Element {
   return (
     <div className={styles.container}>
       <div className={styles.menu}>
-        <GlassWrapper width='100%' style={{ maxHeight: '100%' }}>
+        <GlassWrapper width="300px" style={{ maxHeight: '100%' }}>
           <PetMenu />
         </GlassWrapper>
       </div>
-      <GlassWrapper width='60vw'>
-      {pets?.length !== 0 && <h3 style={{ color: 'orange' }}>Вы можете выбрать любую карточку питомца для просмотра</h3> }
+      <GlassWrapper width="60vw">
+        {pets?.length !== 0 && <h3 style={{ color: 'orange' }}>Вы можете выбрать любую карточку питомца для просмотра</h3>}
         <Outlet />
       </GlassWrapper>
     </div>

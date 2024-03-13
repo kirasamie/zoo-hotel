@@ -147,3 +147,23 @@
   justify-content: flex-end;
   align-items: center;
 }
+.reservationBtn {
+  color: white !important;
+  text-decoration: none;
+  text-shadow: 0 1px 2px #000000;
+  font-weight: bold;
+ 
+}
+.reservationBtn:hover {
+  background-color: #ffc862;
+      border-color: #0062cc;
+      box-shadow: none;
+}
+.reservationBtn:active {
+  box-shadow: none;
+      background-color: #ffa600;
+      border-color: #d38900;
+}
+.btnReservation {
+  margin-top: 15px !important;
+}

@@ -44,13 +44,6 @@ router.post('/', async (req, res) => {
     }));
     const lineItems = [mainItem, ...additionalItems]
     try {
-      const session = await stripe.checkout.sessions.create({
-        payment_method_types: ['card'],
-        line_items: lineItems,
-        mode: 'payment',
-        success_url: FRONT_SUCCESS_URL,
-        cancel_url: FRONT_CANCEL_URL,
-      });
       const order = await Order.create({
         orderUserId: mainOrder.userId,
         orderPetId: mainOrder.petId,
@@ -60,6 +53,13 @@ router.post('/', async (req, res) => {
         addInfo: mainOrder?.description,
         addServices: additionalOrders.map((el) => el[0]).join(''),
         paymentStatus: false,
+      });
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        line_items: lineItems,
+        mode: 'payment',
+        success_url: `${FRONT_SUCCESS_URL}/${order.id}`,
+        cancel_url: FRONT_CANCEL_URL,
       });
       res.json({ id: session.id, order });
     } catch (error) {

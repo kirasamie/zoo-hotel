@@ -45,6 +45,22 @@
   text-align: center;
 }
 
+.servHeaderWrapper {
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.servContentWrapper {
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .servContent {
   font-size: 16px;
   color: gray;

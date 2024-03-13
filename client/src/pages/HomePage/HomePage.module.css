@@ -75,19 +75,35 @@
   border-top: 3px solid black;
   height: 30px;
   background: linear-gradient(180deg #121212, transparent 10px);
-  background: linear-gradient(180deg, #121212,transparent, transparent 30px);
+  background: linear-gradient(180deg, #121212, transparent, transparent 30px);
+}
+
+.homeStepsCardWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 100%;
+  gap: 20px;
+}
+
+.stepParagraphWrapper {
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .imgForm {
-  height: 400px;
-  width: 300px;
-  border-radius: 5px;
+  height: 50vh;
+  width: 100%;
+  border-radius: 20px;
+  transition: 300ms;
+  object-fit: contain;
 }
-.imgForm {
-  transition: 100ms;
-}
+
 .imgForm:hover {
-  transform: scale(1.2);
+  transform: scale(1.3);
 }
 .imgIcon {
   width: 50px;
@@ -97,7 +113,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center
+  justify-content: center;
 }
 
 .buttonUp {
@@ -106,12 +122,12 @@
   right: 15px;
   cursor: pointer;
   background-color: black;
-  display:flex;
+  display: flex;
   width: 60px;
   height: 60px;
   border-radius: 20px;
   border: 3px solid orange;
   flex-direction: column;
   justify-content: flex-end;
-  align-items: center
+  align-items: center;
 }

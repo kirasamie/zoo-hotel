@@ -63,7 +63,7 @@ export default function HomePage(): JSX.Element {
 
       <GlassWrapper width="90vw">
         <div className="home-steps-wrapper">
-          <h2>Для того, чтобы начать пользоваться нашим сервисом нужно сделать три простых шага:</h2>
+          <h2 style={{ marginBottom: '50px' }}>Для того, чтобы начать пользоваться нашим сервисом нужно сделать три простых шага:</h2>
           <div className={styles.homeStepsCardWrapper}>
             <CardGlassWrapper width="25vw">
               <div className="step step-1" />
@@ -110,8 +110,12 @@ export default function HomePage(): JSX.Element {
                 <div className={styles.imgWrapper}>
                   <img className={styles.img} src="/img/room.png" alt="dog" />
                 </div>
-                <p className={styles.servHeader}>Индивидуальные комнатки</p>
-                <p className={styles.servContent}>Комфорт и уход, достойный вашего питомца</p>
+                <div className={styles.servHeaderWrapper}>
+                  <p className={styles.servHeader}>Индивидуальные комнатки</p>
+                </div>
+                <div className={styles.servContentWrapper}>
+                  <p className={styles.servContent}>Комфорт и уход, достойный вашего питомца</p>
+                </div>
               </div>
             </CardGlassWrapper>
             <CardGlassWrapper>
@@ -119,8 +123,12 @@ export default function HomePage(): JSX.Element {
                 <div className={styles.imgWrapper}>
                   <img className={styles.img} src="/img/walkingDog.png" alt="dog" />
                 </div>
-                <p className={styles.servHeader}>Выгул 2-3 раза в день</p>
-                <p className={styles.servContent}>Ваш питомец не останется без внимания</p>
+                <div className={styles.servHeaderWrapper}>
+                  <p className={styles.servHeader}>Выгул 2-3 раза в день</p>
+                </div>
+                <div className={styles.servContentWrapper}>
+                  <p className={styles.servContent}>Ваш питомец не останется без внимания</p>
+                </div>
               </div>
             </CardGlassWrapper>
             <CardGlassWrapper>
@@ -128,8 +136,12 @@ export default function HomePage(): JSX.Element {
                 <div className={styles.imgWrapper}>
                   <img className={styles.img} src="/img/camera.png" alt="camera" />
                 </div>
-                <p className={styles.servHeader}>Фото-отчет ежедневно</p>
-                <p className={styles.servContent}>Постоянная связь и визуальная информация о вашем друге</p>
+                <div className={styles.servHeaderWrapper}>
+                  <p className={styles.servHeader}>Фото-отчет ежедневно</p>
+                </div>
+                <div className={styles.servContentWrapper}>
+                  <p className={styles.servContent}>Постоянная связь и визуальная информация о вашем друге</p>
+                </div>
               </div>
             </CardGlassWrapper>
             <CardGlassWrapper>
@@ -137,8 +149,12 @@ export default function HomePage(): JSX.Element {
                 <div className={styles.imgWrapper}>
                   <img className={styles.img} src="/img/dogFood.png" alt="dogFood" />
                 </div>
-                <p className={styles.servHeader}>Миски и лежанки</p>
-                <p className={styles.servContent}>Питательный рацион и отличный отдых для любых пород собак и кошек</p>
+                <div className={styles.servHeaderWrapper}>
+                  <p className={styles.servHeader}>Миски и лежанки</p>
+                </div>
+                <div className={styles.servContentWrapper}>
+                  <p className={styles.servContent}>Питательный рацион и отличный отдых для любых пород собак и кошек</p>
+                </div>
               </div>
             </CardGlassWrapper>
             <CardGlassWrapper>
@@ -152,8 +168,12 @@ export default function HomePage(): JSX.Element {
                     </div>
                   </div>
                 </div>
-                <p className={styles.servHeader}>Дополнительные услуги</p>
-                <p className={styles.servContent}>Груминг, занятия с кинологом, зоотакси и многое другое</p>
+                <div className={styles.servHeaderWrapper}>
+                  <p className={styles.servHeader}>Дополнительные услуги</p>
+                </div>
+                <div className={styles.servContentWrapper}>
+                  <p className={styles.servContent}>Груминг, занятия с кинологом, зоотакси и многое другое</p>
+                </div>
               </div>
             </CardGlassWrapper>
           </div>
@@ -177,7 +197,7 @@ export default function HomePage(): JSX.Element {
 
       <GlassWrapper width="90vw" style={{ marginBottom: '100px' }}>
         <h2 className={styles.servHeader2}>Мы на карте</h2>
-        <h3 className={styles.servHeader3}>Лорем хренем ипсум шмипсум бибиди бобиди бум</h3>
+        {/* <h3 className={styles.servHeader3}></h3> */}
         <YMaps>
           <div className="ya-map-wrapper">
             <Map
@@ -193,8 +213,9 @@ export default function HomePage(): JSX.Element {
                 modules={['geoObject.addon.balloon']}
                 properties={{
                   balloonContent: 'dasda',
-                  balloonContentHeader: 'Zoотель',
-                  balloonContentBody: '<h1 class="ya-map-placemark">ZH</h1><p style="width: 200px">Описание нашего прекрасного отеля которое я не придумал</p>',
+                  balloonContentHeader: 'ZOOHOTEL',
+                  balloonContentBody:
+                    '<img src="/img/logo.svg" alt="our logo" style="height: 100px; width: 100px" /><p style="width: 290px; color: lightyellow;">Преданный персонал обеспечивает круглосуточный уход и индивидуальный подход, чтобы каждый пушистый гость чувствовал себя, как дома</p>',
                   balloonContentFooter: 'with love by KirKateJuckie',
                   autoPan: true,
                 }}

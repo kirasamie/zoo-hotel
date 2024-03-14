@@ -6,6 +6,7 @@ import { Button, styled } from '@mui/material';
 
 export default function Navbar(): JSX.Element {
   const user = useAppSelector((store) => store.userSlice.info);
+  console.log('USER>>>>', user);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const handlerLogout = async (): Promise<void> => {
@@ -37,42 +38,42 @@ export default function Navbar(): JSX.Element {
   return (
     <header>
       <div className={styles.container}>
-        <Link className={styles.logoContainer} to='/'>
-          <img className={styles.logo} src='/img/logo.svg' alt='logo' />
+        <Link className={styles.logoContainer} to="/">
+          <img className={styles.logo} src="/img/logo.svg" alt="logo" />
           <div className={styles.logoTitle}>ZOOHOTEL</div>
         </Link>
       </div>
       <div className={styles.container}>
         {user && user.id > 0 ? (
           <>
-            <Link to='/account'>
+            <Link to="/account">
               {user.avatar ? (
-                <img className={styles.logoAvatar} src={`${import.meta.env.VITE_URL.slice(0, -3)}/img/avatars/${user.avatar}`} alt='imageNotFound' />
+                <img className={styles.logoAvatar} src={`${import.meta.env.VITE_URL.slice(0, -3)}/img/avatars/${user.avatar}`} alt="imageNotFound" />
               ) : user.isWorker ? (
-                <img className={styles.logoAvatar} src='/worker.png' alt='imageWorker' />
+                <img className={styles.logoAvatar} src="/worker.png" alt="imageWorker" />
               ) : (
-                <img className={styles.logoAvatar} src='/user.png' alt='imageUser' />
+                <img className={styles.logoAvatar} src="/user.png" alt="imageUser" />
               )}
             </Link>
             {user?.isWorker ? null : (
-              <Link to='/rooms '>
-                <HeaderButton variant='contained' className={styles.headerButton}>
+              <Link to="/rooms ">
+                <HeaderButton variant="contained" className={styles.headerButton}>
                   Комнатки
                 </HeaderButton>
               </Link>
             )}
-            <Link to='/account'>
-              <HeaderButton variant='contained' className={styles.headerButton}>
+            <Link to="/account">
+              <HeaderButton variant="contained" className={styles.headerButton}>
                 Личный кабинет
               </HeaderButton>
             </Link>
-            <HeaderButton onClick={() => void handlerLogout()} variant='contained' className={styles.headerButton}>
+            <HeaderButton onClick={() => void handlerLogout()} variant="contained" className={styles.headerButton}>
               Выйти
             </HeaderButton>
           </>
         ) : (
-          <Link to='/auth'>
-            <HeaderButton variant='contained' className={styles.headerButton}>
+          <Link to="/auth">
+            <HeaderButton variant="contained" className={styles.headerButton}>
               Войти
             </HeaderButton>
           </Link>

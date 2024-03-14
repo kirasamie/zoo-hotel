@@ -103,21 +103,20 @@ export default function RegisterForm({ setIsLogin }): JSX.Element {
     console.log(e.target.files[0]);
   };
 
-  const sendFile = async () => {
+  const sendFile = async (): Promise<string | undefined> => {
     const data = new FormData();
     if (avatarFile) {
       data.append('avatar', avatarFile);
       const response = await axios.post(`${import.meta.env.VITE_URL}/image`, data, {
         headers: { 'Content-Type': 'multipart/form-data' },
-
         withCredentials: true,
       });
-      console.log(response);
+      setInputs((prev) => ({ ...prev, avatar: response.data.filename }));
     }
   };
 
   useEffect(() => {
-    // sendFile();
+    sendFile();
     console.log(avatarFile);
   }, [avatarFile]);
 
@@ -190,7 +189,6 @@ export default function RegisterForm({ setIsLogin }): JSX.Element {
         .then((res) => {
           if (res.meta.requestStatus === 'fulfilled') {
             navigate('/account/pets/empty');
-            sendFile();
             setOptionInput({ checkBox: false });
           }
         })

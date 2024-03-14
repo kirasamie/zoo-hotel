@@ -136,9 +136,7 @@ export default function PetForm(): JSX.Element {
         void sendFiles(res.payload.id).then(() => {
           navigate(`/account/pets/${res.payload.id}`);
         });
-        // void dispatch(fetchCheckAllPets()).then(() => {
-
-        // });
+        void dispatch(fetchCheckAllPets())
       }
     });
     setInputs(initialStatePet);

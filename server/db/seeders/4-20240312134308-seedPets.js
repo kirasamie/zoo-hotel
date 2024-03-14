@@ -5,7 +5,7 @@ module.exports = {
   async up(queryInterface) {
     await queryInterface.bulkInsert('Pets', [
       {
-        petUserId: 1,
+        petUserId: 3,
         petType: 2,
         petName: 'Кайл',
         petBreed: 'Злыдня',
@@ -17,7 +17,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        petUserId: 1,
+        petUserId: 3,
         petType: 1,
         petName: 'Булочка',
         petBreed: 'британская вислоухая',
@@ -25,6 +25,30 @@ module.exports = {
         petAge: 2,
         petIsSprayed: true,
         petAbout: 'Лучшая кошечка в мире',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        petUserId: 1,
+        petType: 2,
+        petName: 'Матильда',
+        petBreed: 'Скандинавский огненный лис',
+        petGender: 'Ж',
+        petAge: 2,
+        petIsSprayed: true,
+        petAbout: 'Лучшая собака в мире',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        petUserId: 2,
+        petType: 1,
+        petName: 'Пуся',
+        petBreed: 'Фиг его знает',
+        petGender: 'Ж',
+        petAge: 3,
+        petIsSprayed: true,
+        petAbout: 'Лучшая пуся в мире',
         createdAt: new Date(),
         updatedAt: new Date(),
       },

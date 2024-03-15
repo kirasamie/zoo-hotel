@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: orange;
+  gap: 8px;
+}
+
+.petName {
+  font-size: 24px;
+  font-weight: 600;
+  color: white;
+}
+
+.dateContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container {
+  transition: 0.3s;
+}
+
+.link:hover .container {
+  scale: 1.1;
+}

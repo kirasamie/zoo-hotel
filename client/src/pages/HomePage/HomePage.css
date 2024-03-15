@@ -1,0 +1,274 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+}
+
+:root {
+  --red: #f26419;
+  --orange: #f6ae2d;
+  --dark-blue: #33658a;
+  --light-blue: #86bbd8;
+  --dark: #2f4858;
+}
+
+/* 
+.container__center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+} */
+
+/* .center__row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+} */
+
+.align__left {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  border-radius: 30px;
+  backdrop-filter: blur(8px);
+  top: 40px;
+  left: 40px;
+  width: 400px;
+  height: 200px;
+  z-index: 2;
+  padding: 20px 40px;
+}
+
+.textContainerLeft {
+  position: absolute;
+  border-radius: 30px;
+  top: 40px;
+  left: 40px;
+  width: 400px;
+  height: 200px;
+  z-index: 2;
+  opacity: 0.4;
+  background-color: black;
+}
+
+/* h1 {
+  font-weight: 300;
+  font-size: 40px;
+  letter-spacing: 4px;
+  color: var(--dark);
+}
+
+p {
+  font-size: 18px;
+  letter-spacing: 4px;
+  line-height: 22px;
+  margin: 2rem 0;
+  color: var(--dark);
+}
+
+a {
+  text-decoration: none;
+} */
+
+.landing__content {
+  height: 100%;
+  width: 100%;
+}
+
+.landing__content .landing__info {
+  width: 100%;
+  height: 100%;
+}
+
+.landing__info h1 {
+  color: var(--orange);
+  font-weight: bolder;
+  font-size: 30px;
+  letter-spacing: 4px;
+}
+
+.landing__info p {
+  color: var(--orange);
+  width: 100%;
+  font-size: 17px;
+  font-weight: bolder;
+}
+
+.landing__info button {
+  border: none;
+  background: transparent;
+  outline: none;
+}
+
+.landing__info button:active {
+  transform: translateY(2px);
+}
+
+.landing__info a {
+  color: var(--dark-blue);
+  background-color: var(--orange);
+  padding: 10px 20px;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+.image__pet {
+  background: black;
+}
+
+.image__pet img {
+  object-fit: cover;
+  /* opacity: 0.8; */
+  width: 100%;
+  height: calc(100vh - 65px);
+}
+
+.mySwiper {
+  width: 100%;
+  height: calc(100vh - 65px);
+}
+
+/* .home-steps-wrapper * {
+    border: 1px solid red;
+} */
+
+.home-steps-wrapper {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.home-steps-card-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.home-steps-card {
+  width: 25vw;
+  height: 80%;
+  border: 2px solid black;
+  border-radius: 20px;
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+
+.home-steps-wrapper h2 {
+  margin: 20px 10px;
+  text-align: center;
+}
+
+.home-steps-card div {
+  height: 30%;
+  display: flex;
+  align-items: center;
+}
+
+.step-1 {
+  background-image: url(/img/step-1.png);
+}
+
+.step-2 {
+  background-image: url(/img/step-2.png);
+}
+
+.step-3 {
+  background-image: url(/img/step-3.png);
+}
+
+.step {
+  background-size: cover;
+  box-shadow: inset 0 0 30px 20px white;
+  flex: 1;
+}
+
+.ya-map-wrapper {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 40px;
+  border-radius: 20px;
+}
+
+.ya-map {
+  width: 80vw;
+  height: 500px;
+  border-radius: 20px;
+}
+
+.ya-map-placemark {
+  border-radius: 50%;
+  border: 2px solid black;
+  width: 60px;
+  height: 60px;
+  line-height: 58px;
+  text-align: center;
+  color: white;
+  background-color: brown;
+  margin: 10px auto;
+}
+
+ymaps[class$='balloon'] {
+  box-shadow: none;
+}
+
+ymaps[class$='balloon__content'] {
+  background: url('/background-filler-v2.png') fixed;
+  background-size: contain;
+  width: 100%;
+  /* border: 3px solid orange; */
+  color: orange;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  /* border-radius: 20px; */
+  padding: 10px 0 10px;
+  /* gap: 10px; */
+  /* box-shadow: -5px 5px 20px 1px black; */
+  /* flex: 1 1 auto; */
+}
+
+ymaps[class$='balloon__layout'] {
+  border: 3px solid orange;
+  /* border-radius: 20px; */
+  width: 300px;
+}
+
+ymaps[class$='balloon__close-button'] {
+  margin: 6px 3px;
+  border: 2px solid black;
+  height: 20px;
+  border-radius: 15px;
+  background-color: orange;
+}
+
+ymaps[class$='balloon__close-button'] ::after {
+  background-color: orange;
+}
+
+/* ymaps[class$="balloon__tail"] {
+  opacity: 0.3;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid #f00;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.8);
+} */
+
+ymaps[class$='balloon__tail']::after {
+  opacity: 0.3;
+  /* display: none; */
+  background-color: rgba(0, 0, 0, 0.8);
+}

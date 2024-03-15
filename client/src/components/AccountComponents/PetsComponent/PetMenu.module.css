@@ -1,0 +1,58 @@
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 0 10px;
+  height: 100%;
+  width: 100%;
+  max-height: 70vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.menu::-webkit-scrollbar {
+  background-color: #121212;
+  border-radius: 4px;
+  width: 10px;
+}
+
+.menu::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+.menu::-webkit-scrollbar-thumb {
+  background: #f6ae2d;
+  border-radius: 4px;
+  border: 1px solid #121212;
+}
+
+.menu::-webkit-scrollbar-thumb:hover {
+  background: #ffc862;
+}
+
+.iconCat {
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+}
+.iconDog {
+  width: 35px;
+  height: 35px;
+  margin-right: 5px;
+}
+.iconText {
+  display: flex;
+  align-items: center;
+  color: orange;
+  transition: 150ms;
+}
+
+.link {
+  color: orange;
+  transition: 150ms;
+}
+
+.link:hover {
+  scale: 1.1;
+}

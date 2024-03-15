@@ -1,0 +1,45 @@
+.menu {
+  display: flex;
+  flex-direction: column;
+  /* height: 100%; */
+  max-height: 70vh;
+  padding: 8px 13px 10px 11px;
+  width: 100%;
+  gap: 10px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.menu a {
+  text-decoration: none;
+}
+
+.menu::-webkit-scrollbar {
+  background-color: #121212;
+  border-radius: 4px;
+  width: 10px;
+}
+
+.menu::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+.menu::-webkit-scrollbar-thumb {
+  background: #f6ae2d;
+  border-radius: 4px;
+  border: 1px solid #121212;
+}
+
+.menu::-webkit-scrollbar-thumb:hover {
+  background: #ffc862;
+}
+
+.linkWrapper {
+  color: orange;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.linkWrapper:hover {
+  transform: scale(1.1);
+}

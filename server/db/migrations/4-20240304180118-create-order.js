@@ -8,6 +8,16 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
+      orderUserId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'Users',
+          },
+          key: 'id',
+        },
+      },
       orderPetId: {
         allowNull: false,
         type: Sequelize.INTEGER,
@@ -30,11 +40,20 @@ module.exports = {
       },
       orderDateIn: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: Sequelize.STRING,
       },
       orderDateOut: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: Sequelize.STRING,
+      },
+      addInfo: {
+        type: Sequelize.TEXT,
+      },
+      addServices: {
+        type: Sequelize.STRING,
+      },
+      paymentStatus: {
+        type: Sequelize.BOOLEAN,
       },
       createdAt: {
         allowNull: false,

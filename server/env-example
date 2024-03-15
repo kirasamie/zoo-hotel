@@ -1,3 +1,4 @@
 PORT=3100
 DATABASE = "postgres://test:test@localhost:5432/finalochka"
 SECRET_KEY_SESSION=ochka
+STRIPE_SECRET_KEY='Спросить у Макса в ТГ'

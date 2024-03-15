@@ -1,0 +1,21 @@
+.modal {
+  /* background-color: white; */
+  width: fit-content;
+  padding: 30px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.inputModal {
+  width: 500px;
+}
+.input {
+  margin-bottom: 15px;
+  color: orange;
+}
+.modalContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.groupBtn {
+    border: 2px solid orange;
+    width: fit-content;
+    margin: 15px auto 0;
+}
+
+.accountNavBtn {
+    border: none;
+    background-color: black;
+    padding: 10px;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    size: 14px;
+    font-weight: 700;
+    color: orange;
+}
+
+.accountNavBtn:hover{
+    text-decoration: underline;
+}
+
+.activeNavBtn {
+    color: black;
+    background-color: orange;
+}

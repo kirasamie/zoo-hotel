@@ -1,0 +1,107 @@
+.container {
+  width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.container .buttonContainer {
+  align-self: center;
+}
+.buttonContainer {
+  margin-top: 30px;
+}
+
+.photos {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.photo {
+  width: 200px;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+}
+
+.photoContainer:hover .photoTwo {
+  transform: translateX(110%);
+  /* transition: 0.3s ease; */
+}
+
+.photoContainer:hover .photoThree {
+  transform: translateX(220%);
+  /* transition: 0.5s ease; */
+}
+
+.photoContainer {
+  display: flex;
+  position: relative;
+  width: 250px;
+  /* flex-direction: row; */
+}
+
+.photoOne,
+.photoTwo,
+.photoThree {
+  position: absolute;
+  transition: 0.3s ease;
+}
+
+.photoOne {
+  position: absolute;
+  z-index: 1;
+}
+
+.photoTwo {
+  position: absolute;
+}
+.photoThree {
+  position: absolute;
+}
+
+.photoPet {
+  width: 200px;
+  height: 200px;
+  border-radius: 20px;
+  object-fit: cover;
+}
+.withoutButton {
+  display: flex;
+}
+.withoutButton .info {
+  padding: 20px 0;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  color: orange;
+}
+.editButton {
+  margin-right: 10px !important;
+}
+.iconCat {
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+}
+.iconDog {
+  width: 35px;
+  height: 35px;
+  margin-right: 5px;
+}
+.title {
+  display: flex;
+  align-items: center;
+  color: orange;
+}
+.petIndo {
+  color: white;
+}

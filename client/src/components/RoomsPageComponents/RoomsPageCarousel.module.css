@@ -1,0 +1,46 @@
+.swipableViewsWrapper {
+  width: 250px;
+}
+
+.popupWrapper {
+  /* backdrop-filter: blur(8px); */
+  width: 560px;
+  background: url('/background-filler-v2.png') fixed;
+  border: 3px solid orange;
+  color: orange;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  /* border-radius: 20px; */
+  padding: 10px;
+  gap: 20px;
+  box-shadow: -5px 5px 20px 1px black;
+  flex: 1 1 auto;
+}
+
+.descriptionWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.mobileStepper {
+  color: orange;
+}
+
+.mobileStepper div{
+  /* background-color: white; */
+}
+
+.wrapperLike {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+/* 
+.wrapperLike .buttonLike {
+  color: white;
+  background-color: orange;
+} */
+
+

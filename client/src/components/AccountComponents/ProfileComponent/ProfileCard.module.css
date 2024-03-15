@@ -1,0 +1,31 @@
+.photo {
+  background-size: cover;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-position: center;
+  object-fit: cover;
+}
+.info {
+  margin: 40px;
+  font-size: 30px;
+  color: orange;
+}
+.profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* border: 5px solid #15bbde; */
+  border-radius: 15px;
+  width: fit-content;
+  /* padding: 10px 20px; */
+}
+.profileContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.userInfo {
+  color: white;
+}

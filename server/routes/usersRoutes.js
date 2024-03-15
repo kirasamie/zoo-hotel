@@ -18,6 +18,7 @@ router.get('/checkSession', async (req, res) => {
 router.post('/register', async (req, res) => {
   try {
     const { firstName, lastName, email, password, avatar, phone } = req.body;
+    console.log(req.body);
     const user = await User.findOne({ where: { email } });
     if (user) {
       res.sendStatus(401);
@@ -45,6 +46,7 @@ router.post('/register', async (req, res) => {
           email: newUser.email,
           phone: newUser.phone,
           isWorker: newUser.isWorker,
+          avatar: newUser.avatar,
         });
       });
     }
@@ -86,35 +88,35 @@ router.post('/message', async (req, res) => {
   }
 });
 
-router.post('/register', async (req, res) => {
-  try {
-    const { firstName, lastName, email, password, avatar, phone } = req.body;
-    const hash = await bcrypt.hash(password, 10);
-    const newUser = await User.create({
-      firstName,
-      lastName,
-      email,
-      password: hash,
-      avatar,
-      phone,
-    });
-    req.session.email = newUser.email;
-    req.session.firstName = newUser.firstName;
-    req.session.userId = newUser.id;
-    req.session.save(() => {
-      console.log(`Welcome, ${newUser.firstName}. Your registration completed with email ${newUser.email}`);
-      res.status(201).json({
-        id: newUser.id,
-        firstName: newUser.firstName,
-        email: newUser.email,
-      });
-    });
-  } catch (error) {
-    res.status(500).json({
-      error,
-    });
-  }
-});
+// router.post('/register', async (req, res) => {
+//   try {
+//     const { firstName, lastName, email, password, avatar, phone } = req.body;
+//     const hash = await bcrypt.hash(password, 10);
+//     const newUser = await User.create({
+//       firstName,
+//       lastName,
+//       email,
+//       password: hash,
+//       avatar,
+//       phone,
+//     });
+//     req.session.email = newUser.email;
+//     req.session.firstName = newUser.firstName;
+//     req.session.userId = newUser.id;
+//     req.session.save(() => {
+//       console.log(`Welcome, ${newUser.firstName}. Your registration completed with email ${newUser.email}`);
+//       res.status(201).json({
+//         id: newUser.id,
+//         firstName: newUser.firstName,
+//         email: newUser.email,
+//       });
+//     });
+//   } catch (error) {
+//     res.status(500).json({
+//       error,
+//     });
+//   }
+// });
 
 router.post('/login', async (req, res) => {
   try {
@@ -135,6 +137,7 @@ router.post('/login', async (req, res) => {
             firstName: user.firstName,
             email: user.email,
             isWorker: user.isWorker,
+            avatar: user.avatar,
           });
         });
       } else {

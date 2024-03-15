@@ -8,14 +8,9 @@ const storage = multer.diskStorage({
     callback(null, 'public/img/avatars/');
   },
   filename: async (req, file, callback) => {
-    const avatarFilename = `id_${req.session.userId}.${file.originalname
-      .split('.')
-      .at(-1)}`;
+    const avatarFilename = `id_${req.session.userId}.${file.originalname.split('.').at(-1)}`;
     try {
-      const user = await User.update(
-        { avatar: avatarFilename },
-        { where: { id: req.session.userId } }
-      );
+      const user = await User.update({ avatar: avatarFilename }, { where: { id: req.session.userId } });
       console.log(user);
     } catch (error) {
       console.log(error);
@@ -45,23 +40,20 @@ const fileFilter = (req, file, callback) => {
 
 const upload = multer({ fileFilter, storage });
 
-router.post(
-  '/',
-  upload.fileFilter,
-  upload.single('avatar'),
-  async (req, res) => {
-    console.log(req.file);
-    res.json({
-      msg: 'Аватарка успешно загружена!',
-      filename: req.file.filename,
-    });
-  }
-);
+router.post('/', upload.fileFilter, upload.single('avatar'), async (req, res) => {
+  console.log(req.file);
+  res.json({
+    msg: 'Аватарка успешно загружена!',
+    filename: req.file.filename,
+  });
+});
 
 const load = multer({ storage: petStorage });
 
 router.post('/pet/:petId', load.array('pets', 3), async (req, res) => {
   const { petId } = req.params;
+  console.log(req.files);
+  console.log("REQ FILES ^^^^^^")
   try {
     req.files.forEach(async (file) => {
       await PetImage.create({ petId, link: file.filename });
